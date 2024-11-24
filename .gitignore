@@ -3,9 +3,9 @@ server/node_modules/
 server/.env
 
 # Client folder exclusions
-client/node_modules/
-client/.angular/
-client/.vscode/
+ng-frontend/node_modules/
+ng-frontend/.angular/
+ng-frontend/.vscode/
 
 # General exclusions
 node_modules/
