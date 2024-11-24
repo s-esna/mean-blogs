@@ -8,6 +8,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 import { loginAuthGuard } from './service/login-auth.guard';
+import { AddBlogComponent } from './components/add-blog/add-blog.component';
 
 export const routes: Routes = [
     {
@@ -24,9 +25,14 @@ export const routes: Routes = [
         path: 'blogs',
         component: BlogsComponent,
         canActivate: [loginAuthGuard]
+    }, 
+    {
+        path: 'blogs/add-blog',
+        component: AddBlogComponent,
+        canActivate: [loginAuthGuard]
     },
     {
-        path: 'blogs/:blogId',
+        path: 'blogs/:_id',
         component: BlogDetailsComponent,
         canActivate: [loginAuthGuard]
     },

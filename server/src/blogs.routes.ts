@@ -6,7 +6,7 @@ export const blogRouter = express.Router()
 
 blogRouter.use(express.json())
 
-//RESPONSES json({message : }) json({message : }) TO THE FRONT END (instead of .json({message : })) BECAUSE I FOUND OUT THE HARD WAY THAT IT HELPS (DELETE EXAMPLE)
+//RESPONSES are usually .json({message: }) TO THE FRONT END (instead of .send(message) BECAUSE I FOUND OUT THE HARD WAY THAT IT HELPS (DELETE EXAMPLE)
 
 blogRouter.get("/", async (_req, res) => {
     try {
@@ -19,6 +19,7 @@ blogRouter.get("/", async (_req, res) => {
 blogRouter.get("/:id", async (req, res) => {
     try{
         const id = req.params.id
+        console.log(id)
         const query = {_id : new ObjectId(id)}
         if (!ObjectId.isValid(id)) {
             res.status(400).json({message : "not a valid id of blog"})

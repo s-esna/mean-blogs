@@ -20,7 +20,7 @@ export class BlogsComponent implements OnInit {
   blogs$ = signal<IBlog[]>([])
 
   blog$ = signal<IBlog>({} as IBlog)
-
+  
    
 
   ngOnInit(): void {
@@ -43,9 +43,7 @@ export class BlogsComponent implements OnInit {
     
   }
 
-  toggleComments() {
-    //toggle the comments of a specific blog
-  }
+
 
   deleteById(id: string) {
     const isConfirmed = window.confirm("Are you sure you want to delete this item?")

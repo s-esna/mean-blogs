@@ -20,7 +20,7 @@ export class BlogsService {
               
   }
   //READ ONE
-  getSingleBlog(id: string): Observable<IBlog>  {
+  getSingleBlog(id: string | null): Observable<IBlog>  {
     return this.http.get<IBlog>(`${this.url}/blogs/${id}`)
   }
   //CREATE
