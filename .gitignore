@@ -1,0 +1,13 @@
+# Server folder exclusions
+server/node_modules/
+server/.env
+
+# Client folder exclusions
+client/node_modules/
+client/.angular/
+client/.vscode/
+
+# General exclusions
+node_modules/
+*.log
+.DS_Store

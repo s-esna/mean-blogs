@@ -1,0 +1,48 @@
+<div class="login-wrap p-4 p-md-5">
+    <div class="d-flex">
+        <div class="w-100">
+            <h3 class="mb-4">Sign In</h3>
+        </div>        
+    </div>
+        <form [formGroup]="loginForm" >
+            <!-- username or email input -->
+            <div class="form-group mb-3">
+                <label class="form-label" >Username or Email</label>
+                <input [(ngModel)]="username" type="text" class="form-control" placeholder="Username or Email" formControlName="username">
+                @if (!usernames.includes(username) && loginForm.controls['username'].touched) {  
+
+                    <div class="text-danger">
+                        <span>Not a valid username or email</span>
+                    </div>
+                }
+            </div>
+            <!-- password input -->
+            <div class="form-group mb-3">
+                <label class="label" for="password">Password</label>
+                <input [(ngModel)]="password" type="password" class="form-control" placeholder="Password" formControlName="password">
+            </div>
+            <div class="form-group">
+                <button type="submit" (click)="onLogin()" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+            </div>
+            <div class="form-group d-md-flex">
+                <div class="w-50 text-left">
+                    <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                        <input type="checkbox" unchecked>
+                    </label>
+                </div>
+                <!-- <div class="w-50 text-md-right">
+                    <a href="#">Forgot Password</a>
+                </div> -->
+            </div>
+        </form>
+<p class="text-center">Not a member? <a data-toggle="tab" href="" routerLink="/register">Sign Up</a></p>
+</div>
+
+<select name="" id="">
+    @for (username of usernames; track $index) {
+        <option value="username">{{username}}</option>
+    }
+</select>
+
+
+<p>{{username}} {{password}}</p>

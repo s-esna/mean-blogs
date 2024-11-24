@@ -1,0 +1,12 @@
+{
+    "include": ["src/**/*"], //could change this to only compile typescript files, "src/**/*.ts"
+    "compilerOptions": {
+      "target": "es2016",  //could change this to "es6"
+      "module": "commonjs",
+      "esModuleInterop": true,  
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,    
+      "skipLibCheck": true,
+      "outDir": "./dist"
+    }
+  }

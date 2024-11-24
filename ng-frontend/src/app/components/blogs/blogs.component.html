@@ -1,0 +1,48 @@
+<div>
+    <h2>All Blogs</h2>
+
+    <div>
+        @for (blog of blogs$(); track $index) {
+            <!-- [routerLink]="'blogs/' element._id" -->
+            <h3> <a href="">{{blog.title}} {{blog._id}}</a></h3>
+            <!-- <p>Debugging Area, Blog: {{blog | json  }}</p> -->
+
+            <div>
+                <!-- [routerLink]="'edit/' element._id" -->
+                <button class="btn btn-primary"  >Edit</button>
+                <!-- [routerLink]="'delete/' element._id" -->
+                <button class="btn btn-danger" (click)="deleteById(blog._id)"  >Delete</button>
+                <button data-bs-toggle="collapse" data-bs-target="#blog.blogId" (toggle)="toggleComments()">Comments</button>
+            </div>
+
+            <div>
+                <img [src]="blog.img" alt="">
+                <p>{{blog.date}} - {{blog.title}}</p>
+                <p>{{blog.body}}</p>
+            </div>
+            @for (tag of blog.tags; track $index) {
+                <p>{{tag}}</p>
+            }
+            @for (comment of blog.comments; track $index) {
+                <div>
+                    
+    
+                    <div id='blog.blogId' class="collapse">
+                        {{comment.username}} - {{comment.commentBody}}
+                    </div> 
+                </div>
+            }
+        }
+        <!-- [routerLink]="'new' -->
+        <button class="btn btn-success m-3"  >Add new</button>
+    </div>
+
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#" routerLinkActive="active">1</a></li>
+        <li class="page-item"><a class="page-link" href="#" routerLinkActive="active">2</a></li>
+        <li class="page-item"><a class="page-link" href="#" routerLinkActive="active">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul> 
+
+</div>
