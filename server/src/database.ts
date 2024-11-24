@@ -81,7 +81,11 @@ async function applySchemaValidation(db: mongodb.Db) {
                     },
                     description: "Comments of the blog"
                 },
-                tags: { bsonType: "array", items: { bsonType: "string" }, description: "tags for the blog"  } ,
+                tags: { 
+                    bsonType: "array", 
+                    items: { bsonType: "string" },
+                    description: "tags for the blog"  
+                } ,
                 date: { bsonType: "date", description: "Date posted"  } 
                 
             },

@@ -3,11 +3,12 @@ import { IBlog } from '../../model/interface/interfaces';
 import { BlogsService } from '../../service/blogs.service';
 import { ActivatedRoute } from '@angular/router';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-blog-details',
   standalone: true,
-  imports: [NotFoundComponent],
+  imports: [NotFoundComponent, DatePipe],
   templateUrl: './blog-details.component.html',
   styleUrl: './blog-details.component.css'
 })

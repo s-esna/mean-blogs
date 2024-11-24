@@ -39,6 +39,10 @@ blogRouter.get("/:id", async (req, res) => {
 blogRouter.post("/", async (req, res) => {
     try {
         const blog = req.body;
+            
+        if (!blog.date) {
+            blog.date = new Date();
+        }
         const result = await collections?.blogs?.insertOne(blog);
 
         if (result?.acknowledged) {
