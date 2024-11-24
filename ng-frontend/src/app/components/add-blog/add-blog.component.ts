@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { BlogsService } from '../../service/blogs.service';
 
 @Component({
   selector: 'app-add-blog',
@@ -11,6 +12,9 @@ import { RouterLink } from '@angular/router';
 })
 
 export class AddBlogComponent implements OnInit {
+
+  blogService = inject(BlogsService)
+  router = inject(Router)
 
   ngOnInit(): void {
     const savedData = localStorage.getItem('addBlogForm')
@@ -23,7 +27,7 @@ export class AddBlogComponent implements OnInit {
   }
 
   addBlogForm: FormGroup = new FormGroup({
-    date: new FormControl(new Date().getDate()),
+    // date: new FormControl(new Date().getDate()),
     title: new FormControl("", Validators.required),
     body: new FormControl("", Validators.required),
     img: new FormControl(""),
@@ -33,9 +37,25 @@ export class AddBlogComponent implements OnInit {
 
 
   onSubmit() {
+    // debugger;
     const formData = this.addBlogForm.value
+
+    // if (formData.tags) {
+    //   formData.tags = formData.tags.split(',').map((tag: string )=> tag.trim())
+    // }
 
     localStorage.removeItem('addBlogForm')
     console.log('Blog added: ', formData)
+    
+    this.blogService.createBlog(formData).subscribe({
+      next: (response) => {
+          console.log('Blog added successfully:', response);
+          this.router.navigateByUrl('/blogs'); // Redirect after success
+      },
+      error: (error) => {
+          console.error('Failed to add blog:', error);
+          alert('An error occurred while adding the blog. Please try again.');
+      }
+  });
   }
 }

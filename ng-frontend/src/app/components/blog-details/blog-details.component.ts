@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IBlog } from '../../model/interface/interfaces';
 import { BlogsService } from '../../service/blogs.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
@@ -15,7 +15,7 @@ export class BlogDetailsComponent implements OnInit {
   
   blogService = inject(BlogsService)
   route = inject(ActivatedRoute)
-  router = inject(Router)
+  
 
 
 
@@ -23,17 +23,15 @@ export class BlogDetailsComponent implements OnInit {
 
   loadBlog(id : string | null) { 
     this.blogService.getSingleBlog(id)
-    .subscribe((blog: IBlog) => {
-      
+    .subscribe((blog: IBlog) => 
         this.blog$.set(blog)
-    })
+    )
   }
 
   
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('_id')
       this.loadBlog(id)
-      
   }
 
 }

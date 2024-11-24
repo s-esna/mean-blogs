@@ -25,7 +25,7 @@ export class BlogsService {
   }
   //CREATE
   createBlog(obj: IBlog): Observable<IBlog> {
-    return this.http.post<IBlog>(`${this.url}/blogs}`, obj)
+    return this.http.post<IBlog>(`${this.url}/blogs/`, obj)
   }
 
   //UPDATE 

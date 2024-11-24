@@ -61,7 +61,7 @@ async function applySchemaValidation(db: mongodb.Db) {
     const blogsSchema = {
         $jsonSchema: {
             bsonType: "object",
-            required: ["date", "title", "body",],
+            required: ["title", "body",],
             additionalProperties: false,
             properties: {
                 _id: {},
@@ -72,7 +72,7 @@ async function applySchemaValidation(db: mongodb.Db) {
                     bsonType: "array",
                     items: {
                         bsonType: "object",
-                        required: ["username", "date", "commentBody"],
+                        required: ["username",  "commentBody"],
                         properties: {
                             username: { bsonType: "string", description: "username of commenter" },
                             date: { bsonType: "date", description: "Date of comment posted" },
