@@ -1,9 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IBlog } from '../../model/interface/interfaces';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { BlogsService } from '../../service/blogs.service';
 import { catchError } from 'rxjs';
 import { JsonPipe } from '@angular/common';
+import { HoldBlogService } from '../../service/hold-blog.service';
 
 @Component({
   selector: 'app-blogs',
@@ -13,9 +14,9 @@ import { JsonPipe } from '@angular/common';
   styleUrl: './blogs.component.css'
 })
 export class BlogsComponent implements OnInit {
-
+  router = inject(Router)
   blogService = inject(BlogsService)
-
+  holdBlogService = inject(HoldBlogService)
   
   blogs$ = signal<IBlog[]>([])
 
@@ -30,12 +31,6 @@ export class BlogsComponent implements OnInit {
   loadPage() {
     console.log("got blogs")
     this.blogService.getAllBlogs()
-    // .pipe(
-    //   catchError((err) => {
-    //     console.log(err)
-    //     throw err
-    //   })
-    // )
     .subscribe((blogs: IBlog[]) => {
       console.log(blogs)
       this.blogs$.set(blogs)
@@ -43,6 +38,12 @@ export class BlogsComponent implements OnInit {
     
   }
 
+
+  updateById(blog: IBlog) {
+    this.holdBlogService.setBlog(blog)
+    this.router.navigateByUrl('/blogs/add-blog')
+    console.log("this is being passed: " , blog)
+  }
 
 
   deleteById(id: string) {

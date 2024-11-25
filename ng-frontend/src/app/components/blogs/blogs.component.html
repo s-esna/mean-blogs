@@ -8,7 +8,7 @@
 
             <div>
                 <!-- [routerLink]="'edit/' element._id" -->
-                <button class="btn btn-primary"  >Edit</button>
+                <button class="btn btn-primary" (click)="updateById(blog)"  >Edit</button>
                 <!-- [routerLink]="'delete/' element._id" -->
                 <button class="btn btn-danger" (click)="deleteById(blog._id)"  >Delete</button>
                 

@@ -56,7 +56,7 @@ blogRouter.post("/", async (req, res) => {
     }
 });
 
-blogRouter.put("/:id", async (req, res) => {
+blogRouter.patch("/:id", async (req, res) => {
     try {
         const id = req?.params?.id;
         if (!ObjectId.isValid(id)) {
