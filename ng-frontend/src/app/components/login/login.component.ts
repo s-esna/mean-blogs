@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -10,39 +11,29 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  usernames: string[] = []
-  username : string = ""
-  password: string = ""
   
   router = inject(Router)
+  userService = inject(UserService)
 
-  ngOnInit(): void {
-    this.populateUsers()
-  }
+  ngOnInit(): void {}
 
   loginForm: FormGroup = new FormGroup({
-    username: new FormControl(""),
+    emailOrUsername: new FormControl(""),
     password: new FormControl("")
   })
 
-  
-  
-  populateUsers() {
-    for (let i = 1000; i <= 5000; i++) {
-      this.usernames[i] = i.toString()
-    }
-  }
-
   onLogin() {
     const loginObj = this.loginForm.value
-    if ( loginObj.username == 'abc@123.com' && loginObj.password == 'a1q1S@W@') {
-      this.router.navigateByUrl('home')
-      localStorage.setItem("user", loginObj.username)
-    } else {
-      alert('incorrect username or password')
-    }
+    
+    this.userService.loginUser(loginObj).subscribe({
+      next: (response:any) => {
+        alert(response.message)
+        this.router.navigateByUrl('/')
+      },
+      error: err => {
+        alert(err.error.message || "something went wrong")
+      }
+    })
   }
-
-
 
 }

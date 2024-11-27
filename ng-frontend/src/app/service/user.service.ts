@@ -8,29 +8,33 @@ import { IUser } from '../model/interface/interfaces';
 })
 export class UserService {
   private url = 'http://localhost:5200'
-  users$ = signal<IUser[]>([])
   
   http = inject(HttpClient)
 
-  //CREATE
+  //CREATE - REGISTER USER
   postUserByFormValue(obj: IUser) {
-    return this.http.post("", obj)
+    return this.http.post<IUser>(`${this.url}/users/register`, obj)
   }
 
-  // READ 
+  // READ ALL
   getAllUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>("")
+    return this.http.get<IUser[]>(`${this.url}/users/getall`)
   }
 
-  //UPDATE -Dont know how to implement
-  editUserById(){
-
+  //CREATE - LOGIN USER
+  loginUser(obj: {emailOrUsername: string, password:string}) {
+    return this.http.post<{emailOrUsername: string, password:string}>(`${this.url}/users/login`, obj)
   }
 
-  //DELETE
-  deleteUserById(id : number) {
-    this.http.delete("" + id)
-  }
+  //UPDATE -Dont know if I implement
+  // editUserById(){
+
+  // }
+
+  //DELETE dont know if i implement
+  // deleteUserById(id : number) {
+  //   this.http.delete("" + id)
+  // }
 
 
 }

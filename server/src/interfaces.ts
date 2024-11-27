@@ -9,6 +9,7 @@ export interface User {
     birthDay?: number,
     birthMonth?: number,
     birthYear?: number
+    isAdmin: boolean
     _id?: mongodb.ObjectId
 }
 

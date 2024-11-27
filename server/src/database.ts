@@ -26,7 +26,7 @@ async function applySchemaValidation(db: mongodb.Db) {
     const userSchema = {
         $jsonSchema: {
             bsonType: "object",
-            required: ["username", "email", "password"],
+            required: ["username", "email", "password", "isAdmin"],
             additionalProperties: false,
             properties: {
                 _id: {},
@@ -54,9 +54,17 @@ async function applySchemaValidation(db: mongodb.Db) {
                     bsonType: "number",
                     description: "'birthYear' is NOT required and is a number 01 - 31"
                 },
+                isAdmin: {
+                    bsonType: "bool",
+                    description: "isAdmin is required and set to false by default"
+                }
             },
         },
     };
+
+    //Uniqueness of emails and usernames. Last line of defense
+    await db.collection('users').createIndex({ email: 1 }, { unique: true });
+    await db.collection('users').createIndex({ username: 1 }, { unique: true });
 
     const blogsSchema = {
         $jsonSchema: {

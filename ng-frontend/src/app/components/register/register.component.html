@@ -28,6 +28,9 @@
                 @if (registerUserForm.controls['username'].errors?.['minlength']) {
                     <span>Must be more than 4 characters</span>
                 }
+                @if (registerUserForm.controls['username'].errors?.['pattern']) {
+                    <span>Your username cannot contain the {{"@"}} sign</span>
+                }
             </div>
          }
     </div>
@@ -55,11 +58,8 @@
     <!-- Check to see if retyped password is the same as the original password -->
     @if (registerUserForm.controls['verifyPassword'].touched) {
         <div class="text-danger">
-            @if ( passwordsDoNotMatch(password, verifiedPassword) ) {
+            @if ( passwordsDoNotMatch(registerUserForm.get('password')?.value, registerUserForm.get('verifyPassword')?.value) ) {
                 <span>Doesn't match your above password</span>
-            }
-            @if (registerUserForm.controls['verifyPassword'].errors?.['pattern']) {
-                <span>Doesnt match your above password</span>
             }
         </div>
     }

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '../../service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,8 +14,10 @@ export class RegisterComponent implements OnInit {
   years: number[] = []; 
   days: number[] = [];
 
-  password: string = ""
-  verifiedPassword: string = ""
+  userService = inject(UserService)
+  router = inject(Router)
+
+
   
   selectedDay : number = 0
   selectedMonth : number = 0
@@ -42,8 +46,8 @@ export class RegisterComponent implements OnInit {
 
    */
   registerUserForm: FormGroup = new FormGroup({
-    userId: new FormControl(0),
-    username: new FormControl("", [Validators.required, Validators.minLength(4) ]),
+   
+    username: new FormControl("", [Validators.required, Validators.minLength(4), Validators.pattern(/^[^@]*$/) ]),
     email: new FormControl("", [Validators.required, Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9._%+-]{0,}[a-zA-Z0-9]@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]),
     // password must be at least 8 chars, including 1 uppercase, 1 lowercase, 1 symbol, 1 digit
     password: new FormControl("", [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/)]),
@@ -74,25 +78,36 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     const formData = this.registerUserForm.value
+    //FOUND OUT THE HARD WAY THAT OPTION ELEMENTS IN SELECT ARE ALWAYS STRINGS
+    //Convert string to number
+    console.log(typeof formData.birthDay)
+    formData.birthDay = Number(formData.birthDay);
+    formData.birthMonth = Number(formData.birthMonth);
+    formData.birthYear = Number(formData.birthYear);
 
+    const {verifyPassword, ...formDataNoVerify} = formData
+
+    
 
     localStorage.removeItem('registerUserForm');
-    console.log('Form submitted:', formData);
+    console.log('Trying to register user:', formDataNoVerify);
 
-    // this.userService.registerUser(formData).subscribe({
-    //   next: (response) => {
-    //     console.log('User registered successfully', response);
-    //     // Optionally redirect user or display success message
-    //   },
-    //   error: (error) => {
-    //     console.error('Registration failed', error);
-    //     // Handle the error (e.g., show error message to the user)
-    //   }
+    this.userService.postUserByFormValue(formDataNoVerify).subscribe({
+      next: (response) => {
+          console.log('User added successfully:', response);
+          alert("you registered successfully")
+          this.router.navigateByUrl('/users/login'); // Redirect after success
+      },
+      error: (error) => {
+        console.error("Registration failed:", error);
+        if (error.error.message === "Username exists") {
+            alert("The username you entered is already taken. Please try a different one.");
+        } else if (error.error.message === "Email exists") {
+            alert("The email you entered is already registered. Please try a different one.");
+        } else {
+            alert("Registration failed. Please try again.");
+        }
+      }
+    })
   }
-
-  
-
-
-
-
 }

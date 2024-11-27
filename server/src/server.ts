@@ -7,6 +7,7 @@ import { userRouter } from "./user.routes";
 
 dotenv.config()
 
+//For some reason, server can only be launched from the server dir. Not possible from src dir
 const ATLAS_URL = process.env.ATLAS_URL 
 
 

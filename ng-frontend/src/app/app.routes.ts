@@ -47,12 +47,12 @@ export const routes: Routes = [
         canActivate: [loginAuthGuard]
     },
     {
-        path: 'login',
+        path: 'users/login',
         component: LoginComponent
     }
     ,
     {
-        path: 'register',
+        path: 'users/register',
         component: RegisterComponent
     },
     {
