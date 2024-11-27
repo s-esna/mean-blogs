@@ -3,15 +3,26 @@ import { ObjectId } from "mongodb"
 import { collections } from "./database"
 import * as bcrypt from 'bcrypt'
 import * as rateLimiter from 'express-rate-limit'
+import jwt from 'jsonwebtoken'
+import * as dotenv from "dotenv"
 
 export const userRouter = express.Router()
 
+//Limiter definition, for allowing a maximum of 15 login attempts per 15 minutes. Used on the login endpoint
 const limiter = rateLimiter.rateLimit({
 	windowMs: 15 * 60 * 1000, 
 	limit: 15, 
-	standardHeaders: 'draft-7', 
+	standardHeaders: 'draft-7',
 	message: "You tried too many times to Login. Try again later (<=15 mins)"
 })
+
+//Secret key 
+dotenv.config()
+const SECRET_KEY = process.env.SECRET_KEY_JWT
+if (!SECRET_KEY) {
+    console.error("there is no secret key for JWT, careful on server launch path")
+    process.exit(1)
+}
 
 userRouter.use(express.json())
 
@@ -21,25 +32,6 @@ userRouter.get("/", async (_req, res) => {
         res.status(200).send(users)
     } catch (error) {
         res.status(500).json({message : error instanceof Error ? error.message : "Unknown error"})
-    }
-})
-
-userRouter.get("/:id", async (req, res) => {
-    try{
-        const id = req.params.id
-        if (!ObjectId.isValid(id)){
-            res.status(400).json({message : "Invalid id"})
-            return
-        }
-        const query = {_id : new ObjectId(id)}
-        const user = await collections.users?.findOne(query)
-        if (user) {
-            res.status(200).send(user)
-        } else {
-            res.status(404).json({message : `failed to find user with id ${id}`})
-        }
-    } catch {
-        res.status(500).json({message: `Internal Server Error. Try again later.`})
     }
 })
 
@@ -120,9 +112,19 @@ userRouter.post("/login", limiter, async (req, res) => {
         //2.5 step, for fun
         const birthday = `${String(existingUser.birthDay).padStart(2, '0')}-${String(existingUser.birthMonth).padStart(2, '0')}-${existingUser.birthYear}`; 
 
-        //3rd step, everything matches, proceed to login
+        //3rd step, everything matches if we got this far, time to issue a JWT
+        
+        const token = jwt.sign(
+            { id: existingUser._id, isAdmin: existingUser.isAdmin }, 
+            SECRET_KEY, 
+            { expiresIn: '7d' } // Token expiry
+        );
+
+
+        //4th step, everything matches, proceed to login, with token
         res.status(200).json({
             message: 'Login Successful',
+            token,
             loggedUser: {
                 id: existingUser._id, 
                 username: existingUser.username, 

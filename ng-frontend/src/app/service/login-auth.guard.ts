@@ -1,14 +1,34 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import * as jwt_decode from 'jwt-decode'; 
 
 export const loginAuthGuard: CanActivateFn = (route, state) => {
-  // const localUser = localStorage.getItem("user")
+  // const token = localStorage.getItem("token")
   // const router = inject(Router)
-  // if (localUser) {
-    return true;
+  // if (token) {
+  //   try {
+  //     const decodedToken: any = jwt_decode.jwtDecode(token); // Decode the token to access payload
+  //     const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
 
+  //     if (decodedToken.exp && decodedToken.exp >= currentTime) {
+  //       return true; // Token is valid
+  //     } else {
+  //       // Token expired
+  //       localStorage.removeItem('token'); // Clear expired token
+  //       router.navigateByUrl('/users/login');
+  //       return false;
+  //     }
+  //   } catch (err) {
+  //     console.error('Invalid token:', err);
+  //     router.navigateByUrl('/users/login');
+  //     return false;
+  //   }
   // } else {
-  //   router.navigateByUrl("/login")
-  //   return false
+  //   // No token present
+  //   router.navigateByUrl('/users/login');
+  //   return false;
   // }
+  return true
 };
+
+  
