@@ -9,6 +9,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 import { loginAuthGuard } from './service/login-auth.guard';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
+import { adminPrivilegeGuard } from './service/admin-privilege.guard';
+import { UsersComponent } from './components/users/users.component';
 
 export const routes: Routes = [
     {
@@ -29,7 +31,7 @@ export const routes: Routes = [
     {
         path: 'blogs/add-blog',
         component: AddBlogComponent,
-        canActivate: [loginAuthGuard]
+        canActivate: [loginAuthGuard, adminPrivilegeGuard]
     },
     {
         path: 'blogs/:_id',
@@ -47,6 +49,11 @@ export const routes: Routes = [
         canActivate: [loginAuthGuard]
     },
     {
+        path:'users',
+        component: UsersComponent,
+        canActivate: [loginAuthGuard, adminPrivilegeGuard]
+    },
+    {
         path: 'users/login',
         component: LoginComponent
     }
@@ -60,6 +67,7 @@ export const routes: Routes = [
         component: NotFoundComponent,
         canActivate: [loginAuthGuard]
 
-    }
+    },
+    
 
 ];

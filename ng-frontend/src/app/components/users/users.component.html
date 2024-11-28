@@ -1,0 +1,8 @@
+@for (user of users$(); track $index) {
+    <p>Username: {{user.username}} </p>
+    <p>Email: {{user.email}} </p>
+    <p>Password: {{user.password}}</p>
+    <p>Id: {{user._id}}</p>
+    <p>birthdate: {{user.birthDay}} - {{user.birthMonth}} - {{user.birthYear}}</p>
+    <hr>
+}

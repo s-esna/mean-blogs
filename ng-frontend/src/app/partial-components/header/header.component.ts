@@ -12,7 +12,6 @@ export class HeaderComponent {
 
   router = inject(Router)
   onLogoff() {
-    localStorage.removeItem("user")
-    // redirecting to "/login" is done directly on the HTML using RouterLink
+    localStorage.removeItem("token")
   }
 }

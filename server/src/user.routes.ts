@@ -5,6 +5,7 @@ import * as bcrypt from 'bcrypt'
 import * as rateLimiter from 'express-rate-limit'
 import jwt from 'jsonwebtoken'
 import * as dotenv from "dotenv"
+import { authenticateToken, CustomRequest } from "./middleware/authMiddleware"
 
 export const userRouter = express.Router()
 
@@ -26,7 +27,7 @@ if (!SECRET_KEY) {
 
 userRouter.use(express.json())
 
-userRouter.get("/", async (_req, res) => {
+userRouter.get("/", authenticateToken, async (_req, res) => {
     try {
         const users = await collections?.users?.find({}).toArray()
         res.status(200).send(users)
@@ -117,7 +118,7 @@ userRouter.post("/login", limiter, async (req, res) => {
         const token = jwt.sign(
             { id: existingUser._id, isAdmin: existingUser.isAdmin }, 
             SECRET_KEY, 
-            { expiresIn: '7d' } // Token expiry
+            { expiresIn: '7d' } 
         );
 
 
@@ -140,3 +141,10 @@ userRouter.post("/login", limiter, async (req, res) => {
         return
     }
 })
+
+userRouter.get("/test", authenticateToken,  (req: CustomRequest, res) => {
+    res.json({
+        message: "JWT validated successfully!",
+        user: req.user, // This is the `user` you attached in the middleware
+    });
+});

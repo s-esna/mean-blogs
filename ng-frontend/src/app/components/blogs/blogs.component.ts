@@ -1,10 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IBlog } from '../../model/interface/interfaces';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { BlogsService } from '../../service/blogs.service';
-import { catchError } from 'rxjs';
+import { BlogsService } from '../../service/blogs.service'; 
 import { JsonPipe } from '@angular/common';
 import { HoldBlogService } from '../../service/hold-blog.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-blogs',
@@ -22,10 +22,11 @@ export class BlogsComponent implements OnInit {
 
   blog$ = signal<IBlog>({} as IBlog)
   
-   
+  isAdmin = this.checkAdminStatus()
 
   ngOnInit(): void {
     this.loadPage()
+    this.checkAdminStatus()
   }
 
   loadPage() {
@@ -35,9 +36,18 @@ export class BlogsComponent implements OnInit {
       console.log(blogs)
       this.blogs$.set(blogs)
     })
-    
   }
 
+  checkAdminStatus() {
+    const token = localStorage.getItem("token")
+    if (token) {
+      const decodedToken: any = jwtDecode(token); 
+      if (decodedToken.isAdmin) {
+        return true
+      }
+    }
+    return false
+  }
 
   updateById(blog: IBlog) {
     this.holdBlogService.setBlog(blog)
@@ -60,8 +70,6 @@ export class BlogsComponent implements OnInit {
         }
       })  
     }
-
-    
   }
 
 }

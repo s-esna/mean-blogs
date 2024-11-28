@@ -1,6 +1,7 @@
 import * as express from "express"
 import { ObjectId } from "mongodb"
 import { collections } from "./database"
+import { authenticateToken } from "./middleware/authMiddleware"
 
 export const blogRouter = express.Router()
 
@@ -8,7 +9,7 @@ blogRouter.use(express.json())
 
 //RESPONSES are usually .json({message: }) TO THE FRONT END (instead of .send(message) BECAUSE I FOUND OUT THE HARD WAY THAT IT HELPS (DELETE EXAMPLE)
 
-blogRouter.get("/", async (_req, res) => {
+blogRouter.get("/", authenticateToken, async (_req, res) => {
     try {
         const blogs = await collections?.blogs?.find({}).toArray()
         res.status(200).send(blogs)
@@ -16,10 +17,10 @@ blogRouter.get("/", async (_req, res) => {
         res.status(500).json({message :error instanceof Error ? error.message : "Unknown error" })
 }})
 
-blogRouter.get("/:id", async (req, res) => {
+blogRouter.get("/:id", authenticateToken, async (req, res) => {
     try{
         const id = req.params.id
-        console.log(id)
+        
         const query = {_id : new ObjectId(id)}
         if (!ObjectId.isValid(id)) {
             res.status(400).json({message : "not a valid id of blog"})
@@ -36,7 +37,7 @@ blogRouter.get("/:id", async (req, res) => {
     }
 })
 
-blogRouter.post("/", async (req, res) => {
+blogRouter.post("/", authenticateToken, async (req, res) => {
     try {
         const blog = req.body;
             
@@ -56,7 +57,7 @@ blogRouter.post("/", async (req, res) => {
     }
 });
 
-blogRouter.patch("/:id", async (req, res) => {
+blogRouter.patch("/:id", authenticateToken, async (req, res) => {
     try {
         const id = req?.params?.id;
         if (!ObjectId.isValid(id)) {
@@ -81,7 +82,7 @@ blogRouter.patch("/:id", async (req, res) => {
     }
 })
 
-blogRouter.delete("/:id", async (req, res) => {
+blogRouter.delete("/:id",authenticateToken, async (req, res) => {
     try {
         const id = req?.params?.id;
         if (!ObjectId.isValid(id)) {

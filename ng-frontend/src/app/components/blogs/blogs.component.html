@@ -7,10 +7,12 @@
             <!-- <p>Debugging Area, Blog: {{blog | json  }}</p> -->
 
             <div>
-                <!-- [routerLink]="'edit/' element._id" -->
-                <button class="btn btn-primary" (click)="updateById(blog)"  >Edit</button>
-                <!-- [routerLink]="'delete/' element._id" -->
-                <button class="btn btn-danger" (click)="deleteById(blog._id)"  >Delete</button>
+                @if (isAdmin) {
+                    <button class="btn btn-primary" (click)="updateById(blog)"  >Edit</button>
+                
+                    <button class="btn btn-danger" (click)="deleteById(blog._id)"  >Delete</button>
+                }
+                
                 
                 <button data-bs-toggle="collapse" [attr.data-bs-target]="'#'+blog._id" >Comments</button> 
             </div>
@@ -30,7 +32,11 @@
             }
         }
         <!-- [routerLink]="'new' -->
-        <button class="btn btn-success m-3" routerLink="add-blog"  >Add new Blog</button>
+
+        @if (isAdmin) {
+            <button class="btn btn-success m-3" routerLink="add-blog"  >Add new Blog</button>
+
+        }
     </div>
 
     <ul class="pagination">

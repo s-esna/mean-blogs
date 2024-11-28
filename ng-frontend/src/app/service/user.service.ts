@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUser } from '../model/interface/interfaces';
 
@@ -11,6 +11,13 @@ export class UserService {
   
   http = inject(HttpClient)
 
+  private getAuthorizationHeaders() {
+    const token = localStorage.getItem('token')
+    return new HttpHeaders({
+      'Authorization' : `Bearer ${token}`
+    })
+  }
+
   //CREATE - REGISTER USER
   postUserByFormValue(obj: IUser) {
     return this.http.post<IUser>(`${this.url}/users/register`, obj)
@@ -18,7 +25,7 @@ export class UserService {
 
   // READ ALL
   getAllUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.url}/users/getall`)
+    return this.http.get<IUser[]>(`${this.url}/users/`, { headers: this.getAuthorizationHeaders() })
   }
 
   //CREATE - LOGIN USER
