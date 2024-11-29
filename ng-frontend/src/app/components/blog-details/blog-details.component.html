@@ -1,27 +1,41 @@
-@if (blog$()._id) {
+@if (blog._id) {
     <div class="container">
-        <h1>{{blog$().title}} </h1>
-        <h2>Date Created: {{ blog$().date | date }}</h2>
+        <h1>{{blog.title}} </h1>
+        <h2>Date Created: {{ blog.date | date }}</h2>
         <h3>
-            {{blog$().body}}
+            {{blog.body}}
         </h3>
-        <button data-bs-toggle="collapse" [attr.data-bs-target]="'#'+blog$()._id" >Comments</button> 
+        <button data-bs-toggle="collapse" [attr.data-bs-target]="'#'+blog._id" >Comments</button> 
 
 
 
+        <div class="container">
+            @for (tag of blog.tags; track $index) {
+                <a href="">{{tag}} </a>
+            }
+        </div>
+        
 
-        @for (tag of blog$().tags; track $index) {
-            <a href="">{{tag}} </a>
-        }
-        @for (comment of blog$().comments; track $index) {
+        @for (comment of blog.comments; track $index) {
             <div>
-                <div [id]='blog$()._id' class="collapse">
-                    {{comment.username}} - {{comment.commentBody}}
+                <div [id]='blog._id' class="collapse">
+                    <span><strong>{{comment.username}}: </strong></span>
+                     <span>{{comment.commentBody}}</span>
+                     
                 </div> 
             </div>
         }
-        <label for="">Leave a Comment:</label>
-        <input type="text">
+
+        @if (isUser()) {
+            <form [formGroup]="addCommentForm">
+                <label for="">Leave a Comment:  </label>
+                <input formControlName="commentBody" type="text">
+                
+                <button class="btn btn-success" [disabled]="addCommentForm.invalid" (click)="onSubmit()">Submit Comment</button>
+            </form>
+        }
+        
+        
     </div>
 }  @else {
     <app-not-found></app-not-found>

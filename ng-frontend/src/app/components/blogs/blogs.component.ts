@@ -45,7 +45,6 @@ export class BlogsComponent implements OnInit {
       //pagination
       this.resetPagination()
       this.filteredAndPaginatedBlogs = this.paginateBlogs()
-      console.log('number of blogs and total pages and pages array: ' ,this.filteredBlogs.length ,this.totalPages, this.totalPagesArray)
     })
   }
 
@@ -58,8 +57,6 @@ export class BlogsComponent implements OnInit {
     })
     
     this.filteredAndPaginatedBlogs = this.paginateBlogs()
-    console.log(searchTerm)
-    console.log(this.blogs, this.filteredBlogs, this.filteredAndPaginatedBlogs)
   }
 
   resetPagination() {

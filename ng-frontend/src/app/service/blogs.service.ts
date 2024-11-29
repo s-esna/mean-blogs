@@ -33,6 +33,11 @@ export class BlogsService {
     return this.http.post<IBlog>(`${this.url}/blogs/`, obj, { headers: this.getAuthorizationHeaders() })
   }
 
+  //CREATE COMMENT
+  addComment(blogId: string, obj : {userId: string, commentBody: string, date: Date}) : Observable<IBlog> {
+    return this.http.post<IBlog>(`${this.url}/blogs/${blogId}/comments`, obj, { headers: this.getAuthorizationHeaders() })
+  }
+
   //UPDATE 
   editBlogById(id : string, obj: IBlog) : Observable<IBlog> {
     return this.http.patch<IBlog>(`${this.url}/blogs/${id}`, obj, { headers: this.getAuthorizationHeaders() })        //patch instead .put because put might change the whole thing

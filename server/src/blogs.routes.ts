@@ -81,6 +81,56 @@ blogRouter.patch("/:id", authenticateToken, async (req, res) => {
         res.status(400).json({message});
     }
 })
+// Add a comment to a specific blog
+blogRouter.post("/:id/comments", authenticateToken, async (req, res) => {
+    try {
+        const blogId = req?.params?.id;
+        const { userId, commentBody } = req.body;
+        console.log("here they are ",blogId, req.body)
+
+        if (!ObjectId.isValid(blogId)) {
+            res.status(400).json({ message: "Invalid blog ID" });
+            return
+        }
+
+        const user = await collections?.users?.findOne(
+            { _id: new ObjectId(userId) },
+            { projection: { username: 1 } } // Retrieve only the username field
+        );
+        
+        if (!user) {
+            res.status(404).json({ message: "User not found" });
+            return;
+        }
+        
+        const username = user.username;
+
+        const newComment = {
+            username,
+            date: new Date(),
+            commentBody
+        };
+        console.log('this is the comment: ', newComment)
+
+        const result = await collections?.blogs?.updateOne(
+            { _id: new ObjectId(blogId) },
+            { $push: { comments: newComment } }
+        );
+        
+        
+
+
+        if (result && result.matchedCount) {
+            res.status(200).json({message: `updated blog with id ${blogId}`});
+        } else {
+            res.status(404).json({ message: "Blog not found" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 
 blogRouter.delete("/:id",authenticateToken, async (req, res) => {
     try {
