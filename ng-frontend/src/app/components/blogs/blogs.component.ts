@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IBlog } from '../../model/interface/interfaces';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { BlogsService } from '../../service/blogs.service'; 
@@ -14,37 +14,87 @@ import { jwtDecode } from 'jwt-decode';
   styleUrl: './blogs.component.css'
 })
 export class BlogsComponent implements OnInit {
+
   router = inject(Router)
   blogService = inject(BlogsService)
   holdBlogService = inject(HoldBlogService)
   
-  blogs$ = signal<IBlog[]>([])
-
-  blog$ = signal<IBlog>({} as IBlog)
+  blogs :IBlog[]= []
+  filteredBlogs : IBlog[] = []
+  filteredAndPaginatedBlogs: IBlog[] =[]
   
   isAdmin = this.checkAdminStatus()
 
+  currentPage = 1
+  blogsPerPage = 3
+  totalPagesArray: number[] = []
+  totalPages = 0;
+
   ngOnInit(): void {
     this.loadPage()
-    this.checkAdminStatus()
   }
 
   loadPage() {
-    console.log("got blogs")
     this.blogService.getAllBlogs()
-    .subscribe((blogs: IBlog[]) => {
-      console.log(blogs)
-      this.blogs$.set(blogs)
+    .subscribe((blogs) => {
+      //blogs initialization
+      this.blogs = blogs 
+      this.filteredBlogs = blogs
+      // this.filteredAndPaginatedBlogs = blogs
+
+      //pagination
+      this.resetPagination()
+      this.filteredAndPaginatedBlogs = this.paginateBlogs()
+      console.log('number of blogs and total pages and pages array: ' ,this.filteredBlogs.length ,this.totalPages, this.totalPagesArray)
     })
+  }
+
+  fetchResult(event: KeyboardEvent) {
+    const searchTerm = (event.target as HTMLInputElement).value.toLowerCase()
+    this.resetPagination()
+    this.filteredBlogs = this.blogs.filter((blog) => {
+      return ((blog.title.toLowerCase().includes(searchTerm) ||
+      blog.body.toLowerCase().includes(searchTerm)))
+    })
+    
+    this.filteredAndPaginatedBlogs = this.paginateBlogs()
+    console.log(searchTerm)
+    console.log(this.blogs, this.filteredBlogs, this.filteredAndPaginatedBlogs)
+  }
+
+  resetPagination() {
+    this.currentPage = 1
+    this.totalPages = Math.ceil((this.filteredBlogs.length)/this.blogsPerPage)
+    this.totalPagesArray =[]
+    for (let i = 0; i < this.totalPages; i++) {
+      this.totalPagesArray.push(i)
+    }
+  }
+
+  paginateBlogs() : IBlog[] {
+    const start = (this.currentPage - 1) * this.blogsPerPage
+    return this.filteredBlogs.slice(start, start + this.blogsPerPage)
+  }
+
+  changePage(page : number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page
+      this.filteredAndPaginatedBlogs = this.paginateBlogs()
+    }
   }
 
   checkAdminStatus() {
     const token = localStorage.getItem("token")
+    
     if (token) {
-      const decodedToken: any = jwtDecode(token); 
-      if (decodedToken.isAdmin) {
-        return true
+      try{
+        const decodedToken: any = jwtDecode(token); 
+        return decodedToken.isAdmin
+      } catch (error) {
+        console.error('could not decode token', error)
+        return false
       }
+      
     }
     return false
   }
@@ -71,5 +121,4 @@ export class BlogsComponent implements OnInit {
       })  
     }
   }
-
 }

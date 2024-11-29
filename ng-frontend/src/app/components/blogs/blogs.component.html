@@ -1,50 +1,61 @@
 <div>
     <h2>All Blogs</h2>
-
+    @if (isAdmin) {
+        <button class="btn btn-success m-3" routerLink="add-blog"  >Add new Blog</button>
+    }
     <div>
-        @for (blog of blogs$(); track $index) {
-            <h3> <a href="" [routerLink]="blog._id">{{blog.title}}</a></h3>
+        <input type="text" placeholder="Search..." (keyup)="fetchResult($event)">
+    </div>
+    <div>
+        @for (filteredBlog of filteredAndPaginatedBlogs; track $index) {
+            <h3> <a href="" [routerLink]="filteredBlog._id">{{filteredBlog.title}}</a> {{filteredBlog._id}}</h3>
             <!-- <p>Debugging Area, Blog: {{blog | json  }}</p> -->
 
             <div>
                 @if (isAdmin) {
-                    <button class="btn btn-primary" (click)="updateById(blog)"  >Edit</button>
+                    <button class="btn btn-primary" (click)="updateById(filteredBlog)"  >Edit</button>
                 
-                    <button class="btn btn-danger" (click)="deleteById(blog._id)"  >Delete</button>
+                    <button class="btn btn-danger" (click)="deleteById(filteredBlog._id)"  >Delete</button>
                 }
                 
                 
-                <button data-bs-toggle="collapse" [attr.data-bs-target]="'#'+blog._id" >Comments</button> 
+                <button data-bs-toggle="collapse" [attr.data-bs-target]="'#'+filteredBlog._id" >Comments</button> 
             </div>
 
             <div>
-                <img [src]="blog.img" alt="">
+                <img [src]="filteredBlog.img" alt="">
                 
-                <p>{{blog.body}}</p>
+                <p>{{filteredBlog.body}}</p>
             </div>
        
-            @for (comment of blog.comments; track $index) {
+            @for (comment of filteredBlog.comments; track $index) {
                 <div>
-                    <div [id]='blog._id' class="collapse">
+                    <div [id]='filteredBlog._id' class="collapse">
                         {{comment.username}} - {{comment.commentBody}}
                     </div> 
                 </div>
             }
         }
-        <!-- [routerLink]="'new' -->
+        
 
-        @if (isAdmin) {
-            <button class="btn btn-success m-3" routerLink="add-blog"  >Add new Blog</button>
-
-        }
+       
     </div>
 
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#" routerLinkActive="active">1</a></li>
-        <li class="page-item"><a class="page-link" href="#" routerLinkActive="active">2</a></li>
-        <li class="page-item"><a class="page-link" href="#" routerLinkActive="active">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul> 
+    <div>
+        <ul class="pagination">
+            <li class="page-item">
+                <button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
+            </li>
+            @for (page of totalPagesArray   ; track $index) {
+                <li class="page-item">
+                    <button class="page-link" [class.active]="page + 1 === currentPage" (click)="changePage(page +1)" >{{page + 1}}</button>
+                </li>
+            }
+            <li class="page-item">
+                <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+            </li>
+          </ul>
+    </div>
+     
 
 </div>
