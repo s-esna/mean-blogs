@@ -1,0 +1,60 @@
+@if (blogs.length > 0) {
+    
+    <div>
+        @for (blog of blogs; track $index) {
+            <h3> <a href="" [routerLink]="'../../' + blog._id">{{blog.title}}</a> {{blog._id}}</h3>
+            
+
+            <div>
+                @if (isAdmin) {
+                    <button class="btn btn-primary" (click)="updateById(blog)"  >Edit</button>
+                
+                    <button class="btn btn-danger" (click)="deleteById(blog._id)"  >Delete</button>
+                }
+                
+                
+                <button data-bs-toggle="collapse" [attr.data-bs-target]="'#'+blog._id" >Comments</button> 
+            </div>
+
+            <div>
+                <img [src]="blog.img" alt="">
+                
+                <p>{{blog.body}}</p>
+            </div>
+       
+            @for (comment of blog.comments; track $index) {
+                <div>
+                    <div [id]='blog._id' class="collapse">
+                        {{comment.username}} - {{comment.commentBody}}
+                    </div> 
+                </div>
+            }
+        }
+        
+
+       
+    </div>
+
+    <div>
+        <!-- <ul class="pagination">
+            <li class="page-item">
+                <button class="page-link" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
+            </li>
+            @for (page of totalPagesArray   ; track $index) {
+                <li class="page-item">
+                    <button class="page-link" [class.active]="page + 1 === currentPage" (click)="changePage(page +1)" >{{page + 1}}</button>
+                </li>
+            }
+            <li class="page-item">
+                <button class="page-link" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+            </li>
+          </ul> -->
+    </div>
+     
+
+
+
+} @else {
+    <app-not-found></app-not-found>
+    <p>No such tag exists</p>
+}

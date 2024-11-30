@@ -1,16 +1,17 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './components/pages/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BlogsComponent } from './components/blogs/blogs.component';
-import { ContactComponent } from './components/contact/contact.component';
-import { FaqComponent } from './components/faq/faq.component';
+import { ContactComponent } from './components/pages/contact/contact.component';
+import { FaqComponent } from './components/pages/faq/faq.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
-import { loginAuthGuard } from './service/login-auth.guard';
+import { loginAuthGuard } from './service/guards/login-auth.guard';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
-import { adminPrivilegeGuard } from './service/admin-privilege.guard';
+import { adminPrivilegeGuard } from './service/guards/admin-privilege.guard';
 import { UsersComponent } from './components/users/users.component';
+import { TaggedBlogsComponent } from './components/tagged-blogs/tagged-blogs.component';
 
 export const routes: Routes = [
     {
@@ -36,6 +37,11 @@ export const routes: Routes = [
     {
         path: 'blogs/:_id',
         component: BlogDetailsComponent,
+        canActivate: [loginAuthGuard]
+    },
+    {
+        path: 'blogs/tagged/:tag',
+        component: TaggedBlogsComponent,
         canActivate: [loginAuthGuard]
     },
     {

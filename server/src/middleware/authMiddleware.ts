@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken"
-import * as dotenv from 'dotenv' 
 
 //The following 4 lines were the most painful
 // https://stackoverflow.com/questions/37377731/extend-express-request-object-using-typescript
@@ -11,7 +10,6 @@ export interface CustomRequest extends Request {
     }
 }
 
-dotenv.config()
 const SECRET_KEY = process.env.SECRET_KEY_JWT
 if (!SECRET_KEY) {
     console.log('secret key could not be found')
@@ -24,9 +22,7 @@ export const authenticateToken = async (req: CustomRequest, res: Response, next:
 
     const token = req.header('Authorization')?.replace('Bearer ', '');
     
-    console.log("Headers: ", req.headers);
-
-    console.log('this is the token ' + token)
+   
 
     if (!token) {
         res.status(401).json({ message: "Access Denied: No Token Provided" });

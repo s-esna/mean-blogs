@@ -1,0 +1,140 @@
++---ng-frontend
+|   |   .editorconfig
+|   |   .gitignore
+|   |   angular.json
+|   |   package-lock.json
+|   |   package.json
+|   |   README.md
+|   |   tsconfig.app.json
+|   |   tsconfig.json
+|   |   tsconfig.spec.json
+|   |   
+|   +---public
+|   |       favicon.ico
+|   |       
+|   \---src
+|       |   index.html
+|       |   main.ts
+|       |   styles.css
+|       |   
+|       \---app
+|           |   app.component.css
+|           |   app.component.html
+|           |   app.component.spec.ts
+|           |   app.component.ts
+|           |   app.config.ts
+|           |   app.routes.ts
+|           |   
+|           +---components
+|           |   +---add-blog
+|           |   |       add-blog.component.css
+|           |   |       add-blog.component.html
+|           |   |       add-blog.component.spec.ts
+|           |   |       add-blog.component.ts
+|           |   |       
+|           |   +---blog-details
+|           |   |       blog-details.component.css
+|           |   |       blog-details.component.html
+|           |   |       blog-details.component.spec.ts
+|           |   |       blog-details.component.ts
+|           |   |       
+|           |   +---blogs
+|           |   |       blogs.component.css
+|           |   |       blogs.component.html
+|           |   |       blogs.component.spec.ts
+|           |   |       blogs.component.ts
+|           |   |       
+|           |   +---contact
+|           |   |       contact.component.css
+|           |   |       contact.component.html
+|           |   |       contact.component.spec.ts
+|           |   |       contact.component.ts
+|           |   |       
+|           |   +---faq
+|           |   |       faq.component.css
+|           |   |       faq.component.html
+|           |   |       faq.component.spec.ts
+|           |   |       faq.component.ts
+|           |   |       
+|           |   +---home
+|           |   |       home.component.css
+|           |   |       home.component.html
+|           |   |       home.component.spec.ts
+|           |   |       home.component.ts
+|           |   |       
+|           |   +---login
+|           |   |       login.component.css
+|           |   |       login.component.html
+|           |   |       login.component.spec.ts
+|           |   |       login.component.ts
+|           |   |       
+|           |   +---not-found
+|           |   |       not-found.component.css
+|           |   |       not-found.component.html
+|           |   |       not-found.component.spec.ts
+|           |   |       not-found.component.ts
+|           |   |       
+|           |   +---register
+|           |   |       register.component.css
+|           |   |       register.component.html
+|           |   |       register.component.spec.ts
+|           |   |       register.component.ts
+|           |   |       
+|           |   +---tagged-blogs
+|           |   |       tagged-blogs.component.css
+|           |   |       tagged-blogs.component.html
+|           |   |       tagged-blogs.component.spec.ts
+|           |   |       tagged-blogs.component.ts
+|           |   |       
+|           |   \---users
+|           |           users.component.css
+|           |           users.component.html
+|           |           users.component.spec.ts
+|           |           users.component.ts
+|           |           
+|           +---model
+|           |   +---class
+|           |   \---interface
+|           |           interfaces.ts
+|           |           
+|           +---partial-components
+|           |   +---footer
+|           |   |       footer.component.css
+|           |   |       footer.component.html
+|           |   |       footer.component.spec.ts
+|           |   |       footer.component.ts
+|           |   |       
+|           |   \---header
+|           |           header.component.css
+|           |           header.component.html
+|           |           header.component.spec.ts
+|           |           header.component.ts
+|           |           
+|           \---service
+|                   admin-privilege.guard.spec.ts
+|                   admin-privilege.guard.ts
+|                   blogs.service.spec.ts
+|                   blogs.service.ts
+|                   hold-blog.service.spec.ts
+|                   hold-blog.service.ts
+|                   login-auth.guard.spec.ts
+|                   login-auth.guard.ts
+|                   user.service.spec.ts
+|                   user.service.ts
+|                   
+\---server
+    |   .env
+    |   package-lock.json
+    |   package.json
+    |   tsconfig.json
+    |   
+    \---src
+        |   blogs.routes.ts
+        |   database.ts
+        |   interfaces.ts
+        |   server.ts
+        |   user.routes.ts
+        |   
+        \---middleware
+                authMiddleware.ts
+                

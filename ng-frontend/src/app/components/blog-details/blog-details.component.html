@@ -11,7 +11,7 @@
 
         <div class="container">
             @for (tag of blog.tags; track $index) {
-                <a href="">{{tag}} </a>
+                <a (click)="onTagClick(tag)">{{tag}} </a>
             }
         </div>
         
@@ -19,7 +19,7 @@
         @for (comment of blog.comments; track $index) {
             <div>
                 <div [id]='blog._id' class="collapse">
-                    <span><strong>{{comment.username}}: </strong></span>
+                    <span><strong>{{comment.username}}: at {{comment.date | date:'dd/MM/yyyy hh:mm' }} </strong></span>
                      <span>{{comment.commentBody}}</span>
                      
                 </div> 

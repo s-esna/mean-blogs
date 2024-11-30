@@ -1,15 +1,14 @@
 import * as express from "express"
 import { ObjectId } from "mongodb"
-import { collections } from "./database"
+import { collections } from "../config/database"
 import * as bcrypt from 'bcrypt'
 import * as rateLimiter from 'express-rate-limit'
 import jwt from 'jsonwebtoken'
-import * as dotenv from "dotenv"
-import { authenticateToken, CustomRequest } from "./middleware/authMiddleware"
+import { authenticateToken, CustomRequest } from "../middleware/authMiddleware"
 
 export const userRouter = express.Router()
 
-//Limiter definition, for allowing a maximum of 15 login attempts per 15 minutes. Used on the login endpoint
+//Limiter definition, for allowing a maximum of 15 login attempts per 15 minuts. Used on the login endpoint
 const limiter = rateLimiter.rateLimit({
 	windowMs: 15 * 60 * 1000, 
 	limit: 15, 
@@ -18,14 +17,13 @@ const limiter = rateLimiter.rateLimit({
 })
 
 //Secret key 
-dotenv.config()
 const SECRET_KEY = process.env.SECRET_KEY_JWT
 if (!SECRET_KEY) {
     console.error("there is no secret key for JWT, careful on server launch path")
     process.exit(1)
 }
 
-userRouter.use(express.json())
+// userRouter.use(express.json())
 
 userRouter.get("/", authenticateToken, async (_req, res) => {
     try {

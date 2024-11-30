@@ -10,6 +10,9 @@
           <li><a routerLink="/blogs" routerLinkActive="active" class="nav-link">Blogs</a></li>
           <li><a routerLink="/faq" routerLinkActive="active" class="nav-link">FAQs</a></li>
           <li><a routerLink="/contact" routerLinkActive="active" class="nav-link">Contact us</a></li>
+          @if (isAdmin) {
+            <li><a routerLink="/users" routerLinkActive="active" class="nav-link">Users</a></li>
+          }
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

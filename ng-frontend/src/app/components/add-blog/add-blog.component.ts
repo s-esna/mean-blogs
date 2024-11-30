@@ -61,13 +61,18 @@ export class AddBlogComponent implements OnInit {
   onSubmit() {
     // debugger;
     const formData = this.addBlogForm.value
-
+    const processTags = (tags: string) : string[] => {
+      if (!tags) return [];
+      return tags
+              .split(',')
+              .map(tag =>  tag.trim().replace(/\s+/g, '-'))
+    }
     if (this.isEditMode$() && this.currentBlogId) {
       //Updating here
       
       if (!Array.isArray(formData.tags))  {
         if (formData.tags) {
-          formData.tags = formData.tags.split(',').map((tag : string) => tag.trim())
+          formData.tags = processTags(formData.tags)
         } else {
           formData.tags = []
         }
@@ -86,10 +91,10 @@ export class AddBlogComponent implements OnInit {
     } else {
       //Add new blog
 
-      //Tags are always string, converts into array.
-       //Check for tags, if they are an empty string, make them into an empty array so they can pass validation on db
-      if (formData.tags ) {
-        formData.tags = formData.tags.split(',').map((tag : string) => tag.trim())
+      //Tags are always string, converts into array. Mapping trims the spaces around each tag, and replaces the spaces within the tag with dashes '-'
+      //Check for tags, if they are an empty string, make them into an empty array so they can pass validation on db
+      if (formData.tags) {
+        formData.tags = processTags(formData.tags)
       } else {
         formData.tags = []
       }

@@ -24,7 +24,7 @@ export class BlogsComponent implements OnInit {
   filteredAndPaginatedBlogs: IBlog[] =[]
   
   isAdmin = this.checkAdminStatus()
-
+  
   currentPage = 1
   blogsPerPage = 3
   totalPagesArray: number[] = []

@@ -19,15 +19,20 @@ export class BlogsService {
     })
   }
 
-  // READ 
+  // GET ALL 
   getAllBlogs(): Observable<IBlog[]>  {
-    return this.http.get<IBlog[]>(`${this.url}/blogs`, { headers: this.getAuthorizationHeaders() })
-              
+    return this.http.get<IBlog[]>(`${this.url}/blogs`, { headers: this.getAuthorizationHeaders() })        
   }
-  //READ ONE
+  //GET ONE
   getSingleBlog(id: string | null): Observable<IBlog>  {
     return this.http.get<IBlog>(`${this.url}/blogs/${id}`, { headers: this.getAuthorizationHeaders() })
   }
+
+  //GET TAGGED
+  getTaggedBlogs(tag: string) : Observable<IBlog[]> {
+    return this.http.get<IBlog[]>(`${this.url}/blogs/tagged/${tag}`, { headers: this.getAuthorizationHeaders() })
+  }
+
   //CREATE
   createBlog(obj: IBlog): Observable<IBlog> {
     return this.http.post<IBlog>(`${this.url}/blogs/`, obj, { headers: this.getAuthorizationHeaders() })

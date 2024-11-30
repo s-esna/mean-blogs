@@ -1,11 +1,11 @@
 import * as express from "express"
 import { ObjectId } from "mongodb"
-import { collections } from "./database"
-import { authenticateToken } from "./middleware/authMiddleware"
+import { collections } from "../config/database"
+import { authenticateToken } from "../middleware/authMiddleware"
 
 export const blogRouter = express.Router()
 
-blogRouter.use(express.json())
+// blogRouter.use(express.json())
 
 //RESPONSES are usually .json({message: }) TO THE FRONT END (instead of .send(message) BECAUSE I FOUND OUT THE HARD WAY THAT IT HELPS (DELETE EXAMPLE)
 
@@ -31,6 +31,20 @@ blogRouter.get("/:id", authenticateToken, async (req, res) => {
             res.status(200).send(blog)
         } else {
             res.status(404).json({message : (`failed to find blog with id ${id}`)})
+        }
+    } catch {
+        res.status(500).json({message : (`Server Error. Try again later.`)})
+    }
+})
+blogRouter.get("/tagged/:tag", authenticateToken, async (req, res) => {
+    try{
+        const tag = req.params.tag        
+        const query = { tags: { $regex: new RegExp(tag, 'i') } } //Case insensitive tag searching
+        const blogs = await collections.blogs?.find(query).toArray()
+        if (blogs && blogs.length > 0) {
+            res.status(200).send(blogs)
+        } else {
+            res.status(404).json({message : (`failed to find blogs with tag ${tag}`)})
         }
     } catch {
         res.status(500).json({message : (`Server Error. Try again later.`)})

@@ -1,11 +1,12 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { IBlog } from '../../model/interface/interfaces';
 import { BlogsService } from '../../service/blogs.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { jwtDecode } from 'jwt-decode';
+
 
 @Component({
   selector: 'app-blog-details',
@@ -16,11 +17,13 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class BlogDetailsComponent implements OnInit {
   
+  
   blogService = inject(BlogsService)
+  router = inject(Router)
   route = inject(ActivatedRoute)
   
   blog = {} as IBlog
-
+  blogs : IBlog[] = [];
 
 
   loadBlog(id : string | null) { 
@@ -51,7 +54,7 @@ export class BlogDetailsComponent implements OnInit {
   
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('_id')
-      this.loadBlog(id)
+    this.loadBlog(id)
   }
 
   //Comment logic
@@ -76,6 +79,10 @@ export class BlogDetailsComponent implements OnInit {
         })
       }
     }
+  }
+
+  onTagClick(tag : string) {
+    this.router.navigateByUrl(`/blogs/tagged/${tag}`)
   }
 
 }
