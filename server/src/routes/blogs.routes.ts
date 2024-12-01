@@ -1,171 +1,28 @@
 import * as express from "express"
-import { ObjectId } from "mongodb"
-import { collections } from "../config/database"
 import { authenticateToken } from "../middleware/authMiddleware"
+import { createBlogController, createCommentController, deleteBlogController, getAllBlogsController, getBlogsByTagController, getSingleBlogController, updateBlogController } from "../controllers/blogController"
 
 export const blogRouter = express.Router()
 
-// blogRouter.use(express.json())
-
 //RESPONSES are usually .json({message: }) TO THE FRONT END (instead of .send(message) BECAUSE I FOUND OUT THE HARD WAY THAT IT HELPS (DELETE EXAMPLE)
 
-blogRouter.get("/", authenticateToken, async (_req, res) => {
-    try {
-        const blogs = await collections?.blogs?.find({}).toArray()
-        res.status(200).send(blogs)
-    } catch (error) {
-        res.status(500).json({message :error instanceof Error ? error.message : "Unknown error" })
-}})
+//GET ALL REQUEST
+blogRouter.get("/", authenticateToken, getAllBlogsController)
 
-blogRouter.get("/:id", authenticateToken, async (req, res) => {
-    try{
-        const id = req.params.id
-        
-        const query = {_id : new ObjectId(id)}
-        if (!ObjectId.isValid(id)) {
-            res.status(400).json({message : "not a valid id of blog"})
-            return
-        }
-        const blog = await collections.blogs?.findOne(query)
-        if (blog) {
-            res.status(200).send(blog)
-        } else {
-            res.status(404).json({message : (`failed to find blog with id ${id}`)})
-        }
-    } catch {
-        res.status(500).json({message : (`Server Error. Try again later.`)})
-    }
-})
-blogRouter.get("/tagged/:tag", authenticateToken, async (req, res) => {
-    try{
-        const tag = req.params.tag        
-        const query = { tags: { $regex: new RegExp(tag, 'i') } } //Case insensitive tag searching
-        const blogs = await collections.blogs?.find(query).toArray()
-        if (blogs && blogs.length > 0) {
-            res.status(200).send(blogs)
-        } else {
-            res.status(404).json({message : (`failed to find blogs with tag ${tag}`)})
-        }
-    } catch {
-        res.status(500).json({message : (`Server Error. Try again later.`)})
-    }
-})
+//GET SINGLE BLOG
+blogRouter.get("/:id", authenticateToken, getSingleBlogController)
 
-blogRouter.post("/", authenticateToken, async (req, res) => {
-    try {
-        const blog = req.body;
-            
-        if (!blog.date) {
-            blog.date = new Date();
-        }
-        const result = await collections?.blogs?.insertOne(blog);
+//GET BLOGS BY TAG
+blogRouter.get('/tagged/:tag', authenticateToken, getBlogsByTagController)
 
-        if (result?.acknowledged) {
-            res.status(201).json({message : `Created a new blog: ID ${result.insertedId}.`});
-        } else {
-            res.status(500).json({message : ("Failed to create new blog.")});
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({message : (error instanceof Error ? error.message : "Unknown error")});
-    }
-});
+//CREATE SINGLE BLOG 
+blogRouter.post('/', authenticateToken, createBlogController);
 
-blogRouter.patch("/:id", authenticateToken, async (req, res) => {
-    try {
-        const id = req?.params?.id;
-        if (!ObjectId.isValid(id)) {
-            res.status(400).json({message :("not a valid id of blog") })
-            return
-        }
-        const blog = req.body;
-        const query = { _id: new ObjectId(id) };
-        const result = await collections?.blogs?.updateOne(query, { $set: blog });
+//UPDATE BLOG
+blogRouter.patch('/:id', authenticateToken, updateBlogController)
 
-        if (result && result.matchedCount) {
-            res.status(200).json({message : (`Updated blog with ID ${id}.`)});
-        } else if (!result?.matchedCount) {
-            res.status(404).json({message : (`Failed to find blog ID ${id}`)});
-        } else {
-            res.status(500).json({message : (`Failed to update an employee: ID ${id}`)});
-        }
-    } catch (error) {
-        const message = error instanceof Error ? error.message : "Unknown error";
-        console.error(message);
-        res.status(400).json({message});
-    }
-})
-// Add a comment to a specific blog
-blogRouter.post("/:id/comments", authenticateToken, async (req, res) => {
-    try {
-        const blogId = req?.params?.id;
-        const { userId, commentBody } = req.body;
-        console.log("here they are ",blogId, req.body)
+//POST SINGLE COMMENT ON BLOG (UPDATE BLOG)
+blogRouter.post('/:id/comments', authenticateToken, createCommentController)
 
-        if (!ObjectId.isValid(blogId)) {
-            res.status(400).json({ message: "Invalid blog ID" });
-            return
-        }
-
-        const user = await collections?.users?.findOne(
-            { _id: new ObjectId(userId) },
-            { projection: { username: 1 } } // Retrieve only the username field
-        );
-        
-        if (!user) {
-            res.status(404).json({ message: "User not found" });
-            return;
-        }
-        
-        const username = user.username;
-
-        const newComment = {
-            username,
-            date: new Date(),
-            commentBody
-        };
-        console.log('this is the comment: ', newComment)
-
-        const result = await collections?.blogs?.updateOne(
-            { _id: new ObjectId(blogId) },
-            { $push: { comments: newComment } }
-        );
-        
-        
-
-
-        if (result && result.matchedCount) {
-            res.status(200).json({message: `updated blog with id ${blogId}`});
-        } else {
-            res.status(404).json({ message: "Blog not found" });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server error" });
-    }
-});
-
-
-blogRouter.delete("/:id",authenticateToken, async (req, res) => {
-    try {
-        const id = req?.params?.id;
-        if (!ObjectId.isValid(id)) {
-            res.status(400).json({message :("not a valid id of blog") })
-            return
-        } 
-        const query = { _id: new ObjectId(id) };
-        const result = await collections?.blogs?.deleteOne(query);
-
-        if (result && result.deletedCount) {
-            res.status(202).json({message :"Deleted", _id: id })
-        } else if (!result) {
-            res.status(400).json({message :(`Failed to delete blog with ID ${id}`) });
-        } else if (!result.deletedCount) {
-            res.status(404).json({message :(`Failed to find blog with ID ${id}`) });
-        }
-    } catch (error) {
-        const message = error instanceof Error ? error.message : "Unknown error";
-        console.error(message);
-        res.status(400).json({message});
-    }
-});
+//DELETE BLOG BY ID
+blogRouter.delete("/:id",authenticateToken, deleteBlogController)

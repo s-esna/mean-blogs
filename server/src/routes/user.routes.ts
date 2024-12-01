@@ -1,20 +1,13 @@
 import * as express from "express"
-import { ObjectId } from "mongodb"
 import { collections } from "../config/database"
 import * as bcrypt from 'bcrypt'
-import * as rateLimiter from 'express-rate-limit'
 import jwt from 'jsonwebtoken'
 import { authenticateToken, CustomRequest } from "../middleware/authMiddleware"
+import { limiter } from "../middleware/limiter"
+import { getAllUsersController } from "../controllers/userController"
 
 export const userRouter = express.Router()
 
-//Limiter definition, for allowing a maximum of 15 login attempts per 15 minuts. Used on the login endpoint
-const limiter = rateLimiter.rateLimit({
-	windowMs: 15 * 60 * 1000, 
-	limit: 15, 
-	standardHeaders: 'draft-7',
-	message: "You tried too many times to Login. Try again later (<=15 mins)"
-})
 
 //Secret key 
 const SECRET_KEY = process.env.SECRET_KEY_JWT
@@ -22,18 +15,8 @@ if (!SECRET_KEY) {
     console.error("there is no secret key for JWT, careful on server launch path")
     process.exit(1)
 }
-
-// userRouter.use(express.json())
-
-userRouter.get("/", authenticateToken, async (_req, res) => {
-    try {
-        const users = await collections?.users?.find({}).toArray()
-        res.status(200).send(users)
-    } catch (error) {
-        res.status(500).json({message : error instanceof Error ? error.message : "Unknown error"})
-    }
-})
-
+//GET ALL USERS
+userRouter.get("/", authenticateToken, getAllUsersController)
 
 userRouter.post("/register", async (req, res) => {
 
