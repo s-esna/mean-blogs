@@ -1,0 +1,27 @@
+div {
+    /* border: 1px dotted black; */
+}
+
+.custom-hover-link:hover {
+    opacity: 0.25; 
+    cursor: pointer; 
+}
+
+.outer-container {
+    background-color:#112D4E;
+    .container {
+        background-color: #DBE2EF;
+        }
+}
+
+img {
+    margin-top: 1rem;
+}
+
+.divider {
+    background-color: #112D4E;
+    height: 10px;
+    width: 120%;
+    margin-left: -20px;
+}
+

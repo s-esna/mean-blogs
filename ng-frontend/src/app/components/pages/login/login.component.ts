@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { UserService } from '../../service/user.service';
+import { UserService } from '../../../service/user.service';
 
 @Component({
   selector: 'app-login',

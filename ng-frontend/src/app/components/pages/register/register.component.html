@@ -1,0 +1,109 @@
+<div class="container">
+    <form class="px-3" [formGroup]="registerUserForm">
+        <!-- email -->
+        <div class="mb-3 mt-3">
+            <label class="form-label">Email:</label>
+            <input type="email" class="form-control" placeholder="Enter email" formControlName="email">
+            <!-- Message for incorrect email -->
+            @if (registerUserForm.controls['email'].touched) {
+                <div class="text-danger">
+                    @if (registerUserForm.controls['email'].errors?.['required']) {
+                        <span>Email is required</span>
+                    }
+                    @if (registerUserForm.controls['email'].errors?.['pattern']) {
+                        <span>Not a valid email</span>
+                    }
+                </div>
+             }
+        </div>
+        <!-- username -->
+        <div class="mb-3 mt-3">
+            <label class="form-label">Username:</label>
+            <input type="text" class="form-control" placeholder="Enter username" formControlName="username">
+            <!-- Message for incorrect username -->
+             @if (registerUserForm.controls['username'].touched) {
+                <div class="text-danger">
+                    @if (registerUserForm.controls['username'].errors?.['required']) {
+                        <span>Username is required</span>
+                    }
+                    @if (registerUserForm.controls['username'].errors?.['minlength']) {
+                        <span>Must be more than 4 characters</span>
+                    }
+                    @if (registerUserForm.controls['username'].errors?.['pattern']) {
+                        <span>Your username cannot contain the {{"@"}} sign</span>
+                    }
+                </div>
+             }
+        </div>
+        <!-- password -->
+        <div class="mb-3">
+            <label class="form-label">Password:</label>
+            <input type="password" class="form-control" placeholder="Enter password" formControlName="password">
+            <!-- Message for incorrect password -->
+            @if (registerUserForm.controls['password'].touched) {
+                <div class="text-danger">
+                    @if (registerUserForm.controls['password'].errors?.['required']) {
+                        <span>Password is required</span>
+                    }
+                    @if (registerUserForm.controls['password'].errors?.['pattern']) {
+                        <span>Must be at least 8 chars long and contain 1 digit, 1 uppercase, 1 lowercase and 1 symbol</span>
+                    }
+                </div>
+            }
+        </div>
+        <!-- retype password -->
+        <div class="mb-3">
+            <label class="form-label">Retype Password:</label>
+            <input type="password" formControlName="verifyPassword" class="form-control" placeholder="Re-enter password">
+        </div>
+        <!-- Check to see if retyped password is the same as the original password -->
+        @if (registerUserForm.controls['verifyPassword'].touched) {
+            <div class="text-danger">
+                @if ( passwordsDoNotMatch(registerUserForm.get('password')?.value, registerUserForm.get('verifyPassword')?.value) ) {
+                    <span>Doesn't match your above password</span>
+                }
+            </div>
+        }
+        <!-- birthdate -->
+        <label class="form-label">Date of Birth: </label>
+
+        <div class="row mb-3">
+            <div class="col-12 d-flex align-items-center">
+                <div class="me-2">
+                    <select class="form-select" formControlName="birthDay" style="width: auto;">
+                        @for (day of days; track $index) {
+                            <option [value]="day">{{day}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="me-2">
+                    <select class="form-select" formControlName="birthMonth" style="width: auto;">
+                        <option value="1">Jan</option>
+                        <option value="2">Feb</option>
+                        <option value="3">Mar</option>
+                        <option value="4">Apr</option>
+                        <option value="5">May</option>
+                        <option value="6">Jun</option>
+                        <option value="7">Jul</option>
+                        <option value="8">Aug</option>
+                        <option value="9">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                    </select>
+                </div>
+                <div>
+                    <select class="form-select" formControlName="birthYear" style="width: auto;">
+                        @for (year of years; track $index) {
+                            <option [value]="year">{{year}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- register button -->
+        <div class="col-6">
+            <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="registerUserForm.invalid || passwordsDoNotMatch(registerUserForm.get('password')?.value, registerUserForm.get('verifyPassword')?.value)" >Register</button>
+        </div>
+    </form>
+</div>

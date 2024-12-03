@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { HoldBlogService } from '../../service/hold-blog.service';
+import { HoldBlogService } from '../../../service/hold-blog.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { BlogsService } from '../../service/blogs.service';
-import { IBlog } from '../../model/interface/interfaces';
+import { BlogsService } from '../../../service/blogs.service';
+import { IBlog } from '../../../model/interface/interfaces';
 import { jwtDecode } from 'jwt-decode';
 import { NotFoundComponent } from "../not-found/not-found.component";
 

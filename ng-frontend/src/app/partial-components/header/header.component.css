@@ -1,0 +1,16 @@
+.carousel-image {
+    width: 500px;
+    height: 300px;
+    object-fit:contain 
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: brightness(0.4); /* Reduce brightness to make the icons darker */
+}
+
+/* Optional: Adjust size or add custom hover effect */
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    filter: brightness(0.2); /* Even darker on hover */
+}

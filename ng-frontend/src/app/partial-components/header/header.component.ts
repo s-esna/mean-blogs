@@ -11,27 +11,5 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class HeaderComponent {
 
-  router = inject(Router)
-  isAdmin = this.checkAdminStatus()
-
-
-  onLogoff() {
-    localStorage.removeItem("token")
-  }
-
-  checkAdminStatus() {
-    const token = localStorage.getItem("token")
-    
-    if (token) {
-      try{
-        const decodedToken: any = jwtDecode(token); 
-        return decodedToken.isAdmin
-      } catch (error) {
-        console.error('could not decode token', error)
-        return false
-      }
-      
-    }
-    return false
-  }
+  
 }

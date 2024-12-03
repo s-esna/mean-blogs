@@ -1,10 +1,10 @@
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { BlogsService } from '../../service/blogs.service';
+import { BlogsService } from '../../../service/blogs.service';
 import { DatePipe } from '@angular/common';
-import { IBlog } from '../../model/interface/interfaces';
-import { HoldBlogService } from '../../service/hold-blog.service';
+import { IBlog } from '../../../model/interface/interfaces';
+import { HoldBlogService } from '../../../service/hold-blog.service';
 
 @Component({
   selector: 'app-add-blog',

@@ -1,15 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { IBlog } from '../../model/interface/interfaces';
+import { IBlog } from '../../../model/interface/interfaces';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { BlogsService } from '../../service/blogs.service'; 
-import { JsonPipe } from '@angular/common';
-import { HoldBlogService } from '../../service/hold-blog.service';
+import { BlogsService } from '../../../service/blogs.service'; 
+import { JsonPipe, SlicePipe } from '@angular/common';
+import { HoldBlogService } from '../../../service/hold-blog.service';
 import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-blogs',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, JsonPipe],
+  imports: [RouterLink, RouterLinkActive, JsonPipe, SlicePipe],
   templateUrl: './blogs.component.html',
   styleUrl: './blogs.component.css'
 })

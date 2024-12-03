@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/pages/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { BlogsComponent } from './components/blogs/blogs.component';
+import { LoginComponent } from './components/pages/login/login.component';
+import { RegisterComponent } from './components/pages/register/register.component';
+import { BlogsComponent } from './components/pages/blogs/blogs.component';
 import { ContactComponent } from './components/pages/contact/contact.component';
 import { FaqComponent } from './components/pages/faq/faq.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
+import { NotFoundComponent } from './components/pages/not-found/not-found.component';
+import { BlogDetailsComponent } from './components/pages/blog-details/blog-details.component';
 import { loginAuthGuard } from './service/guards/login-auth.guard';
-import { AddBlogComponent } from './components/add-blog/add-blog.component';
+import { AddBlogComponent } from './components/pages/add-blog/add-blog.component';
 import { adminPrivilegeGuard } from './service/guards/admin-privilege.guard';
-import { UsersComponent } from './components/users/users.component';
-import { TaggedBlogsComponent } from './components/tagged-blogs/tagged-blogs.component';
+import { UsersComponent } from './components/pages/users/users.component';
+import { TaggedBlogsComponent } from './components/pages/tagged-blogs/tagged-blogs.component';
 
 export const routes: Routes = [
     {

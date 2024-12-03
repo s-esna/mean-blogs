@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+img {
+    width: 500px;
+    height: 300px;
+    object-fit: contain;
+    background-color: #363434; /* Custom background color for empty space */
+}
