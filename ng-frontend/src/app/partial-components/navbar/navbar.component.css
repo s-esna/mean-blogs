@@ -1,0 +1,13 @@
+.nav-link {
+    color: var(--color1);
+}
+.nav-link.active {
+    font-weight: bold; 
+    color: var(--color4); 
+    border-bottom: 2px solid var(--color4); 
+}
+
+.help {
+    background-color: var(--color3);
+    border: 2px solid var(--color4);
+}

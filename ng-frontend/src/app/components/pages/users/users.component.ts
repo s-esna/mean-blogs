@@ -12,6 +12,7 @@ import { UserService } from '../../../service/user.service';
 export class UsersComponent implements OnInit {
   userService = inject(UserService)
   users$ = signal<IUser[]>([])
+  isEmailDisplay : boolean = false
 
   ngOnInit(): void {
     this.loadPage()
@@ -23,6 +24,10 @@ export class UsersComponent implements OnInit {
     .subscribe((users: IUser[]) => {
       this.users$.set(users)
     })
+  }
+
+  onClick() {
+    this.isEmailDisplay = !this.isEmailDisplay
   }
 
 }

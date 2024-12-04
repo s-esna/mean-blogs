@@ -1,7 +1,10 @@
 .carousel-image {
     width: 500px;
     height: 300px;
-    object-fit:contain 
+    object-fit:contain;
+}
+.carousel-inner {
+    background-color: var(--color2);
 }
 
 .carousel-control-prev-icon,

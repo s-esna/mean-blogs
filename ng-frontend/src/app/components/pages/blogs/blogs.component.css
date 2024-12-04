@@ -1,6 +1,4 @@
-div {
-    /* border: 1px dotted black; */
-}
+
 
 .custom-hover-link:hover {
     opacity: 0.25; 
@@ -8,9 +6,9 @@ div {
 }
 
 .outer-container {
-    background-color:#112D4E;
+    background-color: var(--color4);
     .container {
-        background-color: #DBE2EF;
+        background-color: var(--color2);
         }
 }
 
@@ -19,7 +17,7 @@ img {
 }
 
 .divider {
-    background-color: #112D4E;
+    background-color: var(--color4);
     height: 10px;
     width: 120%;
     margin-left: -20px;

@@ -1,0 +1,13 @@
+.tag-box {
+    border: 1px dotted black;
+    margin: 0px 5px;
+  
+    color: var(--color3);
+}
+
+.tag-box:hover {
+    cursor: pointer;
+    color: var(--color4);
+}
+
+

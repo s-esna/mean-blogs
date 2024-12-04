@@ -14,9 +14,10 @@
                 @for (filteredBlog of filteredAndPaginatedBlogs; track $index) {
                     <div class="divider"></div>
                     
-                        <h3> <a class="text-decoration-none text-reset custom-hover-link" [routerLink]="filteredBlog._id">{{filteredBlog.title}}</a></h3>
+                        <h3 class="text-center"> <a class="text-decoration-none text-reset custom-hover-link" [routerLink]="filteredBlog._id">{{filteredBlog.title}}</a></h3>
                     <!-- <p>Debugging Area, Blog: {{blog | json  }}</p> -->
-        
+                    <div class="d-flex justify-content-between align-items-center"> </div>
+
                     <div>
                         @if (isAdmin) {
                             <button class="btn btn-primary mx-1" (click)="updateById(filteredBlog)"  >Edit</button>
@@ -26,11 +27,13 @@
                     </div>
         
                     <div>
-                    <img [src]="filteredBlog.img" alt="">
+                    <div class="text-center">
+                        <img [routerLink]="filteredBlog._id"  [src]="filteredBlog.img" alt="">                        
+                    </div>
                     
-                    <p>{{ filteredBlog.body | slice:0:250 }}{{ filteredBlog.body.length > 250 ? '...' : '' }}</p>            </div>
+                    <p class="custom-hover-link" [routerLink]="filteredBlog._id">{{ filteredBlog.body | slice:0:250 }}{{ filteredBlog.body.length > 250 ? '...' : '' }}</p>            </div>
         
-                    <button class="btn btn-primary" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+filteredBlog._id" >Comments</button> 
+                    <button class="btn btn-primary mb-2" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+filteredBlog._id" >Comments</button> 
                     @for (comment of filteredBlog.comments; track $index) {
                         <div>
                             <div [id]='filteredBlog._id' class="collapse">

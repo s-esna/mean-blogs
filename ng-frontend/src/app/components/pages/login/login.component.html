@@ -1,31 +1,34 @@
-<div class="login-wrap p-4 p-md-5">
-    <div class="d-flex">
-        <div class="w-100">
-            <h3 class="mb-4">Sign In</h3>
-        </div>        
-    </div>
-        <form [formGroup]="loginForm" >
-            <!-- username or email input -->
-            <div class="form-group mb-3">
-                <label class="form-label" >Username or Email</label>
-                <input type="text" class="form-control" placeholder="Username or Email" formControlName="emailOrUsername">
-            </div>
-            <!-- password input -->
-            <div class="form-group mb-3">
-                <label class="label" for="password">Password</label>
-                <input type="password" class="form-control" placeholder="Password" formControlName="password">
-            </div>
-            <div class="form-group">
-                <button type="submit" (click)="onLogin()" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
-            </div>
-            <div class="form-group d-md-flex">
-                <div class="w-50 text-left">
-                    <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-                        <input type="checkbox" unchecked>
-                    </label>
+<div class="outer-container">
+    <div class="container login-wrap p-4 p-md-5">
+        <div class="d-flex">
+            <div class="w-100">
+                <h3 class="mb-4">Sign In</h3>
+            </div>        
+        </div>
+            <form [formGroup]="loginForm" >
+                <!-- username or email input -->
+                <div class="form-group mb-3">
+                    <label class="form-label" >Username or Email</label>
+                    <input type="text" class="form-control" placeholder="Username or Email" formControlName="emailOrUsername">
                 </div>
-            </div>
-        </form>
-<p class="text-center">Not a member? <a data-toggle="tab" href="" routerLink="/users/register">Sign Up</a></p>
+                <!-- password input -->
+                <div class="form-group mb-3">
+                    <label class="label" for="password">Password</label>
+                    <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                </div>
+                <div class="form-group">
+                    <button type="submit" (click)="onLogin()" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+                </div>
+                <div class="form-group d-md-flex">
+                    <div class="w-50 text-left">
+                        <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                            <input type="checkbox" unchecked>
+                        </label>
+                    </div>
+                </div>
+            </form>
+    <p class="text-center">Not a member? <a data-toggle="tab" href="" routerLink="/users/register">Sign Up</a></p>
+    </div>
+    
+    
 </div>
-

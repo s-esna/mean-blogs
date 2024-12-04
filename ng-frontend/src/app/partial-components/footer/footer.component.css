@@ -1,0 +1,13 @@
+.help {
+    background-color: var(--color3);
+    border: 2px solid var(--color4);
+}
+
+.nav-link{
+    text-decoration:  none;
+    color: var(--color4);
+}
+.nav-link:hover{
+    text-decoration:  none;
+    color: var(--color1);
+}

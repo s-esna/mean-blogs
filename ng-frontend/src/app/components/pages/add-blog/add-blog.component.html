@@ -1,24 +1,28 @@
 <form [formGroup]="addBlogForm">
-    <div class="container">
-        <div class="m-3 col-6">
-            <label class="form-label">Title</label>
-            <input type="text" class="form-control" formControlName="title">    
-        </div>
-        <div class="m-3 col-6">
-            <label class="form-label">Body</label>
-            <textarea class="form-control" formControlName="body"></textarea>    
-        </div>
-        <div class="m-3 col-6">
-            <label class="form-label">Tags</label>
-            <input type="text" class="form-control" formControlName="tags">
-            <p class="text-danger">Comma separated with no spaces (i.e. peace,momentum,space )</p>
-        </div>
-        <div class="m-3 col-6">
-            <label class="form-label">Image URL</label>
-            <input type="text" class="form-control" formControlName="img">    
+    <div class="outer-container">
+        <div class="container">
+            <div class="m-3 col-6">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" formControlName="title">    
+            </div>
+            <div class="m-3 col-6">
+                <label class="form-label">Body</label>
+                <textarea class="form-control" formControlName="body"></textarea>    
+            </div>
+            <div class="m-3 col-6">
+                <label class="form-label">Tags</label>
+                <input type="text" class="form-control" formControlName="tags">
+                <p class="text-danger">Comma separated with no spaces (i.e. peace,momentum,space )</p>
+            </div>
+            <div class="m-3 col-6">
+                <label class="form-label">Image URL</label>
+                <input type="text" class="form-control" formControlName="img">    
+            </div>
+            <button type="submit" routerLink="/blogs" class="btn btn-success mb-2" (click)="onSubmit()">Submit</button>
+
         </div>
     </div>
+
     
-    <button type="submit" routerLink="/blogs" class="btn btn-success" (click)="onSubmit()">Submit</button>
 </form>
 

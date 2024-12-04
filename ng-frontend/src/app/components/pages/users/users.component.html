@@ -1,8 +1,21 @@
-@for (user of users$(); track $index) {
-    <p>Username: {{user.username}} </p>
-    <p>Email: {{user.email}} </p>
-    <p>Password: {{user.password}}</p>
-    <p>Id: {{user._id}}</p>
-    <p>birthdate: {{user.birthDay}} - {{user.birthMonth}} - {{user.birthYear}}</p>
-    <hr>
+
+@if (isEmailDisplay) {
+    <button class="btn btn-success m-2 ms-auto d-block" (click)="onClick()">CLICK ME FOR NORMAL FORMAT</button>
+    <p><strong>COPY THE BELOW AND PASTE IN BCC: </strong></p>
+    @for (user of users$(); track $index) {
+        {{user.email}}{{ $index < users$().length - 1 ? ', ' : '' }}
+    }
+} @else  {
+    <button class="btn btn-success m-2 ms-auto d-block" (click)="onClick()">CLICK ME FOR EMAIL FORMAT</button>
+
+    @for (user of users$(); track $index) {
+
+        <p>Username: {{user.username}} </p>
+        <p>Email: {{user.email}} </p>
+        <p>Password: {{user.password}}</p>
+        <p>Id: {{user._id}}</p>
+        <p>birthdate: {{user.birthDay}} - {{user.birthMonth}} - {{user.birthYear}}</p>
+        <hr>
+    }    
 }
+
