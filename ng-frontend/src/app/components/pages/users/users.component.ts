@@ -11,23 +11,26 @@ import { UserService } from '../../../service/user.service';
 })
 export class UsersComponent implements OnInit {
   userService = inject(UserService)
-  users$ = signal<IUser[]>([])
+  users : IUser[] = []
+  currentPage = 1
+  totalPages = 1
   isEmailDisplay : boolean = false
 
   ngOnInit(): void {
     this.loadPage()
   }
 
-  loadPage() {
-    console.log("got users")
-    this.userService.getAllUsers()
-    .subscribe((users: IUser[]) => {
-      this.users$.set(users)
+  loadPage(page: number = 1) {
+    this.userService.getAllUsers(page)
+    .subscribe(({users, totalPages}) => {
+      this.users = users
+      this.currentPage = page
+      this.totalPages = totalPages
     })
   }
 
-  onClick() {
-    this.isEmailDisplay = !this.isEmailDisplay
-  }
+  // onClick() {
+  //   this.isEmailDisplay = !this.isEmailDisplay
+  // }
 
 }

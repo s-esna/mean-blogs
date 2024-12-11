@@ -6,15 +6,23 @@ import { ObjectId } from "mongodb";
 //GET ALL
 export async function getAllBlogsController(req: Request, res: Response) {
     try {
-        // const {limit, page} = req.query
-        // const paginationParameters = {
-        //     limit: parseInt(limit as string) ||  10,
-        //     page: parseInt(page as string) ||  1
-        // }
+        const page = parseInt(req.query.page as string) || 1
+        const limit = parseInt(req.query.limit as string) || 3
 
-        // const blogs = await getAllBlogsService(paginationParameters)
-        const blogs = await getAllBlogsService()
-        res.status(200).send(blogs)
+        if (page < 1 || limit < 1) {
+            res.status(400).json({message: "Page and limit must be positive ints"})
+            return
+        }
+
+        const {blogs, total} = await getAllBlogsService(page, limit)
+
+        const totalPages = Math.ceil(total/ limit)
+        res.status(200).json({
+            blogs,
+            total,
+            page,
+            totalPages
+        })
     } catch (err) {
         res.status(500).json({message :err instanceof Error ? err.message : "Unknown error" })
     }    

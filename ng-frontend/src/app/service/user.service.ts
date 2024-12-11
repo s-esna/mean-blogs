@@ -24,8 +24,8 @@ export class UserService {
   }
 
   // READ ALL
-  getAllUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.url}/users/`, { headers: this.getAuthorizationHeaders() })
+  getAllUsers(page: number, limit: number = 5): Observable<{users :IUser[]; totalPages: number}> {
+    return this.http.get<{users:IUser[]; totalPages: number}>(`${this.url}/users?page=${page}&limit=${limit}`, { headers: this.getAuthorizationHeaders() })
   }
 
   //CREATE - LOGIN USER

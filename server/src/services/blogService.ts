@@ -4,21 +4,18 @@ import { Blog } from "../interfaces/blogInterface";
 
 
 //GET ALL
-export async function getAllBlogsService ()  {
-// export async function getAllBlogsService (paginationParameters : {limit: number, page: number})  {
-    // const {limit, page} = paginationParameters
-    try{
-        // const paginatedResults = collections?.blogs
-        //                         ?.find({})
-        //                         .skip((page-1) * limit)
-        //                         .limit(limit)
-        // const blogs = await paginatedResults?.toArray()
-        // const totalBlogs = await collections?.blogs?.countDocuments()
-        // const totalPages = Math.ceil((totalBlogs || 0) / limit)
-        // return {blogs, totalBlogs, totalPages, page}
-        return await collections?.blogs?.find({}).toArray()
-    } catch (err) {
-        console.error('error while fetching blogs', err)
+export async function getAllBlogsService (page : number, limit: number)  {
+
+    const skip = (page - 1) * limit
+    const blogs = await collections.blogs?.find({})      //Could omit passwords here, but they are encrypted anyway
+        .skip(skip)
+        .limit(limit)
+        .toArray()
+    const total = await collections.blogs?.countDocuments()
+
+    return {
+        blogs: blogs || [],
+        total: total || 0
     }
 }
 

@@ -1,14 +1,14 @@
-
+<!-- 
 @if (isEmailDisplay) {
     <button class="btn btn-success m-2 ms-auto d-block" (click)="onClick()">CLICK ME FOR NORMAL FORMAT</button>
     <p><strong>COPY THE BELOW AND PASTE IN BCC: </strong></p>
-    @for (user of users$(); track $index) {
-        {{user.email}}{{ $index < users$().length - 1 ? ', ' : '' }}
+    @for (user of users; track $index) {
+        {{user.email}}{{ $index < users.length - 1 ? ', ' : '' }}
     }
-} @else  {
-    <button class="btn btn-success m-2 ms-auto d-block" (click)="onClick()">CLICK ME FOR EMAIL FORMAT</button>
+} @else  { -->
+    <!-- <button class="btn btn-success m-2 ms-auto d-block" (click)="onClick()">CLICK ME FOR EMAIL FORMAT</button> -->
 
-    @for (user of users$(); track $index) {
+    @for (user of users; track $index) {
 
         <p>Username: {{user.username}} </p>
         <p>Email: {{user.email}} </p>
@@ -16,6 +16,22 @@
         <p>Id: {{user._id}}</p>
         <p>birthdate: {{user.birthDay}} - {{user.birthMonth}} - {{user.birthYear}}</p>
         <hr>
-    }    
-}
+    }
+
+    <div>
+        <ul class="pagination mt-3">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <button class="page-link" (click)="loadPage(currentPage - 1)">Prev</button>
+            </li>
+            @for (page of [].constructor(totalPages); track $index) {
+                <li class="page-item" [class.active]="currentPage === $index + 1">
+                    <button class="page-link" (click)="loadPage($index + 1)">{{$index + 1}}</button>
+                </li>
+            }
+            <li class="page-item"  [class.disabled]="currentPage === totalPages">
+                <button class="page-link" (click)="loadPage(currentPage + 1)">Next</button>
+            </li>
+        </ul>
+    </div>
+<!-- } -->
 

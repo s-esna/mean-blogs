@@ -2,7 +2,6 @@
     <div class="info container">
         <h2>{{ title }}</h2>
         <p>{{ content }}</p>
-      
         <!-- If it's the contact page, show the input form -->
         @if (showInput) {
         <div>
@@ -11,7 +10,6 @@
             <button (click)="onSubmit()">Submit</button>
         </div>
         }
-        
     </div>
 </div>
 

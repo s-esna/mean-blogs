@@ -6,7 +6,7 @@ export const blogRouter = express.Router()
 
 //RESPONSES are usually .json({message: }) TO THE FRONT END (instead of .send(message) BECAUSE I FOUND OUT THE HARD WAY THAT IT HELPS (DELETE EXAMPLE)
 
-//GET ALL REQUEST
+//GET ALL BLOGS
 blogRouter.get("/", authenticateToken, getAllBlogsController)
 
 //GET SINGLE BLOG

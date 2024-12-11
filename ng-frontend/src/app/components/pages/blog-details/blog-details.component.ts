@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { IBlog } from '../../../model/interface/interfaces';
 import { BlogsService } from '../../../service/blogs.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,21 +21,27 @@ export class BlogDetailsComponent implements OnInit {
   blogService = inject(BlogsService)
   router = inject(Router)
   route = inject(ActivatedRoute)
+  cdr = inject(ChangeDetectorRef)
   
-  blog = {} as IBlog
+  blog = {} as IBlog 
   blogs : IBlog[] = [];
+  loading: boolean = true; // Add a loading state to prevent flicker
 
 
   loadBlog(id : string | null) { 
     this.blogService.getSingleBlog(id)
-    .subscribe((blog: IBlog) => 
+    .subscribe((blog: IBlog) => {
         this.blog = blog
+        this.loading = false
+      },
+      (error) => {
+        console.error('Error fetching blog', error);
+        this.loading = false;
+      }
     )
   }
 
   //user id extraction
-
-
   getUserIdFromToken() {
     const token = localStorage.getItem("token")
     
@@ -76,6 +82,7 @@ export class BlogDetailsComponent implements OnInit {
         console.log(blogId, formData)
         this.blogService.addComment(blogId, formData).subscribe((commentedBlog : IBlog) => {
           this.blog = commentedBlog
+          this.router.navigateByUrl(`/blogs/${blogId}`)
         })
       }
     }

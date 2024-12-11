@@ -20,8 +20,8 @@ export class BlogsService {
   }
 
   // GET ALL 
-  getAllBlogs(): Observable<IBlog[]>  {
-    return this.http.get<IBlog[]>(`${this.url}/blogs`, { headers: this.getAuthorizationHeaders() })        
+  getAllBlogs(page: number, limit: number = 3): Observable<{blogs :IBlog[]; totalPages: number}>  {
+    return this.http.get<{blogs:IBlog[]; totalPages: number}>(`${this.url}/blogs?page=${page}&limit=${limit}`, { headers: this.getAuthorizationHeaders() })        
   }
   //GET ONE
   getSingleBlog(id: string | null): Observable<IBlog>  {

@@ -2,14 +2,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { IBlog } from '../../../model/interface/interfaces';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { BlogsService } from '../../../service/blogs.service'; 
-import { JsonPipe, SlicePipe } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 import { HoldBlogService } from '../../../service/hold-blog.service';
 import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-blogs',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, JsonPipe, SlicePipe],
+  imports: [RouterLink, SlicePipe],
   templateUrl: './blogs.component.html',
   styleUrl: './blogs.component.css'
 })
@@ -20,65 +20,30 @@ export class BlogsComponent implements OnInit {
   holdBlogService = inject(HoldBlogService)
   
   blogs :IBlog[]= []
-  filteredBlogs : IBlog[] = []
-  filteredAndPaginatedBlogs: IBlog[] =[]
   
   isAdmin = this.checkAdminStatus()
   
   currentPage = 1
-  blogsPerPage = 3
   totalPagesArray: number[] = []
-  totalPages = 0;
+  totalPages = 1;
 
   ngOnInit(): void {
     this.loadPage()
   }
 
-  loadPage() {
-    this.blogService.getAllBlogs()
-    .subscribe((blogs) => {
-      //blogs initialization
-      this.blogs = blogs 
-      this.filteredBlogs = blogs
-      // this.filteredAndPaginatedBlogs = blogs
-
-      //pagination
-      this.resetPagination()
-      this.filteredAndPaginatedBlogs = this.paginateBlogs()
+  loadPage(page: number = 1) {
+    this.blogService.getAllBlogs(page)
+    .subscribe(({blogs, totalPages}) => {
+      this.blogs = blogs
+      this.currentPage = page
+      this.totalPages = totalPages
     })
   }
 
   fetchResult(event: KeyboardEvent) {
     const searchTerm = (event.target as HTMLInputElement).value.toLowerCase()
-    this.resetPagination()
-    this.filteredBlogs = this.blogs.filter((blog) => {
-      return ((blog.title.toLowerCase().includes(searchTerm) ||
-      blog.body.toLowerCase().includes(searchTerm)))
-    })
     
-    this.filteredAndPaginatedBlogs = this.paginateBlogs()
-  }
-
-  resetPagination() {
-    this.currentPage = 1
-    this.totalPages = Math.ceil((this.filteredBlogs.length)/this.blogsPerPage)
-    this.totalPagesArray =[]
-    for (let i = 0; i < this.totalPages; i++) {
-      this.totalPagesArray.push(i)
     }
-  }
-
-  paginateBlogs() : IBlog[] {
-    const start = (this.currentPage - 1) * this.blogsPerPage
-    return this.filteredBlogs.slice(start, start + this.blogsPerPage)
-  }
-
-  changePage(page : number) {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page
-      this.filteredAndPaginatedBlogs = this.paginateBlogs()
-    }
-  }
 
   checkAdminStatus() {
     const token = localStorage.getItem("token")
