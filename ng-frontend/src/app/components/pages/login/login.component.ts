@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../../service/user.service';
 import { CommonModule } from '@angular/common';
+import {  ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   
   router = inject(Router)
   userService = inject(UserService)
+  toastr = inject(ToastrService)
 
   showPassword : boolean = false
 
@@ -31,11 +33,19 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(loginObj).subscribe({
       next: (response:any) => {
         localStorage.setItem('token', response.token)
-        alert(response.message)
+        this.toastr.success(response.message, "SUCCESS" ,{
+          timeOut: 3000, // Close after 3 seconds
+          positionClass: 'toast-top-right', // Position on the screen
+          closeButton: true // Show a close button
+        })
         this.router.navigateByUrl('/')
       },
       error: err => {
-        alert(err.error.message || "something went wrong")
+        this.toastr.error(err.error.message || "Too many attempts, try again later", "OOPS" ,{
+          timeOut: 3000, // Close after 3 seconds
+          positionClass: 'toast-top-right', // Position on the screen
+          closeButton: true // Show a close button
+        })
       }
     })
   }

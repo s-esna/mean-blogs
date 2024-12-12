@@ -5,6 +5,7 @@ import { BlogsService } from '../../../service/blogs.service';
 import { DatePipe } from '@angular/common';
 import { IBlog } from '../../../model/interface/interfaces';
 import { HoldBlogService } from '../../../service/hold-blog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-blog',
@@ -16,6 +17,7 @@ import { HoldBlogService } from '../../../service/hold-blog.service';
 
 export class AddBlogComponent implements OnInit {
 
+  toastr = inject(ToastrService)
   blogService = inject(BlogsService)
   holdBlogService = inject(HoldBlogService)
   router = inject(Router)
@@ -109,7 +111,11 @@ export class AddBlogComponent implements OnInit {
         },
         error: (error) => {
             console.error('Failed to add blog:', error);
-            // alert('An error occurred while adding the blog. Please try again.');
+            this.toastr.error('An error occurred while adding the blog. Please try again.', "Could not add blog" ,{
+              timeOut: 5000, 
+              positionClass: 'toast-top-right', 
+              closeButton: true 
+            })
         }
     });
     }

@@ -5,6 +5,7 @@ import { BlogsService } from '../../../service/blogs.service';
 import { IBlog } from '../../../model/interface/interfaces';
 import { jwtDecode } from 'jwt-decode';
 import { NotFoundComponent } from "../not-found/not-found.component";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tagged-blogs',
@@ -14,6 +15,7 @@ import { NotFoundComponent } from "../not-found/not-found.component";
   styleUrl: './tagged-blogs.component.css'
 })
 export class TaggedBlogsComponent implements OnInit {
+  toastr = inject(ToastrService)
   blogService = inject(BlogsService)
   route = inject(ActivatedRoute)
   holdBlogService = inject(HoldBlogService)
@@ -74,7 +76,11 @@ export class TaggedBlogsComponent implements OnInit {
         },
         error: (err) => {
           console.error('Deletion failed', err);
-          alert('Error deleting the blog. Please try again.');
+          this.toastr.error('Error deleting the blog. Please try again.', "Could not delete blog" ,{
+            timeOut: 5000, 
+            positionClass: 'toast-top-right', 
+            closeButton: true 
+          })
         }
       })  
     }

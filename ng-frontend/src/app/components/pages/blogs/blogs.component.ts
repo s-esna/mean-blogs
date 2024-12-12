@@ -5,6 +5,7 @@ import { BlogsService } from '../../../service/blogs.service';
 import { SlicePipe } from '@angular/common';
 import { HoldBlogService } from '../../../service/hold-blog.service';
 import { jwtDecode } from 'jwt-decode';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-blogs',
@@ -14,7 +15,7 @@ import { jwtDecode } from 'jwt-decode';
   styleUrl: './blogs.component.css'
 })
 export class BlogsComponent implements OnInit {
-
+  toastr = inject(ToastrService)
   router = inject(Router)
   blogService = inject(BlogsService)
   holdBlogService = inject(HoldBlogService)
@@ -78,7 +79,11 @@ export class BlogsComponent implements OnInit {
         },
         error: (err) => {
           console.error('Deletion failed', err);
-          alert('Error deleting the blog. Please try again.');
+          this.toastr.error('Error deleting the blog. Please try again.', "Could not delete blog" ,{
+            timeOut: 5000, 
+            positionClass: 'toast-top-right', 
+            closeButton: true 
+          })
         }
       })  
     }

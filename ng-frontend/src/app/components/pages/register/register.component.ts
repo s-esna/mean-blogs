@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../service/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
+  toastr = inject(ToastrService)
+
   years: number[] = []; 
   days: number[] = [];
 
@@ -95,17 +98,34 @@ export class RegisterComponent implements OnInit {
     this.userService.postUserByFormValue(formDataNoVerify).subscribe({
       next: (response) => {
           console.log('User added successfully:', response);
-          alert("you registered successfully")
+          
+          this.toastr.success("Welcome to the Team!", "You Registered Successfully" ,{
+            timeOut: 5000, // Close after 3 seconds
+            positionClass: 'toast-top-right', // Position on the screen
+            closeButton: true // Show a close button
+          })
           this.router.navigateByUrl('/users/login'); // Redirect after success
       },
       error: (error) => {
         console.error("Registration failed:", error);
         if (error.error.message === "Username exists") {
-            alert("The username you entered is already taken. Please try a different one.");
+            this.toastr.warning("The username you entered is already taken. Please try a different one.", "Username taken" ,{
+              timeOut: 5000, // Close after 3 seconds
+              positionClass: 'toast-top-right', // Position on the screen
+              closeButton: true // Show a close button
+            })
         } else if (error.error.message === "Email exists") {
-            alert("The email you entered is already registered. Please try a different one.");
+            this.toastr.warning("The email you entered is already registered. Please try a different one.", "Email Taken" ,{
+              timeOut: 5000, // Close after 3 seconds
+              positionClass: 'toast-top-right', // Position on the screen
+              closeButton: true // Show a close button
+            })
         } else {
-            alert("Registration failed. Please try again.");
+            this.toastr.error("Registration failed. Please try again.", "OOPS" ,{
+              timeOut: 5000, // Close after 3 seconds
+              positionClass: 'toast-top-right', // Position on the screen
+              closeButton: true // Show a close button
+            })
         }
       }
     })
