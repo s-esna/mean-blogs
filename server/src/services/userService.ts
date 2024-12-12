@@ -2,6 +2,7 @@ import { collections } from "../config/database";
 import * as bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { JWT_SECRET_KEY } from "../config/env";
+import { ObjectId } from "mongodb";
 
 
 
@@ -127,5 +128,20 @@ export async function loginUserService(loginAttempt: {emailOrUsername: string; p
     } catch (err) {
         console.error('Error in loginUserService:', err);
         return { success: false, status: 500, message: 'Server error. Please try again later.' };
+    }
+}
+
+
+export async function getUsernameByUserIdService(userId : string) {
+    try {
+        const user = await collections?.users?.findOne(
+            { _id: new ObjectId(userId) },
+            { projection: { username: 1 } } // Retrieve only the username field
+        );
+
+        return user?.username
+    } catch (err) {
+        console.error('could not fetch user', err)
+        throw new Error('Error while looking for user in DB')
     }
 }

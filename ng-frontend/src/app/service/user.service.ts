@@ -33,6 +33,11 @@ export class UserService {
     return this.http.post<{emailOrUsername: string, password:string}>(`${this.url}/users/login`, obj)
   }
 
+  //Get Username by UserId
+  getUsernameByUserId(userId: string) : Observable<{username :string}> {
+    return this.http.get<{username :string}>(`${this.url}/users/username?userId=${userId}`, { headers: this.getAuthorizationHeaders() })
+  }
+
   //UPDATE -Dont know if I implement
   // editUserById(){
 

@@ -1,6 +1,7 @@
 import { Request, Response } from "express"; 
-import { createBlogService, createCommentService, deleteBlogService, getAllBlogsService, getBlogsByTagService, getSingleBlogService, getUsernameByUserId, updateBlogService } from "../services/blogService";
+import { createBlogService, createCommentService, deleteBlogService, getAllBlogsService, getBlogsByTagService, getSingleBlogService, updateBlogService } from "../services/blogService";
 import { ObjectId } from "mongodb";
+import { getUsernameByUserIdService } from "../services/userService";
 
 
 //GET ALL
@@ -132,7 +133,7 @@ export async function createCommentController(req: Request, res:Response) {
             return
         }
 
-        const username = await getUsernameByUserId(userId)       
+        const username = await getUsernameByUserIdService(userId)       
         if (!username) {
             res.status(404).json({ message: "User not found" });
             return;

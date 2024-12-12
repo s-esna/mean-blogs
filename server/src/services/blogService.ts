@@ -95,20 +95,6 @@ export async function createCommentService(blogId: string, newComment: object) {
     }
 }
 
-export async function getUsernameByUserId(userId : string) {
-    try {
-        const user = await collections?.users?.findOne(
-            { _id: new ObjectId(userId) },
-            { projection: { username: 1 } } // Retrieve only the username field
-        );
-
-        return user?.username
-    } catch (err) {
-        console.error('could not fetch user', err)
-        throw new Error('Error while looking for user in DB')
-    }
-}
-
 //DELETE BLOG BY ID
 export async function deleteBlogService(id: string) {
     const query = { _id: new ObjectId(id) };

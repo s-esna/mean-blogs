@@ -14,14 +14,16 @@
           @if (isAdmin) {
             <li><a routerLink="/users" routerLinkActive="active" class="nav-link">Users</a></li>
           }
+          
         </ul>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-          <button type="button" class="btn btn-warning rounded" routerLink="users/login" (click)="onLogoff()">Logoff</button>
-        </form>
-
-        
+        <div class="d-flex align-items-center ms-auto">
+          <li class="nav-item me-3 text-white">{{username}}</li>
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <button type="button" class="btn btn-warning rounded" routerLink="users/login" (click)="onLogoff()">Logoff</button>
+          </form>
+        </div>
       </div>
     </div>
-</div>
+  </div>
 }

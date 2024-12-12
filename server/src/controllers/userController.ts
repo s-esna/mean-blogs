@@ -1,5 +1,5 @@
 import { Request, Response } from "express"; 
-import { getAllUsersService, loginUserService, registerUserService } from "../services/userService";
+import { getAllUsersService, getUsernameByUserIdService, loginUserService, registerUserService } from "../services/userService";
 
 //GET ALL USERS PAGINATED
 export async function getAllUsersController(req: Request, res: Response) {
@@ -62,5 +62,20 @@ export async function loginUserController(req: Request, res: Response) {
     } catch (err) {
         console.error('Error during login:', err);
         res.status(500).json({ message: 'An unexpected error occurred' });
+    }
+}
+
+//GET USERNAME BY USERID
+export async function getUsernameByUserIdController(req: Request, res: Response) {
+    try{
+        const userId = req.query.userId as string
+        const username = await getUsernameByUserIdService(userId)
+        if (!username) {
+            res.status(404).json({ message: "User not found" });
+            return;
+        }
+        res.status(200).json({username})
+    } catch {
+        res.status(500).json({message: "could not get username"})
     }
 }

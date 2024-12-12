@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +10,16 @@ import { jwtDecode } from 'jwt-decode';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  userService = inject(UserService)
   router = inject(Router)
   isAdmin = this.checkAdminStatus()
   isLoggedIn = this.checkLoggedStatus()
+  username : string = "hi"
 
+  ngOnInit(): void {
+    this.getUsernameByUserId()
+  }
 
   onLogoff() {
     localStorage.removeItem("token")
@@ -29,7 +35,6 @@ export class NavbarComponent {
         console.error('could not decode token', error)
         return false
       }
-      
     }
     return false
   }
@@ -45,8 +50,26 @@ export class NavbarComponent {
         console.error('could not decode token', error)
         return false
       }
-      
     }
     return false
+  }
+
+  getUsernameByUserId() {
+    const token = localStorage.getItem("token")
+    if (token) {
+      try{
+        const decodedToken: any = jwtDecode(token);
+        this.userService.getUsernameByUserId(decodedToken.id).subscribe({
+          next: (response: { username: string }) => {
+            this.username = response.username; // Set the username
+          },
+          error: (err) => {
+            console.error('Error fetching username:', err);
+          },
+        });
+      } catch (error) {
+        console.error('could not decode token', error)
+      }
+    }
   }
 }
