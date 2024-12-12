@@ -1,6 +1,7 @@
 import * as express from "express"
 import { authenticateToken } from "../middleware/authMiddleware"
 import { createBlogController, createCommentController, deleteBlogController, getAllBlogsController, getBlogsByTagController, getSingleBlogController, updateBlogController } from "../controllers/blogController"
+import { checkAdmin } from "../middleware/isAdmin"
 
 export const blogRouter = express.Router()
 
@@ -16,13 +17,13 @@ blogRouter.get("/:id", authenticateToken, getSingleBlogController)
 blogRouter.get('/tagged/:tag', authenticateToken, getBlogsByTagController)
 
 //CREATE SINGLE BLOG 
-blogRouter.post('/', authenticateToken, createBlogController);
+blogRouter.post('/', authenticateToken, checkAdmin ,createBlogController);
 
 //UPDATE BLOG
-blogRouter.patch('/:id', authenticateToken, updateBlogController)
+blogRouter.patch('/:id', authenticateToken, checkAdmin, updateBlogController)
 
 //POST SINGLE COMMENT ON BLOG (UPDATE BLOG)
 blogRouter.post('/:id/comments', authenticateToken, createCommentController)
 
 //DELETE BLOG BY ID
-blogRouter.delete("/:id",authenticateToken, deleteBlogController)
+blogRouter.delete("/:id",authenticateToken, checkAdmin, deleteBlogController)
