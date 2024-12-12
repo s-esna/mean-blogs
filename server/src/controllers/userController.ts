@@ -1,5 +1,5 @@
 import { Request, Response } from "express"; 
-import { getAllUsersService, getUsernameByUserIdService, loginUserService, registerUserService } from "../services/userService";
+import { getAllEmailsService, getAllUsersService, getUsernameByUserIdService, loginUserService, registerUserService } from "../services/userService";
 
 //GET ALL USERS PAGINATED
 export async function getAllUsersController(req: Request, res: Response) {
@@ -79,3 +79,21 @@ export async function getUsernameByUserIdController(req: Request, res: Response)
         res.status(500).json({message: "could not get username"})
     }
 }
+
+//GET ALL EMAILS
+export async function getAllEmailsController(req: Request, res: Response) {
+    try {
+        const users = await getAllEmailsService() 
+    
+        if (!users || users.length === 0) {
+           res.status(404).json({ message: 'No users found' });
+           return
+        }
+    
+        const emails = users.map(user => user.email); // Extract emails from users
+        res.status(200).json({emails: emails});
+      } catch (err) {
+        console.error('Error fetching emails:', err);
+        res.status(500).json({ message: 'Failed to fetch emails' });
+      }
+    };

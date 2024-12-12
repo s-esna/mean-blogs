@@ -131,7 +131,7 @@ export async function loginUserService(loginAttempt: {emailOrUsername: string; p
     }
 }
 
-
+//GET USERNAME BY USERID
 export async function getUsernameByUserIdService(userId : string) {
     try {
         const user = await collections?.users?.findOne(
@@ -143,5 +143,14 @@ export async function getUsernameByUserIdService(userId : string) {
     } catch (err) {
         console.error('could not fetch user', err)
         throw new Error('Error while looking for user in DB')
+    }
+}
+
+//GET ALL EMAILS
+export async function getAllEmailsService() {
+    try{
+        return await collections?.users?.find({}, { projection: { email: 1 } }).toArray();
+    } catch {
+        
     }
 }

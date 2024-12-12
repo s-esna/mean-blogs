@@ -23,19 +23,11 @@ export const authenticateToken = async (req: CustomRequest, res: Response, next:
         return
     }
     try {
-
-        // Log the token to inspect it (for debugging purposes)
-        console.log("Token being verified:", token);
-
         const decoded = jwt.verify(token, JWT_SECRET_KEY) as {
             _id: string;
             isAdmin: boolean;
         };
-
-        // Log the decoded user data to confirm it's being decoded properly
-        console.log("Decoded user data:", decoded);
         
-
         req.user = decoded; // Attach user data to the request object
         next(); // Proceed to the next middleware or route
     } catch (err) {

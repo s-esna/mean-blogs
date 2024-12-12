@@ -23,7 +23,7 @@ export class UserService {
     return this.http.post<IUser>(`${this.url}/users/register`, obj)
   }
 
-  // READ ALL
+  // GET ALL
   getAllUsers(page: number, limit: number = 5): Observable<{users :IUser[]; totalPages: number}> {
     return this.http.get<{users:IUser[]; totalPages: number}>(`${this.url}/users?page=${page}&limit=${limit}`, { headers: this.getAuthorizationHeaders() })
   }
@@ -38,15 +38,11 @@ export class UserService {
     return this.http.get<{username :string}>(`${this.url}/users/username?userId=${userId}`, { headers: this.getAuthorizationHeaders() })
   }
 
-  //UPDATE -Dont know if I implement
-  // editUserById(){
+  //GET ALL EMAILS
+  getAllEmails(): Observable<{emails :string[]}> {
+    return this.http.get<{emails: string[]}>(`${this.url}/users/emails`, { headers: this.getAuthorizationHeaders() })
+  }
 
-  // }
-
-  //DELETE dont know if i implement
-  // deleteUserById(id : number) {
-  //   this.http.delete("" + id)
-  // }
 
 
 }
