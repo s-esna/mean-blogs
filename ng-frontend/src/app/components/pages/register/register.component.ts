@@ -12,13 +12,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-  toastr = inject(ToastrService)
+  showPassword : boolean = false
 
   years: number[] = []; 
   days: number[] = [];
 
   userService = inject(UserService)
   router = inject(Router)
+  toastr = inject(ToastrService)
 
 
   
@@ -129,5 +130,8 @@ export class RegisterComponent implements OnInit {
         }
       }
     })
+  }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword
   }
 }

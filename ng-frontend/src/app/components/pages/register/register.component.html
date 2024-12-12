@@ -39,7 +39,12 @@
             <!-- password -->
             <div class="mb-3">
                 <label class="form-label">Password:</label>
-                <input type="password" class="form-control" placeholder="Enter password" formControlName="password">
+                <div class="password-field-container">
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Enter Password" formControlName="password">
+                    <span class="password-toggle" (click)="togglePasswordVisibility()">
+                        {{ showPassword ? 'Hide All' : 'Show All' }}
+                    </span>
+                </div>
                 <!-- Message for incorrect password -->
                 @if (registerUserForm.controls['password'].touched) {
                     <div class="text-danger">
@@ -55,7 +60,7 @@
             <!-- retype password -->
             <div class="mb-3">
                 <label class="form-label">Retype Password:</label>
-                <input type="password" formControlName="verifyPassword" class="form-control" placeholder="Re-enter password">
+                <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Re-enter password" formControlName="verifyPassword">
             </div>
             <!-- Check to see if retyped password is the same as the original password -->
             @if (registerUserForm.controls['verifyPassword'].touched) {
