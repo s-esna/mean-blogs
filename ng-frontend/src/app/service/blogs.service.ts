@@ -29,8 +29,8 @@ export class BlogsService {
   }
 
   //GET TAGGED
-  getTaggedBlogs(tag: string) : Observable<IBlog[]> {
-    return this.http.get<IBlog[]>(`${this.url}/blogs/tagged/${tag}`, { headers: this.getAuthorizationHeaders() })
+  getTaggedBlogs(tag: string, page: number, limit: number = 3) : Observable<{blogs: IBlog[]; totalPages:number}> {
+    return this.http.get<{blogs:IBlog[]; totalPages: number}>(`${this.url}/blogs/tagged/${tag}?page=${page}&limit=${limit}`, { headers: this.getAuthorizationHeaders() })
   }
 
   //CREATE

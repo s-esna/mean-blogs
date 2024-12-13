@@ -1,1 +1,75 @@
-<p>display-blogs works!</p>
+<div class="outer-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>{{title}}</h2>
+            </div>
+            @if (title === 'All Blogs') { 
+                @if (isAdmin) {
+                <button class="btn btn-success m-3 w-auto" routerLink="add-blog" >Add new Blog</button>
+                }
+                <div>
+                    <input class="my-1" type="text" placeholder="Search...">
+                </div>
+            }
+            
+            <div>
+                @for (blog of blogs; track $index) { 
+                    <div class="divider"></div>
+                    @if (title === 'All Blogs') {
+                        <h3 class="text-center"> <a class="text-decoration-none text-reset custom-hover-link" [routerLink]="blog._id">{{blog.title}}</a></h3>
+                    } @else {
+                        <h3 class="text-center"> <a class="text-decoration-none text-reset custom-hover-link" [routerLink]="'../../' + blog._id">{{blog.title}}</a></h3>
+
+                    }
+                    <div>
+                        @if (isAdmin) {
+                            <button class="btn btn-primary mx-1" (click)="updateById(blog)"  >Edit</button>
+                        
+                            <button class="btn btn-danger mx-1" (click)="deleteById(blog._id)"  >Delete</button>
+                        }
+                    </div>
+        
+                    <div>
+                        <div class="text-center">
+                            <img [routerLink]="blog._id"  [src]="blog.img" alt="">                        
+                        </div>
+                        
+                        <p class="custom-hover-link" [routerLink]="blog._id">{{ blog.body | slice:0:250 }}{{ blog.body.length > 250 ? '...' : '' }}</p>            
+                    </div>
+        
+                    <button class="btn btn-primary mb-2" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+blog._id" >Comments</button> 
+                    @for (comment of blog.comments; track $index) {
+                        <div>
+                            <div [id]='blog._id' class="collapse">
+                               <span class="fw-bold">{{comment.username}}:</span>  {{comment.commentBody}}
+                            </div> 
+                        </div>
+                    }
+                }   
+            </div>
+        
+            <div>
+                <ul class="pagination mt-3">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                        <button class="page-link" (click)="loadPage(currentPage - 1)">Prev</button>
+                    </li>
+                    @for (page of [].constructor(totalPages); track $index) {
+                        <li class="page-item" [class.active]="currentPage === $index + 1">
+                            <button class="page-link" (click)="loadPage($index + 1)">{{$index + 1}}</button>
+                        </li>
+                    }
+                    <li class="page-item"  [class.disabled]="currentPage === totalPages">
+                        <button class="page-link" (click)="loadPage(currentPage + 1)">Next</button>
+                    </li>
+                </ul>
+            </div>
+    
+        </div>
+             
+    
+    </div>
+    
+</div>
+
+

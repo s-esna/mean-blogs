@@ -57,11 +57,23 @@ export async function getSingleBlogController(req: Request, res: Response) {
 export async function getBlogsByTagController(req: Request, res: Response) {
     try{
         const tag = req.params.tag
+        const page = parseInt(req.query.page as string) || 1
+        const limit = parseInt(req.query.limit as string) || 3
+        if (page < 1 || limit < 1) {
+            res.status(400).json({message: "Page and limit must be positive ints"})
+            return
+        }
+        const {blogs, total} = await getBlogsByTagService(tag, page, limit)
 
-        const blogs = await getBlogsByTagService(tag)
+        const totalPages = Math.ceil(total/ limit)
 
         if (blogs && blogs.length > 0) {
-            res.status(200).send(blogs)
+            res.status(200).json({
+            blogs,
+            total,
+            page,
+            totalPages
+        })
         } else {
             res.status(404).json({message : (`failed to find blogs with tag ${tag}`)})
         }

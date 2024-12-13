@@ -30,10 +30,18 @@ export async function getSingleBlogService(id : string) {
 }
 
 //GET BLOGS BY TAG
-export async function getBlogsByTagService(tag: string) {
-
+export async function getBlogsByTagService(tag: string, page: number, limit:number) {
+    const skip = (page - 1) * limit
     const query = { tags: { $regex: new RegExp(tag, 'i') } } //Case insensitive
-    return await collections.blogs?.find(query).toArray()
+    const blogs = await collections.blogs?.find(query)
+        .skip(skip)
+        .limit(limit)
+        .toArray();
+    const total = await collections.blogs?.countDocuments(query);
+    return {
+        blogs: blogs || [],
+        total: total || 0
+    };
 }
     
 //CREATE SINGLE BLOG

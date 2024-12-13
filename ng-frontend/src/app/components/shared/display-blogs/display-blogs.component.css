@@ -1,0 +1,25 @@
+
+
+.custom-hover-link:hover {
+    opacity: 0.25; 
+    cursor: pointer; 
+}
+
+.outer-container {
+    background-color: var(--color4);
+    .container {
+        background-color: var(--color2);
+        }
+}
+
+img {
+    margin-top: 1rem;
+}
+
+.divider {
+    background-color: var(--color4);
+    height: 10px;
+    width: 120%;
+    margin-left: -20px;
+}
+
