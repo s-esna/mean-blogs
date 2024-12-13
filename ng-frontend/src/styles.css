@@ -21,3 +21,10 @@ img {
       border: 3 px solid var(--color4);
       }
 }
+
+.toast-top-right {
+  position: fixed !important;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1050; 
+}

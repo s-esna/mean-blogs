@@ -1,4 +1,4 @@
-<div class="outer-container">
+<div class="outer-container help">
     <div class="container">
         <form class="px-3" [formGroup]="registerUserForm">
             <!-- email -->
@@ -42,7 +42,7 @@
                 <div class="password-field-container">
                     <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Enter Password" formControlName="password">
                     <span class="password-toggle" (click)="togglePasswordVisibility()">
-                        {{ showPassword ? 'Hide All' : 'Show All' }}
+                        <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
                     </span>
                 </div>
                 <!-- Message for incorrect password -->

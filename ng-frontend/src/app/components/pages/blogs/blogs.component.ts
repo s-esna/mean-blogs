@@ -18,8 +18,9 @@ export class BlogsComponent {
   //These are passed to child (DisplayBlogsComponent)
   pageTitle: string = 'All Blogs'
   blogs: IBlog[] = []
-  loadPage(page: number = 1) {
-        this.blogService.getAllBlogs(page)
+  
+  loadPage(page: number = 1, query: string = '') {
+        this.blogService.getAllBlogs(page, query)
         .subscribe(({blogs, totalPages}) => {
           this.blogs = blogs
           this.currentPage = page

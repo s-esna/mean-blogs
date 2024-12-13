@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { IBlog } from '../model/interface/interfaces';
 import { Observable } from 'rxjs';
@@ -20,8 +20,15 @@ export class BlogsService {
   }
 
   // GET ALL 
-  getAllBlogs(page: number, limit: number = 3): Observable<{blogs :IBlog[]; totalPages: number}>  {
-    return this.http.get<{blogs:IBlog[]; totalPages: number}>(`${this.url}/blogs?page=${page}&limit=${limit}`, { headers: this.getAuthorizationHeaders() })        
+  getAllBlogs(page: number, query: string = '' ,limit: number = 3): Observable<{blogs :IBlog[]; totalPages: number}>  {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString())
+      .set('query', query);
+
+    const headers = this.getAuthorizationHeaders(); // Add authorization headers if needed
+
+    return this.http.get<{ blogs: IBlog[], totalPages: number }>(`${this.url}/blogs`, { params, headers });
   }
   //GET ONE
   getSingleBlog(id: string | null): Observable<IBlog>  {

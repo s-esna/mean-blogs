@@ -1,3 +1,9 @@
+<div class="container">
+    <button (click)="copyEmails()" [disabled]="isCopying" class="btn btn-primary">
+      {{ buttonText }}
+    </button>
+</div>
+
 @for (user of users; track $index) {
 
     <p>Username: {{user.username}} </p>
@@ -24,9 +30,5 @@
     </ul>
 </div>
 
-<div class="container">
-    <button (click)="copyEmails()" [disabled]="isCopying" class="btn btn-primary">
-      {{ buttonText }}
-    </button>
-</div>
+
 

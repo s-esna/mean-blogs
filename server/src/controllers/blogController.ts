@@ -9,13 +9,14 @@ export async function getAllBlogsController(req: Request, res: Response) {
     try {
         const page = parseInt(req.query.page as string) || 1
         const limit = parseInt(req.query.limit as string) || 3
+        const query = req.query.query as string || ''
 
         if (page < 1 || limit < 1) {
             res.status(400).json({message: "Page and limit must be positive ints"})
             return
         }
 
-        const {blogs, total} = await getAllBlogsService(page, limit)
+        const {blogs, total} = await getAllBlogsService(page, limit, query)
 
         const totalPages = Math.ceil(total/ limit)
         res.status(200).json({

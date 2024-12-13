@@ -2,17 +2,21 @@
     position: relative;
   }
   
-  .password-toggle {
-    position: absolute;
-    right: 10px;  /* Right align it inside the input field */
-    top: 70%;
-    transform: translateY(-50%);  /* Vertically center it */
-    cursor: pointer;
-    font-size: 20px;  /* Adjust the font size if necessary */
-    color: black;  /* Blue color for the text */
-  }
+.password-toggle {
+  position: absolute;
+  right: 10px;  /* Right align it inside the input field */
+  top: 70%;
+  transform: translateY(-50%);  /* Vertically center it */
+  cursor: pointer;
+  font-size: 20px;  /* Adjust the font size if necessary */
+  color: black;  /* Blue color for the text */
+}
   
-  .password-toggle:hover {
-    text-decoration: underline;  /* Underline on hover */
-    color: blue;
-  }
+.password-toggle:hover {
+  text-decoration: underline;  /* Underline on hover */
+  color: blue;
+}
+
+.help {
+  border-top: 3px solid var(--color4);
+}

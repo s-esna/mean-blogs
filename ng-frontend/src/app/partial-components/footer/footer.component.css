@@ -11,3 +11,8 @@
     text-decoration:  none;
     color: var(--color1);
 }
+
+.help {
+    background-color: var(--color3);
+    border: 2px solid var(--color4);
+}

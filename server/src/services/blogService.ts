@@ -4,14 +4,20 @@ import { Blog } from "../interfaces/blogInterface";
 
 
 //GET ALL
-export async function getAllBlogsService (page : number, limit: number)  {
+export async function getAllBlogsService (page : number, limit: number, query: string)  {
 
     const skip = (page - 1) * limit
-    const blogs = await collections.blogs?.find({})      //Could omit passwords here, but they are encrypted anyway
+    const searchCriteria = query ? {
+        $or: [
+            { title: { $regex: query, $options: 'i' } },  // Case-insensitive search
+            { body: { $regex: query, $options: 'i' } }
+        ]
+    } : {};
+    const blogs = await collections.blogs?.find(searchCriteria)      //Could omit passwords here, but they are encrypted anyway
         .skip(skip)
         .limit(limit)
         .toArray()
-    const total = await collections.blogs?.countDocuments()
+    const total = await collections.blogs?.countDocuments(searchCriteria)
 
     return {
         blogs: blogs || [],
@@ -32,7 +38,8 @@ export async function getSingleBlogService(id : string) {
 //GET BLOGS BY TAG
 export async function getBlogsByTagService(tag: string, page: number, limit:number) {
     const skip = (page - 1) * limit
-    const query = { tags: { $regex: new RegExp(tag, 'i') } } //Case insensitive
+    const query = { tags: { $regex: new RegExp(`\\b${tag}\\b`, 'i') } }
+
     const blogs = await collections.blogs?.find(query)
         .skip(skip)
         .limit(limit)

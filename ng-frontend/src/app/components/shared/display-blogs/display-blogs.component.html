@@ -6,10 +6,10 @@
             </div>
             @if (title === 'All Blogs') { 
                 @if (isAdmin) {
-                <button class="btn btn-success m-3 w-auto" routerLink="add-blog" >Add new Blog</button>
+                <button class="btn btn-success m-3 w-auto" routerLink="add-blog">Add new Blog</button>
                 }
                 <div>
-                    <input class="my-1" type="text" placeholder="Search...">
+                    <input class="my-1" type="text" placeholder="Search..."  (keyup)="onSearch($event)">
                 </div>
             }
             
@@ -52,24 +52,20 @@
             <div>
                 <ul class="pagination mt-3">
                     <li class="page-item" [class.disabled]="currentPage === 1">
-                        <button class="page-link" (click)="loadPage(currentPage - 1)">Prev</button>
+                        <button class="page-link" (click)="loadPage(currentPage - 1, searchQuery)">Prev</button>
                     </li>
                     @for (page of [].constructor(totalPages); track $index) {
                         <li class="page-item" [class.active]="currentPage === $index + 1">
-                            <button class="page-link" (click)="loadPage($index + 1)">{{$index + 1}}</button>
+                            <button class="page-link" (click)="loadPage($index + 1, searchQuery)">{{$index + 1}}</button>
                         </li>
                     }
                     <li class="page-item"  [class.disabled]="currentPage === totalPages">
-                        <button class="page-link" (click)="loadPage(currentPage + 1)">Next</button>
+                        <button class="page-link" (click)="loadPage(currentPage + 1, searchQuery)">Next</button>
                     </li>
                 </ul>
             </div>
-    
         </div>
-             
-    
     </div>
-    
 </div>
 
 

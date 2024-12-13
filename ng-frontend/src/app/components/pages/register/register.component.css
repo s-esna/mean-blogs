@@ -13,8 +13,12 @@
     font-size: 20px; /* Adjust the font size if necessary */
     color: black; /* Text color */
 }
-  
-  .password-toggle:hover {
-    text-decoration: underline;  /* Underline on hover */
-    color: blue;
-  }
+
+.password-toggle:hover {
+  text-decoration: underline;  /* Underline on hover */
+  color: blue;
+}
+
+.help {
+  border-top: 3px solid var(--color4);
+}

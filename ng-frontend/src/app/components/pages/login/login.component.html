@@ -1,4 +1,4 @@
-<div class="outer-container">
+<div class="outer-container help">
     <div class="container login-wrap p-4 p-md-5">
         <div class="d-flex">
             <div class="w-100">
@@ -16,7 +16,7 @@
                     <label class="label" for="password">Password </label>
                     <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password" formControlName="password">
                     <span class="password-toggle" (click)="togglePasswordVisibility()">
-                        {{ showPassword ? 'Hide' : 'Show' }}
+                        <i class="fa" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
                     </span>
                 </div>
                 <div class="form-group">
@@ -24,13 +24,13 @@
                 </div>
 
                 
-                <div class="form-group d-md-flex">
+                <!-- <div class="form-group d-md-flex">
                     <div class="w-50 text-left">
                         <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
                             <input type="checkbox" unchecked>
                         </label>
                     </div>
-                </div>
+                </div> -->
             </form>
     <p class="text-center">Not a member? <a data-toggle="tab" href="" routerLink="/users/register">Sign Up</a></p>
     </div>

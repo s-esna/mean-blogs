@@ -8,7 +8,7 @@ import { DisplayBlogsComponent } from "../../shared/display-blogs/display-blogs.
 @Component({
   selector: 'app-tagged-blogs',
   standalone: true,
-  imports: [ NotFoundComponent, DisplayBlogsComponent],
+  imports: [DisplayBlogsComponent],
   templateUrl: './tagged-blogs.component.html',
   styleUrl: './tagged-blogs.component.css'
 })
@@ -19,9 +19,7 @@ export class TaggedBlogsComponent {
   currentPage = 1
   totalPages = 1;
   //Passed to child
-   
-
-  pageTitle: string = 'Blogs with tag: ' + this.route.snapshot.paramMap.get('tag')
+  pageTitle: string = 'Blogs with tag: ' + `"${this.route.snapshot.paramMap.get('tag')}"`
   blogs: IBlog[] = []
   loadPage(page: number = 1) {
     const tag = this.route.snapshot.paramMap.get('tag')
