@@ -31,11 +31,19 @@
                     </div>
         
                     <div>
-                        <div class="text-center">
-                            <img [routerLink]="blog._id"  [src]="blog.img" alt="">                        
-                        </div>
+                        @if (title === "All Blogs") {
+                            <div class="text-center">
+                                <img [routerLink]="blog._id"  [src]="blog.img" alt="">                        
+                            </div>
+                            <p class="custom-hover-link" [routerLink]="blog._id">{{ blog.body | slice:0:250 }}{{ blog.body.length > 250 ? '...' : '' }}</p>            
+                        } @else {
+                            <div class="text-center">
+                                <img [routerLink]="'../../' + blog._id"  [src]="blog.img" alt="">                        
+                            </div>
+                            <p class="custom-hover-link" [routerLink]="'../../' + blog._id">{{ blog.body | slice:0:250 }}{{ blog.body.length > 250 ? '...' : '' }}</p> 
+                        }
                         
-                        <p class="custom-hover-link" [routerLink]="blog._id">{{ blog.body | slice:0:250 }}{{ blog.body.length > 250 ? '...' : '' }}</p>            
+                        
                     </div>
         
                     <button class="btn btn-primary mb-2" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+blog._id" >Comments</button> 

@@ -21,9 +21,9 @@ export class TaggedBlogsComponent {
   //Passed to child
   pageTitle: string = 'Blogs with tag: ' + `"${this.route.snapshot.paramMap.get('tag')}"`
   blogs: IBlog[] = []
+  
   loadPage(page: number = 1) {
     const tag = this.route.snapshot.paramMap.get('tag')
-
     if(tag){
       this.blogService.getTaggedBlogs(tag, page)
         .subscribe(({blogs, totalPages}) => {

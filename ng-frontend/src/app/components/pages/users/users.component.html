@@ -1,34 +1,37 @@
-<div class="container">
-    <button (click)="copyEmails()" [disabled]="isCopying" class="btn btn-primary">
-      {{ buttonText }}
+<div class="container position-relative">
+    
+
+    @for (user of users; track $index) {
+
+        <p><strong>Username: </strong>{{user.username}} </p>
+        <p><strong>Email: </strong>{{user.email}} </p>
+        <!-- <p>Password: {{user.password}}</p>
+        <p>Id: {{user._id}}</p> -->
+        <p><strong>birthdate: </strong> {{user.birthDay}} - {{user.birthMonth}} - {{user.birthYear}}</p>
+        <hr>
+    }
+    
+    <div>
+        <ul class="pagination mt-3">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <button class="page-link" (click)="loadPage(currentPage - 1)">Prev</button>
+            </li>
+            @for (page of [].constructor(totalPages); track $index) {
+                <li class="page-item" [class.active]="currentPage === $index + 1">
+                    <button class="page-link" (click)="loadPage($index + 1)">{{$index + 1}}</button>
+                </li>
+            }
+            <li class="page-item"  [class.disabled]="currentPage === totalPages">
+                <button class="page-link" (click)="loadPage(currentPage + 1)">Next</button>
+            </li>
+        </ul>
+    </div>
+    <button (click)="copyEmails()" [disabled]="isCopying" class="btn btn-primary position-absolute bottom-0 end-0 mt-3">
+        {{ buttonText }}
     </button>
 </div>
 
-@for (user of users; track $index) {
 
-    <p>Username: {{user.username}} </p>
-    <p>Email: {{user.email}} </p>
-    <p>Password: {{user.password}}</p>
-    <p>Id: {{user._id}}</p>
-    <p>birthdate: {{user.birthDay}} - {{user.birthMonth}} - {{user.birthYear}}</p>
-    <hr>
-}
-
-<div>
-    <ul class="pagination mt-3">
-        <li class="page-item" [class.disabled]="currentPage === 1">
-            <button class="page-link" (click)="loadPage(currentPage - 1)">Prev</button>
-        </li>
-        @for (page of [].constructor(totalPages); track $index) {
-            <li class="page-item" [class.active]="currentPage === $index + 1">
-                <button class="page-link" (click)="loadPage($index + 1)">{{$index + 1}}</button>
-            </li>
-        }
-        <li class="page-item"  [class.disabled]="currentPage === totalPages">
-            <button class="page-link" (click)="loadPage(currentPage + 1)">Next</button>
-        </li>
-    </ul>
-</div>
 
 
 

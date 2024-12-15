@@ -11,7 +11,7 @@ import { NotFoundComponent } from '../../pages/not-found/not-found.component';
 @Component({
   selector: 'app-display-blogs',
   standalone: true,
-  imports: [RouterLink, SlicePipe, NotFoundComponent],
+  imports: [RouterLink, SlicePipe],
   templateUrl: './display-blogs.component.html',
   styleUrl: './display-blogs.component.css'
 })

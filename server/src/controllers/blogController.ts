@@ -161,9 +161,15 @@ export async function createCommentController(req: Request, res:Response) {
         const result = await createCommentService(blogId, newComment)
         
         if (result.success) {
-            res.status(200).json({message: `updated blog with id ${blogId}`});
+            // Fetch and return the updated blog
+            const updatedBlog = await getSingleBlogService(blogId);
+            if (updatedBlog) {
+                res.status(200).json(updatedBlog); // Send back the updated blog
+            } else {
+                res.status(404).json({ message: "Blog not found after update" });
+            }
         } else {
-            res.status(404).json({ message: "comment could not be made" });
+            res.status(404).json({ message: "Comment could not be added" });
         }
     } catch (error) {
         console.error(error);

@@ -6,6 +6,7 @@ import { NotFoundComponent } from '../not-found/not-found.component';
 import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { jwtDecode } from 'jwt-decode';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class BlogDetailsComponent implements OnInit {
   
-  
+  toastr = inject(ToastrService)
   blogService = inject(BlogsService)
   router = inject(Router)
   route = inject(ActivatedRoute)
@@ -74,18 +75,18 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   onSubmit() {
+    // event.preventDefault(); // Prevent the default form submission behavior
     const formData = this.addCommentForm.value
     const blogId = this.blog._id
     
     if (blogId) {
       if (formData.commentBody) {
-        console.log(blogId, formData)
         this.blogService.addComment(blogId, formData).subscribe((commentedBlog : IBlog) => {
           this.blog = commentedBlog
-          this.router.navigateByUrl(`/blogs/${blogId}`)
         })
       }
     }
+    this.toastr.success(`${formData.commentBody}`, "Comment submitted successfully:")
   }
 
   onTagClick(tag : string) {
