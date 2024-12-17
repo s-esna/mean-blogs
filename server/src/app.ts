@@ -8,6 +8,7 @@ import express from "express";
 import { blogRouter } from "./routes/blogs.routes";
 import { userRouter } from "./routes/user.routes";
 import { applyMiddleware } from "./middleware/serverMiddleware";
+import { contactRouter } from "./routes/email.routes";
 
 // Function that configures and returns an Express app
 export const createApp = () => {
@@ -19,6 +20,7 @@ export const createApp = () => {
     //Router Mounting
     app.use("/blogs", blogRouter);
     app.use("/users", userRouter);
+    app.use("/contact", contactRouter)
 
     return app;
 };

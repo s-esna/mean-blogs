@@ -5,9 +5,11 @@
         <!-- If it's the contact page, show the input form -->
         @if (showInput) {
         <div>
-            <label for="userMessage">Your Message:</label>
-            <input type="text" id="userMessage" [(ngModel)]="userMessage" placeholder="Enter your message here...">
-            <button (click)="onSubmit()">Submit</button>
+            <label for="userMessage">Enter your message below:</label>
+            <div style="height: 200px;">
+                <textarea class="form-control my-2 w-75 h-100" type="text" id="userMessage" [(ngModel)]="userMessage" placeholder="Enter your message here..."> </textarea>
+            </div>
+            <button class="mb-1 btn btn-success" (click)="onSubmit()">Send</button>
         </div>
         }
     </div>

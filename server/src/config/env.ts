@@ -17,3 +17,6 @@ export const SERVER_CONFIG = {
 };
 
 export const JWT_SECRET_KEY = process.env.SECRET_KEY_JWT
+
+export const INCOMING_MAIL_ADDRESS = process.env.INCOMING_MAIL_ADDRESS
+export const MAIL_PASSWORD = process.env.MAIL_PASSWORD

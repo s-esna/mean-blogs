@@ -6,7 +6,7 @@ import { JWT_SECRET_KEY } from "../config/env";
 // https://stackoverflow.com/questions/37377731/extend-express-request-object-using-typescript
 export interface CustomRequest extends Request {
     user?: {
-        _id: string,
+        id: string,
         isAdmin: boolean
     }
 }
@@ -17,16 +17,17 @@ export const authenticateToken = async (req: CustomRequest, res: Response, next:
         process.exit(1)
     }
     const token = req.header('Authorization')?.replace('Bearer ', '');
-    
+    console.log('Received Token:', token); // Log token to make sure it's being passed correctly
     if (!token) {
         res.status(401).json({ message: "Access Denied: No Token Provided" });
         return
     }
     try {
         const decoded = jwt.verify(token, JWT_SECRET_KEY) as {
-            _id: string;
+            id: string;
             isAdmin: boolean;
         };
+        console.log('Decoded Token:', decoded); // Log the decoded token to verify the user data
         
         req.user = decoded; // Attach user data to the request object
         next(); // Proceed to the next middleware or route
