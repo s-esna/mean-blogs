@@ -2,6 +2,8 @@
     <div class="info container">
         <h2>{{ title }}</h2>
         <p>{{ content }}</p>
+        
+        
         <!-- If it's the contact page, show the input form -->
         @if (showInput) {
         <div>
@@ -11,6 +13,12 @@
             </div>
             <button class="mb-1 btn btn-success" (click)="onSubmit()">Send</button>
         </div>
+        }
+
+        @if (song) {
+            <div>
+                <div [innerHTML]="getSanitizedsong()"></div>  <!-- Use innerHTML to insert the iframe code -->
+            </div>
         }
     </div>
 </div>

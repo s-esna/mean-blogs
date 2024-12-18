@@ -32,7 +32,6 @@ export class AddBlogComponent implements OnInit {
 
     const blog : IBlog | null = this.holdBlogService.getBlog()
     if (blog) {
-      console.log("this was passed from the edit button " , blog)
       this.isEditMode$.set(true)
       this.currentBlogId = blog._id
       this.currentBlogDate = blog.date
@@ -84,7 +83,6 @@ export class AddBlogComponent implements OnInit {
       this.blogService.editBlogById(this.currentBlogId, formData).subscribe({
         next: () => {
           localStorage.removeItem('addBlogForm')
-          console.log('blog updated successfully')
           this.router.navigateByUrl('blogs')
         }, error: err => {
           console.error('error updating blog', err)
@@ -103,20 +101,18 @@ export class AddBlogComponent implements OnInit {
       }
 
       localStorage.removeItem('addBlogForm')
-      console.log('Trying to add this Blog: ', formData)
       
       this.blogService.createBlog(formData).subscribe({
         next: (response) => {
-            console.log('Blog added successfully:', response);
             this.router.navigateByUrl('/blogs'); // Redirect after success
-        },
-        error: (error) => {
-            console.error('Failed to add blog:', error);
-            this.toastr.error('An error occurred while adding the blog. Please try again.', "Could not add blog" ,{
+            this.toastr.success('Blog submitted successfully', "Blog added!" ,{
               timeOut: 5000, 
               positionClass: 'toast-top-right', 
               closeButton: true 
             })
+        },
+        error: (error) => {
+            console.error('Failed to add blog:', error);
         }
     });
     }

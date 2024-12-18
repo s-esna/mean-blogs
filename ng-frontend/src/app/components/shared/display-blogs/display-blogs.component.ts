@@ -6,7 +6,7 @@ import { HoldBlogService } from '../../../service/hold-blog.service';
 import { IBlog } from '../../../model/interface/interfaces';
 import { jwtDecode } from 'jwt-decode';
 import { SlicePipe } from '@angular/common';
-import { NotFoundComponent } from '../../pages/not-found/not-found.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-display-blogs',
@@ -84,23 +84,28 @@ export class DisplayBlogsComponent implements OnInit {
     }
 
     //FROM BOTH PARENTS
+
     deleteById(id: string) {
-      const isConfirmed = window.confirm("Are you sure you want to delete this item?")
-      
-      if (isConfirmed) {
-        this.blogService.deleteBlogById(id).subscribe({
-          next: () => {
-            this.loadPage(); 
-          },
-          error: (err) => {
-            console.error('Deletion failed', err);
-            this.toastr.error('Error deleting the blog. Please try again.', "Could not delete blog" ,{
-              timeOut: 5000, 
-              positionClass: 'toast-top-right', 
-              closeButton: true 
-            })
-          }
-        })  
-      }
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won’t be able to undo this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.blogService.deleteBlogById(id).subscribe({
+            next: () => {
+              this.loadPage();
+              Swal.fire('Deleted!', 'The blog has been deleted.', 'success');
+            },
+            error: (err) => {
+              console.error('Deletion failed', err);
+              Swal.fire('Error!', 'Error deleting the blog. Please try again.', 'error');
+            },
+          });
+        }
+      });
     }
 }

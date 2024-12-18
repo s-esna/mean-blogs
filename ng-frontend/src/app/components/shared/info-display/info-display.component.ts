@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-info-display',
@@ -12,9 +13,11 @@ export class InfoDisplayComponent {
   @Input() title: string = ''
   @Input() content: string = ''
   @Input() showInput: boolean = false
+  @Input() song : string = '' 
 
   @Output() formSubmitted = new EventEmitter<string>();
 
+  sanitizer = inject(DomSanitizer)
   userMessage: string = ''
 
   onSubmit() {
@@ -22,5 +25,7 @@ export class InfoDisplayComponent {
     this.userMessage = '';  // Clear the input field
   }
   
-
+  getSanitizedsong() {
+    return this.sanitizer.bypassSecurityTrustHtml(this.song);
+  }
 }

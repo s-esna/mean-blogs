@@ -12,7 +12,7 @@ import { ContactService } from '../../../service/contact.service';
 export class ContactComponent {
   contactTitle = 'Contact Us';
   contactContent = 'If you have any questions, please feel free to reach out to us.';
-
+  song = '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/17VP4tofJ3evJbtY8Tk1Qi?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
   contactService = inject(ContactService)
 
   onFormSubmit(userMessage: string) {
