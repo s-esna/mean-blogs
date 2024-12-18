@@ -1,3 +1,17 @@
+/**
+ * Controller for handling blog-related API requests, including fetching, creating, updating, and deleting blogs, 
+ * as well as adding comments to blogs.
+ * 
+ * @import { createBlogService }: Service to create a new blog.
+ * @import { createCommentService }: Service to add a comment to a blog.
+ * @import { deleteBlogService }: Service to delete a blog by its ID.
+ * @import { getAllBlogsService }: Service to fetch all blogs with pagination.
+ * @import { getBlogsByTagService }: Service to fetch blogs filtered by a tag.
+ * @import { getSingleBlogService }: Service to fetch a single blog by its ID.
+ * @import { updateBlogService }: Service to update a blog by its ID.
+ * @import { getUsernameByUserIdService }: Service to fetch a username by user ID.
+ */
+
 import { Request, Response } from "express"; 
 import { createBlogService, createCommentService, deleteBlogService, getAllBlogsService, getBlogsByTagService, getSingleBlogService, updateBlogService } from "../services/blogService";
 import { ObjectId } from "mongodb";
@@ -5,6 +19,13 @@ import { getUsernameByUserIdService } from "../services/userService";
 
 
 //GET ALL
+/**
+ * * Retrieves a paginated list of all blogs with an optional search query.
+ * 
+ * @param req - The request object, which can contain query parameters for pagination (page, limit) and a search query.
+ * @param res - The response object, which returns a paginated list of blogs and pagination metadata.
+ * @returns JSON response containing the blogs, total count, current page, and total pages.
+ */
 export async function getAllBlogsController(req: Request, res: Response) {
     try {
         const page = parseInt(req.query.page as string) || 1
@@ -31,6 +52,13 @@ export async function getAllBlogsController(req: Request, res: Response) {
 }
 
 //GET SINGLE BLOG
+/**
+ * * Retrieves a single blog by its ID.
+ * 
+ * @param req - The request object, which contains the blog ID in the URL parameters.
+ * @param res - The response object, which returns the blog if found or an error message if not.
+ * @returns JSON response containing the requested blog or an error message if the blog is not found.
+ */
 export async function getSingleBlogController(req: Request, res: Response) {
     try{
         const id = req.params.id
@@ -55,6 +83,13 @@ export async function getSingleBlogController(req: Request, res: Response) {
 }
 
 //GET BLOGS BY TAG
+/**
+ *  * Retrieves a list of blogs filtered by a specific tag, with pagination support.
+ * 
+ * @param req - The request object, which contains the tag in the URL parameters and pagination query parameters.
+ * @param res - The response object, which returns the filtered list of blogs along with pagination metadata.
+ * @returns JSON response containing the blogs, total count, current page, and total pages or an error message.
+ */
 export async function getBlogsByTagController(req: Request, res: Response) {
     try{
         const tag = req.params.tag
@@ -84,6 +119,13 @@ export async function getBlogsByTagController(req: Request, res: Response) {
 }
 
 //CREATE SINGLE BLOG
+/**
+ *  * Creates a new blog post.
+ * 
+ * @param req - The request object, which contains the blog data in the body.
+ * @param res - The response object, which returns a success message with the ID of the created blog or an error message.
+ * @returns JSON response indicating the success or failure of blog creation.
+ */
 export async function createBlogController(req: Request, res: Response)  {
     try {
         const blog = req.body;
@@ -103,6 +145,13 @@ export async function createBlogController(req: Request, res: Response)  {
 }
 
 //UPDATE SINGLE BLOG
+/**
+ * * Updates an existing blog by its ID.
+ * 
+ * @param req - The request object, which contains the blog ID in the URL parameters and updated blog data in the body.
+ * @param res - The response object, which returns a success message or an error message if the update fails.
+ * @returns JSON response indicating the success or failure of blog update.
+ */
 export async function updateBlogController(req: Request, res: Response) {
     try {
         const id = req?.params?.id;
@@ -131,6 +180,13 @@ export async function updateBlogController(req: Request, res: Response) {
 }
 
 //POST SINGLE COMMENT ON BLOG (UPDATE BLOG)
+/**
+ *  * Creates a comment on a specific blog post.
+ * 
+ * @param req - The request object, which contains the blog ID in the URL parameters and the comment data in the body.
+ * @param res - The response object, which returns the updated blog post with the new comment or an error message.
+ * @returns JSON response containing the updated blog post or an error message if the comment could not be added.
+ */
 export async function createCommentController(req: Request, res:Response) {
     try {
         const blogId = req?.params?.id;
@@ -178,6 +234,13 @@ export async function createCommentController(req: Request, res:Response) {
 }
 
 //DELETE BLOG BY ID
+/**
+ * * Deletes a blog by its ID.
+ * 
+ * @param req - The request object, which contains the blog ID in the URL parameters.
+ * @param res - The response object, which returns a success message or an error message if the blog could not be deleted.
+ * @returns JSON response indicating the success or failure of the blog deletion.
+ */
 export async function deleteBlogController(req: Request, res:Response) {
     try {
         const id = req.params.id

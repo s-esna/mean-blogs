@@ -1,10 +1,13 @@
 /** Makes all enviromental variables available globally by exporting them from here
  * 
- * @import dotenv: Serves the purpose of making all variables available to everyone through '@dotenv.config()'
+ * @import dotenv - Serves the purpose of making all ".env" variables available to everyone through 'dotenv.config()' & 'process.env'
  * 
- * 
- * @exports JWT_SECRET_KEY: standalone secret key for Jason Web Tokens to be used in other parts of the app
- * @exports SERVER_CONFIG: Server-related variables grouped together (PORT & ATLAS_URL as {SERVER_CONFIG})
+ * @exports JWT_SECRET_KEY - A secret key used for signing and verifying JSON Web Tokens (JWTs).
+ * @exports SERVER_CONFIG - Contains server-related configuration settings. Specifically 
+ *                              1.The MongoDB Atlas URL (`ATLAS_URL`) and
+ *                              2.The server's port (`PORT`)
+ * @exports INCOMING_MAIL_ADDRESS - The email address to be used for incoming contact attempts by the users.
+ * @exports MAIL_PASSWORD - The password for above email address
  */
 
 import * as dotenv from 'dotenv'
@@ -20,3 +23,5 @@ export const JWT_SECRET_KEY = process.env.SECRET_KEY_JWT
 
 export const INCOMING_MAIL_ADDRESS = process.env.INCOMING_MAIL_ADDRESS
 export const MAIL_PASSWORD = process.env.MAIL_PASSWORD
+
+export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD

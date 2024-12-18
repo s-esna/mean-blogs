@@ -1,7 +1,24 @@
+/**
+ * Controller for handling user-related API requests, including user registration, login, retrieval, and email fetching.
+ * Each function corresponds to a specific route and HTTP method in the user API.
+ * 
+ * @import { getAllEmailsService }: Service to fetch all user emails.
+ * @import { getAllUsersService }: Service to fetch all users with pagination.
+ * @import { getUsernameByUserIdService }: Service to retrieve the username of a user by their ID.
+ * @import { loginUserService }: Service to handle user login.
+ * @import { registerUserService }: Service to handle user registration.
+ */
+
 import { Request, Response } from "express"; 
 import { getAllEmailsService, getAllUsersService, getUsernameByUserIdService, loginUserService, registerUserService } from "../services/userService";
 
-//GET ALL USERS PAGINATED
+
+/** GET ALL USERS PAGINATED
+ * @param req - The request object, expected to contain query parameters for pagination (page, limit).
+ * @param res - The response object, which will be populated with the users, total count, current page, and total pages.
+ * @returns JSON response with paginated users and metadata (total, page, totalPages).
+ */
+
 export async function getAllUsersController(req: Request, res: Response) {
     try {
         const page = parseInt(req.query.page as string) || 1
@@ -27,6 +44,13 @@ export async function getAllUsersController(req: Request, res: Response) {
 }
 
 //POST USER (REGISTER)
+/**
+ * Registers a new user in the system.
+ * 
+ * @param req - The request object, expected to contain user data in the body.
+ * @param res - The response object, which will return a success or error message.
+ * @returns JSON response indicating the success or failure of user registration.
+ */
 export async function registerUserController(req: Request, res: Response) {
     try {
         const user = req.body;
@@ -44,6 +68,14 @@ export async function registerUserController(req: Request, res: Response) {
 }
 
 //POST USER (LOGIN)
+/**
+ * 
+ * * Logs in a user based on their credentials.
+ * 
+ * @param req - The request object, expected to contain login data in the body.
+ * @param res - The response object, which will return a success or error message along with a JWT token if successful.
+ * @returns JSON response containing a login status message, a token (if login is successful), and user data.
+ */
 export async function loginUserController(req: Request, res: Response) {
     try {
         const loginAttempt = req.body;
@@ -66,6 +98,13 @@ export async function loginUserController(req: Request, res: Response) {
 }
 
 //GET USERNAME BY USERID
+/**
+ * * Retrieves a user's username by their user ID.
+ * 
+ * @param req - The request object, expected to contain a userId query parameter.
+ * @param res - The response object, which will return the username of the requested user or an error message.
+ * @returns JSON response with the username or an error message if the user is not found.
+ */
 export async function getUsernameByUserIdController(req: Request, res: Response) {
     try{
         const userId = req.query.userId as string
@@ -81,6 +120,14 @@ export async function getUsernameByUserIdController(req: Request, res: Response)
 }
 
 //GET ALL EMAILS
+/**
+ * 
+ * Retrieves all user emails from the database.
+ * 
+ * @param req - The request object, no specific parameters expected for this action.
+ * @param res - The response object, which will return a list of user emails or an error message.
+ * @returns JSON response with a list of user emails or an error message if no users are found.
+ */
 export async function getAllEmailsController(req: Request, res: Response) {
     try {
         const users = await getAllEmailsService() 
@@ -96,4 +143,4 @@ export async function getAllEmailsController(req: Request, res: Response) {
         console.error('Error fetching emails:', err);
         res.status(500).json({ message: 'Failed to fetch emails' });
       }
-    };
+};

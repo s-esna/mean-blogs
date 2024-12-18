@@ -1,5 +1,4 @@
-// import * as nodemailer from "nodemailer"
-const nodemailer = require('nodemailer')
+import nodemailer from "nodemailer"
 import { ObjectId } from "mongodb";
 import { collections } from "../config/database";
 import { INCOMING_MAIL_ADDRESS, MAIL_PASSWORD } from "../config/env";

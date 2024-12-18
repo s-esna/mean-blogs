@@ -1,5 +1,15 @@
+/**
+ * This file defines all the routes related to blogs, including blog management 
+ * (CRUD operations), blog retrieval, and comment creation.
+ * 
+ * @import express: The express module to define and handle routing.
+ * @import { authenticateToken }: Middleware to authenticate users via JWT tokens.
+ * @import { createBlogController, createCommentController, deleteBlogController, getAllBlogsController, getBlogsByTagController, getSingleBlogController, updateBlogController }: Controllers that handle the business logic for each route.
+ * @import { checkAdmin }: Middleware to ensure the user has admin privileges before performing certain actions (like creating, updating, or deleting blogs).
+ */
+
 import * as express from "express"
-import { authenticateToken } from "../middleware/authMiddleware"
+import  {authenticateToken}  from "../middleware/authMiddleware"
 import { createBlogController, createCommentController, deleteBlogController, getAllBlogsController, getBlogsByTagController, getSingleBlogController, updateBlogController } from "../controllers/blogController"
 import { checkAdmin } from "../middleware/isAdmin"
 

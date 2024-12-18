@@ -1,32 +1,50 @@
 /**
- * Entry point of my server. Server starts here
- * @import connectToDatabase: Connecting to the database is the job of someone else (database.ts)
- * @import SERVER_CONFIG (from env.ts file): Loading enviromental variables here directly is unnecessary. All of them are loaded elsewhere (env.ts).
- *          Here only the necessary .env variables are made accessible through this import
- * @import createApp: configures the express app and applies middleware. Not necessary to be done here
+ * Entry point of my server.
+ * 
+ * This file initializes the server by connecting to the database, setting up the express application, 
+ * and listening for incoming requests. The primary responsibilities are to ensure the database connection 
+ * and start the Express server.
+ * 
+ * 
+ * @import connectToDatabase - Handles connecting to the database.
+ *      The actual connection string and logic are abstracted in `database.ts`.
+ * 
+ * @import SERVER_CONFIG - Imports environmental variables required for the server.
+ *      These variables (e.g., database URL and port) are defined in the `.env` file and loaded in the `env.ts` file.
+ *      This allows configuration to be managed separately from the application logic.
+ * 
+ * @import createApp - Configures the express app, applies middleware, and sets up routers.
+ *      This function encapsulates the logic for creating the app, keeping the `server.ts` focused on server-specific tasks.
  */
 
 import { connectToDatabase } from "./config/database";
 import { SERVER_CONFIG } from "./config/env";
 import { createApp } from "./app";
 
-
+// Destructures the two environmental variables from SERVER_CONFIG for server startup. 
 const {ATLAS_URL, PORT} = SERVER_CONFIG;
 
+
+/**
+ * Starts the server application by ensuring the database connection is established 
+ * and then creating and listening on the Express app.
+ * 
+ * Errors are caught and logged in the console.
+ */
 async function startServer() {
     
     try{
 
-        //Makes sure the Atlas URL exists, otherwise shuts down
+        // Makes sure the MongoDB connection string is available; exits if not.
         if (!ATLAS_URL) {
             console.error("There is no such URL")
             process.exit(1)
         }
 
-        //Connects to the database based on the URI
+        //Connects to the database based on the provided URL
         await connectToDatabase(ATLAS_URL);
 
-        //Creates express App, Applies General Middleware and mounts the routers
+        //Creates express App, Applies General Middleware and configures the routes
         const app = createApp();
         
         app.listen(PORT, () => {
