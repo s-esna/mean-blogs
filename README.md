@@ -80,7 +80,7 @@ Navigate to the ng-frontend ("mean-blogs/ng-frontend/") directory and install th
 
 - CREATE a ".env" file inside the "server" dir (server/.env ) and set it up following the instructions below with the following contents:
 
-```ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  
+`ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  
 
 SECRET_KEY_JWT = ""  #ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  
 
@@ -90,7 +90,7 @@ PORT= 5200  #The port I used is 5200 but feel Free to change it to your liking. 
 
 INCOMING_MAIL_ADDRESS = ""  #This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be gmail.  
 
-MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  #https://support.google.com/accounts/answer/185833```
+MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  #https://support.google.com/accounts/answer/185833`
 
 
 
