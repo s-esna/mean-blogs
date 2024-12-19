@@ -1,5 +1,7 @@
-MEAN-stack Blogs
-A basic webapp using the MEAN stack (MongoDB, Express, Angular, Node) for a blog-post implementation.
+MEAN-stack Blogs:
+A basic webapp using the MEAN stack (MongoDB, Express, Angular, Node) for posting blogs.
+Implements user registration, authentication & authorization, comments and dynamic search functionality.
+All those in addition to the CRUD operations an admin can perform on the blogs.
 
 Table of Contents
 
