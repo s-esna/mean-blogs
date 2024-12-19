@@ -21,8 +21,8 @@ export class InfoDisplayComponent {
   userMessage: string = ''
 
   onSubmit() {
-    this.formSubmitted.emit(this.userMessage);  // Emit the user message to the parent
-    this.userMessage = '';  // Clear the input field
+    this.formSubmitted.emit(this.userMessage);  
+    this.userMessage = '';  
   }
   
   getSanitizedsong() {

@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   router = inject(Router)
   isAdmin = this.checkAdminStatus()
   isLoggedIn = this.checkLoggedStatus()
-  username : string = "hi"
+  username : string = ""
 
   ngOnInit(): void {
     this.getUsernameByUserId()
