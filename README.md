@@ -7,15 +7,15 @@ All those in addition to the CRUD operations an admin can perform on the blogs.
 
 #### 1. Pre-requisites
 #### 2. Installation
-#### >2.1. Clone the repository
-#### >2.2. Install Dependencies
+##### 2.1. Clone the repository
+##### 2.2. Install Dependencies
 #### 3.Environmental Variables
 #### 4.Database Setup
-#### >4.1.MongoDB Atlas
-#### >4.2.Populating DB
+##### 4.1.MongoDB Atlas
+##### 4.2.Populating DB
 #### 5.Running the Project Locally
-#### >5.1.Backend
-#### >5.2.Frontend
+##### 5.1.Backend
+##### 5.2.Frontend
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ Before running the project locally, make sure you have the following installed o
 
 > Node.js: Ensure Node.js is installed.  
 > MongoDB: MongoDB doesn't need to be installed locally.  
->>         You are recommended to use a cloud instance (MongoDB Atlas), because i haven't tested with a local Instance of mongoDB, although local should work.
+>         You are recommended to use a cloud instance (MongoDB Atlas), because i haven't tested with a local Instance of mongoDB, although local should work.
 > Angular CLI: Ensure Angular CLI is installed.  
 > OS: Windows  
 > IDE: VSCode  
@@ -80,7 +80,20 @@ Navigate to the ng-frontend ("mean-blogs/ng-frontend/") directory and install th
 
 - CREATE a ".env" file inside the "server" dir (server/.env ) and set it up following the instructions below with the following contents:
 
-`ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  SECRET_KEY_JWT = ""  #ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  ADMIN_PASSWORD = '' #ABSOLUTELY NECESSARY! Choose your password for the Superuser of the website (the default admin username is 'admin', and it's defined in the seed.ts file)  PORT= 5200  #The port I used is 5200 but feel Free to change it to your liking. If you change it after launching the server, don't forget to restart the server.  INCOMING_MAIL_ADDRESS = ""  #This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be gmail.  MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  #https://support.google.com/accounts/answer/185833`
+```ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  SECRET_KEY_JWT = ""  #ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  ADMIN_PASSWORD = '' #ABSOLUTELY NECESSARY! Choose your password for the Superuser of the website (the default admin username is 'admin', and it's defined in the seed.ts file)  PORT= 5200  #The port I used is 5200 but feel Free to change it to your liking. If you change it after launching the server, don't forget to restart the server.  INCOMING_MAIL_ADDRESS = ""  #This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be gmail.  MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  #https://support.google.com/accounts/answer/185833```
+
+```ATLAS_URL  = ""  # ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/
+mongodb-connection-string  
+
+SECRET_KEY_JWT = ""  # ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  
+
+ADMIN_PASSWORD = ''  # ABSOLUTELY NECESSARY! Choose your password for the Superuser of the website (the default admin username is 'admin', and it's defined in the seed.ts file)  
+
+PORT= 5200  # The port I used is 5200 but feel free to change it to your liking. If you change it after launching the server, don't forget to restart the server.  
+
+INCOMING_MAIL_ADDRESS = ""  # This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be Gmail.  
+
+MAIL_PASSWORD = ""  # You would need to generate a 16-digit app-password from Google (after setting up two-step verification for your account). Further instructions: https://support.google.com/accounts/answer/185833```
 
 The atlas_url, the key for signing jwts, as well as the admin_password are absolutely necessary for the functionality of the app.  
 For the ATLAS_URL (look below, step 4) you will need to navigate to mongodb.com, sign in and connect to the cluster using a node.js driver (6.7 or later)
@@ -114,7 +127,7 @@ Navigate back to the server directory:
 
 In order to populate the Database(and the webapp) with some blogs, and an admin-superuser, please run the file "seed.ts" through the following command:
 
-!!!BEFORE RUNNING THIS COMMAND MAKE SURE THE .env FILE HAS BEEN SET UP PROPERLY!!!
+**!!!BEFORE RUNNING THIS COMMAND MAKE SURE THE .env FILE HAS BEEN SET UP PROPERLY!!!**
 
 `npm run seed`
 
@@ -133,7 +146,7 @@ To start the backend (Node.js/Express) server, you need to be in the server dire
 If you see "listening for requests on port 5200" (or the PORT you defined in .env) it means the server launched successfully
 This will start the server on the specified port (default is 5000 port is omitted from .env).
 
-    The server will be accessible at http://localhost:5200 or the port defined in your .env.
+The server will be accessible at http://localhost:5200 or the port defined in your .env.
 
 5.2.Frontend:
 
