@@ -20,7 +20,7 @@ All those in addition to the CRUD operations an admin can perform on the blogs.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-1. Pre-requisites:  
+#### 1. Pre-requisites:  
 Before running the project locally, make sure you have the following installed on your machine:
 
 > Node.js: Ensure Node.js is installed.  
@@ -49,17 +49,15 @@ Check both versions by running:
 
 ---
 
-2. Installation
-
-2.1. Clone the repository
+#### 2. Installation  
+##### 2.1. Clone the repository
 
 - Clone the repository to your local machine using Git:  
 	`git clone https://github.com/s-esna/mean-blogs.git`
 
 - Then, open the project folder in VScode and navigate to the root directory:  
-	`cd mean-blogs`
-
-2.2. Install dependencies (at this point you should be at the root of the project "mean-blogs/")
+	`cd mean-blogs`  
+##### 2.2. Install dependencies (at this point you should be at the root of the project "mean-blogs/")
 - Backend (Node.js/Express)
 
 Navigate to the server ("mean-blogs/server/") directory and install the backend dependencies with:
@@ -76,7 +74,7 @@ Navigate to the ng-frontend ("mean-blogs/ng-frontend/") directory and install th
 
 ---
 
-3. Environmental Variables
+#### 3. Environmental Variables
 
 CREATE a ".env" file inside the "server" dir (server/.env ) and set it up following the instructions below with the following contents:
 
@@ -91,7 +89,7 @@ PORT= 5200  #The port I used is 5200 but feel Free to change it to your liking. 
 
 INCOMING_MAIL_ADDRESS = ""  #This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be gmail.  
 
-MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  #https://support.google.com/accounts/answer/185833
+MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  https://support.google.com/accounts/answer/185833
 ```  
 
 The atlas_url, the key for signing jwts, as well as the admin_password are absolutely necessary for the functionality of the app.  
@@ -99,8 +97,8 @@ For the ATLAS_URL (look below, step 4) you will need to navigate to mongodb.com,
 
 ---
 
-4. Database Setup  
-4.1. MongoDB Atlas  
+#### 4. Database Setup  
+##### 4.1. MongoDB Atlas  
 Configure a cloud MongoDB instance (e.g., MongoDB Atlas):
 - Login to your MongoDB Atlas Account, or sign-up if you don't have an account.
 - Navigate to your organization's projects (https://cloud.mongodb.com/v2#/org/)
@@ -118,7 +116,7 @@ In Network Access: Under the Network Access tab, make sure to whitelist your cur
 
 Update the connection string in your .env file.
 
-4.2. Populating DB  
+##### 4.2. Populating DB  
 (Even though populating the DB with blogs is unnecessary, it is absolutely necessary that we have an admin-superuser. This is the only way to set up an admin.)
 
 Navigate back to the server directory:
@@ -134,8 +132,8 @@ If everything has been completed so far, proceed to the next step.
 
 ---
 
-5. Running the Project Locally  
-5.1. Backend:
+#### 5. Running the Project Locally  
+##### 5.1. Backend:
 
 To start the backend (Node.js/Express) server, you need to be in the server directory and run:
 
@@ -147,7 +145,7 @@ This will start the server on the specified port (default is 5000 port is omitte
 
 The server will be accessible at http://localhost:5200 or the port defined in your .env.
 
-5.2. Frontend:
+##### 5.2. Frontend:
 
 To run the Angular frontend, open a new terminal in vsCode and navigate to the ng-frontend directory ("~/mean-blogs/ng-frontend/") and run:
 
