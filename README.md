@@ -23,7 +23,7 @@ Table of Contents
 1.Pre-requisites
 Before running the project locally, make sure you have the following installed on your machine:
 
-    Node.js: Ensure Node.js is installed. 
+	Node.js: Ensure Node.js is installed. 
     MongoDB: MongoDB doesn't need to be installed locally. 
 	     You are recommended to use a cloud instance (MongoDB Atlas), because i haven't tested with a local Instance of mongoDB, although local should work.
     Angular CLI: Ensure Angular CLI is installed.
@@ -37,8 +37,8 @@ Angular CLI: 18.2.11
 Node: 20.14.0
 Package Manager: npm 10.7.0
 
-Install Angular globally using the command: npm install -g @angular/cli
-Check Angular version using the command: ng version
+Install Angular globally using the command: 	npm install -g @angular/cli
+Check Angular version using the command: 	ng version
 
 To install both Node.js and Node Package Manager go to: https://nodejs.org/, download Node.js(LTS) and set up. This should also install the npm.
 Check both versions by running:
