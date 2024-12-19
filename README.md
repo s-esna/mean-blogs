@@ -78,9 +78,10 @@ Navigate to the ng-frontend ("mean-blogs/ng-frontend/") directory and install th
 
 3. Environmental Variables
 
-- CREATE a ".env" file inside the "server" dir (server/.env ) and set it up following the instructions below with the following contents:
+CREATE a ".env" file inside the "server" dir (server/.env ) and set it up following the instructions below with the following contents:
 
-`ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  
+```
+ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  
 
 SECRET_KEY_JWT = ""  #ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  
 
@@ -90,9 +91,8 @@ PORT= 5200  #The port I used is 5200 but feel Free to change it to your liking. 
 
 INCOMING_MAIL_ADDRESS = ""  #This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be gmail.  
 
-MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  #https://support.google.com/accounts/answer/185833`
-
-
+MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  #https://support.google.com/accounts/answer/185833
+```  
 
 The atlas_url, the key for signing jwts, as well as the admin_password are absolutely necessary for the functionality of the app.  
 For the ATLAS_URL (look below, step 4) you will need to navigate to mongodb.com, sign in and connect to the cluster using a node.js driver (6.7 or later)
@@ -135,32 +135,32 @@ If everything has been completed so far, proceed to the next step.
 ---
 
 5. Running the Project Locally  
-5.1.Backend:
+5.1. Backend:
 
 To start the backend (Node.js/Express) server, you need to be in the server directory and run:
 
 `cd server`  
 `npm start`
 
-If you see "listening for requests on port 5200" (or the PORT you defined in .env) it means the server launched successfully
+If you see "listening for requests on port 5200" (or the PORT you defined in .env) it means the server launched successfully.  
 This will start the server on the specified port (default is 5000 port is omitted from .env).
 
 The server will be accessible at http://localhost:5200 or the port defined in your .env.
 
-5.2.Frontend:
+5.2. Frontend:
 
 To run the Angular frontend, open a new terminal in vsCode and navigate to the ng-frontend directory ("~/mean-blogs/ng-frontend/") and run:
 
-cd ng-frontend
-ng serve
+`cd ng-frontend`
+`ng serve`
 
 This will start the Angular development server, and the frontend will be accessible at http://localhost:4200 by default.
 
-As said earlier, the default admin credentials are the following:
-username = admin
+As said earlier, the default admin credentials are the following:  
+username = admin  
 password = the one you specified in the .env file as ADMIN_PASSWORD.
 
-Make sure you remember the first password you set up, because there's no way of resetting it.
+Make sure you remember the first password you set up, because there's no way of resetting it.  
 But even if you forget your password, you can create subsequent admin-superusers through the seed.ts file (just make sure you change the username and the email in said file) 
 
 If you want to login as an ordinary user, just register after logging off.
