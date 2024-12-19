@@ -85,7 +85,6 @@ export class RegisterComponent implements OnInit {
     const formData = this.registerUserForm.value
     //FOUND OUT THE HARD WAY THAT OPTION ELEMENTS IN SELECT ARE ALWAYS STRINGS
     //Convert string to number
-    console.log(typeof formData.birthDay)
     formData.birthDay = Number(formData.birthDay);
     formData.birthMonth = Number(formData.birthMonth);
     formData.birthYear = Number(formData.birthYear);
@@ -95,11 +94,9 @@ export class RegisterComponent implements OnInit {
     
 
     localStorage.removeItem('registerUserForm');
-    console.log('Trying to register user:', formDataNoVerify);
 
     this.userService.postUserByFormValue(formDataNoVerify).subscribe({
       next: (response) => {
-          console.log('User added successfully:', response);
           
           this.toastr.success("Welcome to the Team!", "You Registered Successfully" ,{
             timeOut: 5000, // Close after 3 seconds

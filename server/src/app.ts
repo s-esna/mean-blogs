@@ -11,6 +11,7 @@ import { blogRouter } from "./routes/blogs.routes";
 import { userRouter } from "./routes/user.routes";
 import { applyMiddleware } from "./middleware/serverMiddleware";
 import { contactRouter } from "./routes/email.routes";
+import { setupSwagger } from "./middleware/swaggerMiddleware";
 
 // Function that configures and returns an Express app
 export const createApp = () => {
@@ -19,11 +20,16 @@ export const createApp = () => {
 
     // Use middleware
     applyMiddleware(app)
+    
+    
 
     //Router Mounting
     app.use("/blogs", blogRouter);
     app.use("/users", userRouter);
     app.use("/contact", contactRouter)
+
+    //Setup Swagger
+    setupSwagger(app)
 
     //Configured Express app instance is returned
     return app;

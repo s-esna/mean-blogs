@@ -154,9 +154,9 @@ To run the Angular frontend, open a new terminal in vsCode and navigate to the n
 
 This will start the Angular development server, and the frontend will be accessible at http://localhost:4200 by default.
 
-As said earlier, the default admin credentials are the following:  
-username = admin  
-password = the one you specified in the .env file as ADMIN_PASSWORD.
+As said earlier, the default **admin credentials** are the following:  
+**username** = *admin*  
+**password** = *the one you specified in the .env file as **ADMIN_PASSWORD**.*
 
 Make sure you remember the first password you set up, because there's no way of resetting it.  
 But even if you forget your password, you can create subsequent admin-superusers through the seed.ts file (just make sure you change the username and the email in said file) 
