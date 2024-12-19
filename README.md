@@ -8,14 +8,14 @@ Table of Contents
 1.Pre-requisites
 2.Installation
 	2.1. Clone the repository
-	2.2 Install Dependencies
+ 	2.2 Install Dependencies
 3.Environmental Variables
 4.Database Setup
 	4.1.MongoDB Atlas
-	4.2.Populating DB
+ 	4.2.Populating DB
 5.Running the Project Locally
 	5.1.Backend
-	5.2.Frontend
+ 	5.2.Frontend
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
