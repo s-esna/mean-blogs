@@ -80,20 +80,19 @@ Navigate to the ng-frontend ("mean-blogs/ng-frontend/") directory and install th
 
 - CREATE a ".env" file inside the "server" dir (server/.env ) and set it up following the instructions below with the following contents:
 
-```ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  SECRET_KEY_JWT = ""  #ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  ADMIN_PASSWORD = '' #ABSOLUTELY NECESSARY! Choose your password for the Superuser of the website (the default admin username is 'admin', and it's defined in the seed.ts file)  PORT= 5200  #The port I used is 5200 but feel Free to change it to your liking. If you change it after launching the server, don't forget to restart the server.  INCOMING_MAIL_ADDRESS = ""  #This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be gmail.  MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  #https://support.google.com/accounts/answer/185833```
+```ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  
 
-```ATLAS_URL  = ""  # ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/
-mongodb-connection-string  
+SECRET_KEY_JWT = ""  #ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  
 
-SECRET_KEY_JWT = ""  # ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  
+ADMIN_PASSWORD = '' #ABSOLUTELY NECESSARY! Choose your password for the Superuser of the website (the default admin username is 'admin', and it's defined in the seed.ts file)  
 
-ADMIN_PASSWORD = ''  # ABSOLUTELY NECESSARY! Choose your password for the Superuser of the website (the default admin username is 'admin', and it's defined in the seed.ts file)  
+PORT= 5200  #The port I used is 5200 but feel Free to change it to your liking. If you change it after launching the server, don't forget to restart the server.  
 
-PORT= 5200  # The port I used is 5200 but feel free to change it to your liking. If you change it after launching the server, don't forget to restart the server.  
+INCOMING_MAIL_ADDRESS = ""  #This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be gmail.  
 
-INCOMING_MAIL_ADDRESS = ""  # This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be Gmail.  
+MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  #https://support.google.com/accounts/answer/185833```
 
-MAIL_PASSWORD = ""  # You would need to generate a 16-digit app-password from Google (after setting up two-step verification for your account). Further instructions: https://support.google.com/accounts/answer/185833```
+
 
 The atlas_url, the key for signing jwts, as well as the admin_password are absolutely necessary for the functionality of the app.  
 For the ATLAS_URL (look below, step 4) you will need to navigate to mongodb.com, sign in and connect to the cluster using a node.js driver (6.7 or later)
