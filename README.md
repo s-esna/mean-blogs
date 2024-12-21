@@ -169,7 +169,7 @@ If you want to login as an ordinary user, just register after logging off.
 
 The endpoint for testing endpoints via swagger is the following:
 
-`http://localhost:5200/swagger/`
+`http://localhost:5200/swagger/`  (Or the port you chose in .env)
 
 Please make sure you have a valid JWT for testing the various endpoints.
 
