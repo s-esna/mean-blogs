@@ -21,16 +21,20 @@ const userSchema = {
             _id: {},
             username: {
                 bsonType: "string",
-                description: "'username' is required and is a string",
-            },
+                description: "'username' is required and must not contain '@'. Minimum length is 4.",
+                minLength: 4,
+                pattern: "^[^@]*$", // Matches strings that do not contain '@'
+                },
             email: {
                 bsonType: "string",
-                description: "'email' is required and is a string",
-            },
+                description: "'email' is required and must follow the standard email format.",
+                pattern: "^[a-zA-Z0-9][a-zA-Z0-9._%+-]*[a-zA-Z0-9]@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+                },
             password: {
                 bsonType: "string",
-                description: "'password' is required and is a string",
-            },
+                description: "'password' is required and must be at least 8 characters long with 1 uppercase, 1 lowercase, 1 digit, and 1 symbol.",
+                pattern: "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_])[A-Za-z\\d\\W_]{8,}$"
+                },
             birthDay: {
                 bsonType: "number",
                 description: "'birthDay' is NOT required and is a number 01 - 31",

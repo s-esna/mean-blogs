@@ -125,15 +125,15 @@ userRouter.get("/", authenticateToken, checkAdmin, getAllUsersController)
  *             properties:
  *               username:
  *                 type: string
- *                 description: The username of the user.
+ *                 description: The username of the user. Must not containt the '@' sign. Must be at least 4 characters long.
  *                 example: "john_doe"
  *               email:
  *                 type: string
- *                 description: The email address of the user.
+ *                 description: The email address of the user. Must be a valid email format.
  *                 example: "john.doe@example.com"
  *               password:
  *                 type: string
- *                 description: The password of the user.
+ *                 description: The password of the user. Must be at least 8 characters long, and contain 1 uppercase and 1 lowercase letter, 1 digit and 1 symbol
  *                 example: "j()Hnd0e"
  *               birthDay:
  *                 type: number

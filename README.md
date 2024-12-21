@@ -83,7 +83,7 @@ ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. 
 
 SECRET_KEY_JWT = ""  #ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  
 
-ADMIN_PASSWORD = '' #ABSOLUTELY NECESSARY! Choose your password for the Superuser of the website (the default admin username is 'admin', and it's defined in the seed.ts file)  
+ADMIN_PASSWORD = '' #ABSOLUTELY NECESSARY! Choose your password for the superuser of the website. MUST be at least 8 chars long, and contain at least 1 Uppercase, 1 Lowercase, 1 digit and 1 symbol (example: J()Hnd0e) (the default admin username is 'admin', and it's defined in the seed.ts file)  
 
 PORT= 5200  #The port I used is 5200 but feel Free to change it to your liking. If you change it after launching the server, don't forget to restart the server.  
 

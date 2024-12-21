@@ -57,9 +57,9 @@ export class RegisterComponent implements OnInit {
     // password must be at least 8 chars, including 1 uppercase, 1 lowercase, 1 symbol, 1 digit
     password: new FormControl("", [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/)]),
     verifyPassword: new FormControl(""),
-    birthDay: new FormControl(new Date().getDate()),
-    birthMonth: new FormControl(new Date().getMonth() + 1),
-    birthYear: new FormControl(new Date().getFullYear()),
+    birthDay: new FormControl(1),
+    birthMonth: new FormControl(1),
+    birthYear: new FormControl(1905),
     
   })
 
