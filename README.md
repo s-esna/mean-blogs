@@ -164,3 +164,25 @@ But even if you forget your password, you can create subsequent admin-superusers
 If you want to login as an ordinary user, just register after logging off.
 
 ---
+
+#### 6. Swagger  
+
+The endpoint for testing endpoints via swagger is the following:
+
+`http://localhost:5200/swagger/`
+
+Please make sure you have a valid JWT for testing the various endpoints.
+
+In order to get a JWT:
+
+1. Login to the webapp
+
+2. Open developer tools in your browser (F12)
+
+3. Go to the storage tab, and look under local storage
+
+4. Copy the value of the "key" that is named token
+
+5. Paste it in the "Authorize" section, on the top right of the swagger page
+
+Check description of each endpoint to see if it needs a JWT, and if the JWT of an admin, or a plain user is needed
