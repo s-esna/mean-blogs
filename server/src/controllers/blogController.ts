@@ -37,12 +37,12 @@ export async function getAllBlogsController(req: Request, res: Response) {
             return
         }
 
-        const {blogs, total} = await getAllBlogsService(page, limit, query)
+        const {blogs, totalDocuments} = await getAllBlogsService(page, limit, query)
 
-        const totalPages = Math.ceil(total/ limit)
+        const totalPages = Math.ceil(totalDocuments/ limit)
         res.status(200).json({
             blogs,
-            total,
+            totalDocuments,
             page,
             totalPages
         })
@@ -99,14 +99,14 @@ export async function getBlogsByTagController(req: Request, res: Response) {
             res.status(400).json({message: "Page and limit must be positive ints"})
             return
         }
-        const {blogs, total} = await getBlogsByTagService(tag, page, limit)
+        const {blogs, totalDocuments} = await getBlogsByTagService(tag, page, limit)
 
-        const totalPages = Math.ceil(total/ limit)
+        const totalPages = Math.ceil(totalDocuments/ limit)
 
         if (blogs && blogs.length > 0) {
             res.status(200).json({
             blogs,
-            total,
+            totalDocuments,
             page,
             totalPages
         })

@@ -17,11 +17,11 @@ export async function getAllBlogsService (page : number, limit: number, query: s
         .skip(skip)
         .limit(limit)
         .toArray()
-    const total = await collections.blogs?.countDocuments(searchCriteria)
+    const totalDocuments = await collections.blogs?.countDocuments(searchCriteria)
 
     return {
         blogs: blogs || [],
-        total: total || 0
+        totalDocuments: totalDocuments || 0
     }
 }
 
@@ -44,10 +44,10 @@ export async function getBlogsByTagService(tag: string, page: number, limit:numb
         .skip(skip)
         .limit(limit)
         .toArray();
-    const total = await collections.blogs?.countDocuments(query);
+    const totalDocuments = await collections.blogs?.countDocuments(query);
     return {
         blogs: blogs || [],
-        total: total || 0
+        totalDocuments: totalDocuments || 0
     };
 }
     
@@ -80,9 +80,9 @@ export async function updateBlogService(id : string, blog: any) {
         if (result && result.matchedCount) {
             return { success: true }
         } else if (!result?.matchedCount) {
-            return {success: false, msg : 'no_change'}
+            return {success: false, msg : 'not_found'}
         } else {
-            return {success: false, msg: "not_found"}
+            return {success: false, msg: "error"}
         }
     } catch (err) {
         console.error("Error in updateBlogService:", err);

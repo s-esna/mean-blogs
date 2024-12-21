@@ -58,7 +58,7 @@ export async function registerUserService(user: any): Promise<{ success: boolean
         }
     } catch (error) {
         console.error('Error in registerUserService:', error);
-        return { success: false, status: 500, message: 'Server error. Please try again later.' };
+        return { success: false, status: 500, message: 'Something went wrong. Please try again later, and make sure you insert a valid email, username and password' };
     }
 }
 
@@ -150,7 +150,8 @@ export async function getUsernameByUserIdService(userId : string) {
 export async function getAllEmailsService() {
     try{
         return await collections?.users?.find({}, { projection: { email: 1 } }).toArray();
-    } catch {
-        
+    } catch (err) {
+        console.error('could not fetch emails', err)
+        throw new Error('Error while fetching emails from DB')
     }
 }

@@ -115,7 +115,7 @@ export async function getUsernameByUserIdController(req: Request, res: Response)
         }
         res.status(200).json({username})
     } catch {
-        res.status(500).json({message: "could not get username"})
+        res.status(500).json({message: "could not get username due to server issues or invalid id format"})
     }
 }
 
