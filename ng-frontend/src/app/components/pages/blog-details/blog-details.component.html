@@ -25,10 +25,17 @@
         
         
         
-                <div class="container">
-                    @for (tag of blog.tags; track $index) {
-                        <a class="text-decoration-none px-1 py-1 me-2 tag-box" (click)="onTagClick(tag)">{{tag}} </a>
-                    }
+                <div class="container py-2">
+                    <!-- Display "Tags: " at the start with a label-like style -->
+                    <div class="d-flex flex-wrap align-items-center">
+                        <span class="fw-bold me-1">Tags:</span>
+                        <!-- Loop through tags and style each tag as a badge -->
+                        @for (tag of blog.tags; track $index) {
+                            <a class="text-decoration-none px-3 py-2 me-2 mb-1 badge bg-primary tag-box" (click)="onTagClick(tag)">
+                                {{tag}}
+                            </a>
+                        }
+                    </div>
                 </div>
                 
         
@@ -51,7 +58,7 @@
         
                 @if (isUser()) {
                     <form [formGroup]="addCommentForm">
-                        <label class="mt-4 me-1" for="">Leave a Comment:  </label>
+                        <label class="mt-2 me-1" for="">Leave a Comment:  </label>
                         <input  formControlName= "commentBody" type="text">
                         
                         <button class="btn btn-sm btn-success ms-2 mb-2" [disabled]="addCommentForm.invalid" (click)="onSubmit()">Submit Comment</button>

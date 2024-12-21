@@ -1,7 +1,7 @@
 .tag-box {
     border: 1px dotted black;
     margin: 0px 5px;
-    color: var(--color3);
+    color: var(--color1);
 }
 
 .tag-box:hover {

@@ -38,8 +38,7 @@ export async function getSingleBlogService(id : string) {
 //GET BLOGS BY TAG
 export async function getBlogsByTagService(tag: string, page: number, limit:number) {
     const skip = (page - 1) * limit
-    const query = { tags: { $regex: new RegExp(`\\b${tag}\\b`, 'iu')} }
-
+    const query = { tags: { $regex: new RegExp(`${tag}`, 'iu')} }
     const blogs = await collections.blogs?.find(query)
         .skip(skip)
         .limit(limit)

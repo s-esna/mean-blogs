@@ -16,3 +16,11 @@
     background-color: var(--color3);
     border: 2px solid var(--color4);
 }
+
+.copyright-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem;
+    color: white;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }

@@ -93,6 +93,7 @@ export async function getSingleBlogController(req: Request, res: Response) {
 export async function getBlogsByTagController(req: Request, res: Response) {
     try{
         const tag = req.params.tag
+
         const page = parseInt(req.query.page as string) || 1
         const limit = parseInt(req.query.limit as string) || 3
         if (page < 1 || limit < 1) {

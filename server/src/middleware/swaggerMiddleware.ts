@@ -44,7 +44,6 @@ export const setupSwagger = (app: express.Application) => {
             // "./controllers/*.ts"
         ]
     };
-    console.log('Swagger Paths:', options.apis);
     // Initialize swagger-jsdoc
     const swaggerSpec = swaggerJsdoc(options);
     // Set up Swagger UI
