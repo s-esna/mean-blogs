@@ -1,0 +1,24 @@
+.outer-container {
+    padding: 15px;
+}
+.container {
+    padding: 10px;
+}
+.m-3 {
+    margin: 10px 0; /* Reduce spacing between form fields */
+}
+  
+@media (max-width: 767px) { /* Small screens */
+    .col-8 {
+      width: 92%; 
+    }
+    .btn {
+      width: 100%; 
+      padding: 12px; 
+      font-size: 1rem; 
+    }
+    .form-label, .form-control, p.text-danger {
+      font-size: 0.8rem; 
+    }
+}
+  

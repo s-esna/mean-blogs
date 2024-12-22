@@ -1,3 +1,16 @@
 .oops {
-    height: 50vh;
+    height: 60vh;
 }
+
+
+  
+@media (max-width: 767px) {
+    .oops {
+      height: auto; 
+      padding: 20px;
+    }
+    
+    .oops .btn {
+      width: 100%; 
+    }
+  }

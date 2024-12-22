@@ -13,3 +13,38 @@
     font-size: 0.8em; 
     font-style: italic;
 }
+.outer-container {
+    padding: 12px;
+  }
+  .container {
+    padding: 7px;
+  }
+
+@media (max-width: 767px) {
+    h1 {
+      text-align: center; 
+    }
+    .d-flex.justify-content-between {
+      flex-wrap: wrap;
+    }
+ 
+    img {
+      max-width: 100%; 
+      height: auto;
+      margin: 10px auto; 
+    }
+    p {
+      text-align: justify; 
+    }
+    .btn {
+      width: 97%; 
+      padding: 12px;
+      font-size: 1rem; 
+    }
+   
+    form input[type="text"] {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+}
+  

@@ -1,24 +1,35 @@
 <div class="outer-container">
     <div class="info container">
-        <h2>{{ title }}</h2>
-        <p>{{ content }}</p>
-        
-        
-        <!-- If it's the contact page, show the input form -->
-        @if (showInput) {
+      <h2 class="text-center">{{ title }}</h2>
+      <p class="text-justify">{{ content }}</p>
+  
+      <!-- Contact form for Contact page -->
+      @if (showInput) {
         <div>
-            <label for="userMessage">Enter your message below:</label>
-            <div style="height: 200px;">
-                <textarea class="form-control my-2 w-75 h-100" type="text" id="userMessage" [(ngModel)]="userMessage" placeholder="Enter your message here..."> </textarea>
-            </div>
-            <button class="mb-1 btn btn-success" (click)="onSubmit()">Send</button>
+          <label for="userMessage" class="form-label">Enter your message below:</label>
+          <div class="form-group">
+            <textarea 
+              class="form-control my-2" 
+              id="userMessage" 
+              [(ngModel)]="userMessage" 
+              placeholder="Enter your message here..."
+              aria-label="Enter your message">
+            </textarea>
+          </div>
+          <button 
+            class="btn btn-success my-2" 
+            (click)="onSubmit()" 
+            aria-label="Send your message">
+            Send
+          </button>
         </div>
-        }
-
-        @if (song) {
-            <div>
-                <div [innerHTML]="getSanitizedsong()"></div>  
-            </div>
-        }
+      }
+  
+      <!-- Display song if provided -->
+      @if (song) {
+        <div class="song-container my-3">
+          <div [innerHTML]="getSanitizedsong()" aria-label="Song content"></div>
+        </div>
+      }
     </div>
-</div>
+  </div>  

@@ -25,21 +25,14 @@
     <!-- Small size rendering/ Below 1200px -->
     <div class="container show-for-small">
       <button class="hamburger-icon" data-bs-toggle="collapse" data-bs-target="#collapsable" (click)="toggleMenu()">
-        <i class="bi" [ngClass]="isMenuOpen ? 'bi-x' : 'bi-list'"></i> <!-- Dynamically change the icon -->
+        <i class="bi" [ngClass]="isMenuOpen ? 'bi-x' : 'bi-list'"></i>
       </button>
-
       <div class="d-flex flex-column align-items-center justify-content-center w-100">
-        <!-- Hamburger toggle button to collapse the menu -->
-        
-      <!-- Menu content (starts visible, will be toggled) -->
       <div class="menu-content w-100 collapse" id="collapsable">
         <ul class="nav flex-column w-100">
-        <!-- Username at the top -->
         <li class="nav-item text-center w-100 text-white p-3">
           Logged in as: {{username}}
         </li>
-
-        <!-- Menu items -->
         <li><a routerLink="/home" routerLinkActive="active" class="nav-link text-center">Home</a></li>
         <li><a routerLink="/blogs" routerLinkActive="active" class="nav-link text-center">Blogs</a></li>
         <li><a routerLink="/faq" routerLinkActive="active" class="nav-link text-center">FAQs</a></li>
@@ -48,7 +41,6 @@
           <li><a routerLink="/users" routerLinkActive="active" class="nav-link text-center">Users</a></li>
         }
       </ul>
-        <!-- Logoff button at the bottom -->
         <div class="d-flex justify-content-center w-100 mt-auto">
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 w-50">
             <button type="button" class="btn btn-warning rounded w-100 mt-2" routerLink="users/login" (click)="onLogoff()">Logoff</button>
