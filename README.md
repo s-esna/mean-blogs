@@ -16,6 +16,8 @@ All those in addition to the CRUD operations an admin can perform on the blogs.
 #### 5.Running the Project Locally
 ##### 5.1.Backend
 ##### 5.2.Frontend
+#### 6.Swagger
+
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------

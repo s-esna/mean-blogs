@@ -3,29 +3,29 @@
 }
 
 .pagination {
-    justify-content: center; /* Center pagination for better layout */
-    flex-wrap: wrap; /* Allow pagination to wrap if necessary */
+    justify-content: center; 
+    flex-wrap: wrap; 
     
 }
 
 .page-item {
-    margin-bottom: 10px; /* Add spacing between pagination items */
+    margin-bottom: 10px; 
 }
 
 .this-button {
-    position: relative; /* Remove absolute positioning */
-    display: block; /* Ensure the button doesn't overlap */
-    margin: 20px auto; /* Center button with spacing */
-    width: auto; /* Keep button size adaptable */
+    position: relative; 
+    display: block; 
+    margin: 20px auto; 
+    width: auto; 
     margin-top: 50px;
 }
 
 
 @media (max-width: 767px) {
     .this-button {
-      width: 100%; /* Full-width button for smaller screens */
-      font-size: 1rem; /* Adjust font size for readability */
-      padding: 12px; /* Increase padding for accessibility */
+      width: 100%; 
+      font-size: 1rem; 
+      padding: 12px; 
     }
 }
   
