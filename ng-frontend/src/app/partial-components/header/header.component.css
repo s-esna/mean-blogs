@@ -1,19 +1,28 @@
 .carousel-image {
-    width: 500px;
-    height: 300px;
-    object-fit:contain;
+    width: 100%;         /* Make the image width take up the full width of its container */
+    height: 40vh;       /* Fixed height for carousel images */
+    object-position: center;  /* Center the image in the container if it's cropped */
 }
 .carousel-inner {
     background-color: var(--color2);
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    filter: brightness(0.4); /* Reduce brightness to make the icons darker */
-}
-
-/* Optional: Adjust size or add custom hover effect */
 .carousel-control-prev-icon:hover,
 .carousel-control-next-icon:hover {
-    filter: brightness(0.2); /* Even darker on hover */
+    filter: brightness(0.2); 
+}
+
+/* Adjustments for small screens */
+@media (max-width: 767px) {
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        font-size: 1.5rem;  
+    }
+
+    .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
 }

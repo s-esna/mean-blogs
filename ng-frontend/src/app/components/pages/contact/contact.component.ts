@@ -18,7 +18,6 @@ export class ContactComponent {
   contactService = inject(ContactService)
 
   onFormSubmit(userMessage: string) {
-    alert('Your message: ' + userMessage); // Handle the form submission (e.g., send to server)
     this.contactService.sendEmail(userMessage).subscribe({
       next: (response) => {
         this.toastr.success(`You will receive a reply soon to the email you've registered with.`, "Message sent successfully!")

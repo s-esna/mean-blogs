@@ -1,3 +1,7 @@
+.show-for-small{
+    display: none;
+}
+
 .nav-link {
     color: var(--color1);
 }
@@ -10,4 +14,35 @@
 .help {
     background-color: var(--color3);
     border: 2px solid var(--color4);
+    height: auto;
+}
+
+.hamburger-icon {
+    font-size: 2rem; /* Make the icon larger */
+    background-color: var(--color3);
+    color: var(--color1);
+    top: 20px; /* Adjust the top margin as necessary */
+    right: 20px; /* Position the icon on the far right */
+    width: 250px;
+}
+
+@media (max-width: 1200px) {
+    .hide-for-small{
+        display: none;
+    }
+    .show-for-small {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center;    /* Center items horizontally */
+    }
+
+    .nav-link {
+        width: 100%; /* Make each item take full width */
+        text-align: center; /* Center the text */
+        padding: 15px 0; /* Add some padding for better touch target */
+    }
+
+    .nav-item {
+        width: 100%; /* Ensures the whole item takes up full width */
+    }
 }

@@ -1,22 +1,75 @@
 .form-group {
-    position: relative;
-  }
-  
+  position: relative;
+}
+
 .password-toggle {
   position: absolute;
-  right: 10px;  /* Right align it inside the input field */
+  right: 10px;
   top: 70%;
-  transform: translateY(-50%);  /* Vertically center it */
+  transform: translateY(-50%);
   cursor: pointer;
-  font-size: 20px;  /* Adjust the font size if necessary */
-  color: black;  /* Blue color for the text */
+  font-size: 20px;
+  color: black;
 }
-  
+
 .password-toggle:hover {
-  text-decoration: underline;  /* Underline on hover */
+  text-decoration: underline;
   color: blue;
 }
 
 .help {
   border-top: 3px solid var(--color4);
 }
+
+
+@media (max-width: 767px) {
+  .outer-container {
+    padding: 0.5rem;
+  }
+
+  .login-wrap {
+    padding: 1.5rem; 
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-control {
+    font-size: 13px; 
+    padding: 0.5rem; 
+  }
+
+  .password-toggle {
+    font-size: 16px; 
+  }
+
+  .form-group label {
+    font-size: 12px; 
+  }
+
+  h3 {
+    font-size: 18px; 
+    text-align: center;
+  }
+
+}
+
+/* Accessibility Enhancements with Custom Focus Styles */
+.form-control:focus {
+  box-shadow: 0 0 4px var(--color4); 
+  border: 1px solid var(--color4);  
+}
+
+button:focus, 
+a:focus {
+  box-shadow: 0 0 4px var(--color4);
+  border-radius: 4px;
+}
+
+
+label {
+  font-weight: 600; 
+}
+
+

@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { UserService } from '../../service/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -16,6 +17,11 @@ export class NavbarComponent implements OnInit {
   isAdmin = this.checkAdminStatus()
   isLoggedIn = this.checkLoggedStatus()
   username : string = ""
+  isMenuOpen = false;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = this.checkLoggedStatus();

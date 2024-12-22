@@ -1,20 +1,18 @@
 .help {
     background-color: var(--color3);
     border: 2px solid var(--color4);
+    padding: 20px 0; 
 }
 
-.nav-link{
-    text-decoration:  none;
+.link-pretty {
+    text-decoration: none ;
     color: var(--color4);
-}
-.nav-link:hover{
-    text-decoration:  none;
-    color: var(--color1);
+    transition: color 0.3s ease; 
 }
 
-.help {
-    background-color: var(--color3);
-    border: 2px solid var(--color4);
+.link-pretty:hover {
+    color: var(--color1);
+    text-decoration: underline; 
 }
 
 .copyright-text {
@@ -23,4 +21,14 @@
     color: white;
     letter-spacing: 0.5px;
     margin: 0;
-  }
+}
+
+@media (max-width: 767px) { 
+    .row-cols-sm-2 {
+        grid-template-columns: 1fr; 
+    }
+
+    .link-pretty {
+        font-size: 1.2rem; 
+    }
+}

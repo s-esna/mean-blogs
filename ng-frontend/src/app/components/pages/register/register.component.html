@@ -1,5 +1,6 @@
 <div class="outer-container help">
     <div class="container">
+        <h2 class="text-center text-primary fw-bold mb-4">Create Your Account</h2>
         <form class="px-3" [formGroup]="registerUserForm">
             <!-- email -->
             <div class="mb-3 mt-3">
@@ -108,9 +109,15 @@
                 </div>
             </div>
             <!-- register button -->
-            <div class="col-6">
-                <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="registerUserForm.invalid || passwordsDoNotMatch(registerUserForm.get('password')?.value, registerUserForm.get('verifyPassword')?.value)" >Register</button>
+            <div class="col-12">
+                <button type="submit" class="btn btn-success register" (click)="onSubmit()" [disabled]="registerUserForm.invalid || passwordsDoNotMatch(registerUserForm.get('password')?.value, registerUserForm.get('verifyPassword')?.value)" >Register</button>
+                <a 
+                href="#" 
+                class="text-muted small d-block">
+                Already have an account? Log in here.
+                </a>
             </div>
+            
         </form>
     </div>
     
