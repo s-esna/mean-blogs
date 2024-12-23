@@ -19,14 +19,12 @@ export class NavbarComponent implements OnInit {
   username : string = ""
   isMenuOpen = false;
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
+  
 
   ngOnInit(): void {
+    this.isMenuOpen = false
     this.isLoggedIn = this.checkLoggedStatus();
     this.isAdmin = this.checkAdminStatus();
-    this.username = ''; // Reset username
     if (this.isLoggedIn) {
       this.getUsernameByUserId(); // Fetch the username if logged in
     }
@@ -82,5 +80,9 @@ export class NavbarComponent implements OnInit {
         console.error('could not decode token', error)
       }
     }
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }
