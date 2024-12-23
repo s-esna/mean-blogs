@@ -61,7 +61,7 @@ ng version
 
 - Clone the repository to your local machine using Git:  
 ```bash
-	`git clone https://github.com/s-esna/mean-blogs.git
+	git clone https://github.com/s-esna/mean-blogs.git
 ```
 - Then, open the project folder in your IDE (e.g. VScode) and navigate to the root directory:  
 ```
