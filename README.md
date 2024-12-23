@@ -9,7 +9,7 @@ All those in addition to the CRUD operations an admin can perform on the blogs.
 #### 2. Installation
 ###### 2.1. Clone the repository
 ###### 2.2. Install Dependencies
-#### 3.Environmental Variables
+#### 3.Setting Up Environmental Variables
 #### 4.Database Setup
 ###### 4.1.MongoDB Atlas
 ###### 4.2.Populating DB
@@ -19,36 +19,40 @@ All those in addition to the CRUD operations an admin can perform on the blogs.
 #### 6.Swagger
 #### 7.Features
 
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 #### 1. Pre-requisites:  
 Before running the project locally, make sure you have the following installed on your machine:
 
-> Node.js: Ensure Node.js is installed.  
-> MongoDB: MongoDB doesn't need to be installed locally.  
->         You are recommended to use a cloud instance (MongoDB Atlas), because i haven't tested with a local Instance of mongoDB, although local should work.
-> Angular CLI: Ensure Angular CLI is installed.  
-> OS: Windows  
-> IDE: VSCode  
+ **Node.js** (v20.14.0)  
+  - Install Node.js from [Node.js official website](https://nodejs.org/) (LTS version recommended).  
+  - Node Package Manager (npm 10.7.0) will be installed along with Node.js.  
+  - Then, check their versions using:  
+```bash
+node -v
+npm -v
+```
+
+ **MongoDB**  
+  - A cloud instance (e.g., [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)) is recommended.  
+  - Local MongoDB should work but is untested with this project.
 
 
-Here are the recommended versions for the above, as well as the commands to run in order to install them.
+ **Angular CLI** (v18.2.11)  
+- Install globally using:  
+```bash
+npm install -g @angular/cli
+```
+- Verify installation and version through:  
+```bash
+ng version
+```
 
-> Angular CLI: 18.2.11  
-> Node: 20.14.0  
-> Package Manager: npm 10.7.0
+- **Operating System**  
+  - Tested on **Windows** (win32 x64).  
 
-- Install Angular globally using the command: 	`npm install -g @angular/cli`
-Check Angular version using the command: 	`ng version`
-
-- To install both Node.js and Node Package Manager go to: https://nodejs.org/, download Node.js(LTS) and set up. This should also install the npm.
-Check both versions by running:
-`node -v`
-`npm -v`
-
-- OS: win32 x64
+- **IDE (Optional)**  
+  - [Visual Studio Code](https://code.visualstudio.com/) is recommended for development.
 
 ---
 
@@ -56,46 +60,73 @@ Check both versions by running:
 ##### 2.1. Clone the repository
 
 - Clone the repository to your local machine using Git:  
-	`git clone https://github.com/s-esna/mean-blogs.git`
+```bash
+	`git clone https://github.com/s-esna/mean-blogs.git
+```
+- Then, open the project folder in your IDE (e.g. VScode) and navigate to the root directory:  
+```
+	cd mean-blogs  
+```
+##### 2.2. Install dependencies
 
-- Then, open the project folder in VScode and navigate to the root directory:  
-	`cd mean-blogs`  
-##### 2.2. Install dependencies (at this point you should be at the root of the project "mean-blogs/")
-- Backend (Node.js/Express)
+At this point you should be at the root directory of the project called "mean-blogs/"
 
-Navigate to the server ("mean-blogs/server/") directory and install the backend dependencies with:
+**1. Backend (Node.js/Express)**
 
-`cd server`  
-`npm install`
-
+Navigate to the server directory ("mean-blogs/server/") and install the backend dependencies with:
+```bash
+cd server
+npm install
+```
 - Frontend (Angular)
 
 Navigate to the ng-frontend ("mean-blogs/ng-frontend/") directory and install the frontend dependencies:
-
-`cd ../ng-frontend`  
-`npm install`
+```bash
+cd ../ng-frontend 
+npm install
+```
 
 ---
 
 #### 3. Environmental Variables
 
-CREATE a ".env" file inside the "server" dir (server/.env ) and paste the below contents inside it. Pay attention to the comments please:
+- CREATE a ".env" file inside the "server" directory (server/.env ). You can use the following:
 
+```bash
+cd ../server
+touch .env
 ```
-ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  
 
+- Copy and paste the contents below, inside the '.env' file. Pay attention to the comments please:
+
+```text
+# Database connection string (MongoDB Atlas)
+ATLAS_URL  = "" 
+# ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  
+
+# JSON Web Token (JWT) secret key
 SECRET_KEY_JWT = ""  #ABSOLUTELY NECESSARY! Enter a Secret key of your choice for decoding JWTs here. It's recommended to use a 32-character string, making it as complex as possible.  
 
-ADMIN_PASSWORD = '' #ABSOLUTELY NECESSARY! Choose your password for the superuser of the website. MUST be at least 8 chars long, and contain at least 1 Uppercase, 1 Lowercase, 1 digit and 1 symbol (example: J()Hnd0e) (the default admin username is 'admin', and it's defined in the seed.ts file)  
 
-PORT= 5200  #The port I used is 5200 but feel Free to change it to your liking. If you change it after launching the server, don't forget to restart the server.  
+# Administrator credentials
+ADMIN_PASSWORD = '' 
+# ABSOLUTELY NECESSARY! Choose your password for the admin of the website. 
+# MUST be at least 8 chars long, and contain at least 1 Uppercase, 1 Lowercase, 1 digit and 1 symbol (example: J()Hnd0e)
+# The default admin username is 'admin', and it's defined in the 'seed.ts' file  
 
-INCOMING_MAIL_ADDRESS = ""  #This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be gmail.  
+PORT= 5200  
+# The port used is 5200 but feel Free to change it to your liking. If you change it after launching the server, don't forget to restart the server.  
 
-MAIL_PASSWORD = ""  # You would need to generate a 16digit app-password from google (after setting up two-step verification for your account). Further instructions:  https://support.google.com/accounts/answer/185833
+# Contact email configuration
+INCOMING_MAIL_ADDRESS = ""  
+# This mail is used for receiving mails from the 'contact' page. For the purpose of this Project, it must be gmail.  
+
+MAIL_PASSWORD = ""  
+# You would need to generate a 16-digit app password from google (after setting up two-step verification for your account)
+# Further instructions:  https://support.google.com/accounts/answer/185833
 ```  
 
-The atlas_url, the key for signing jwts, as well as the admin_password are absolutely necessary for the functionality of the app.  
+The atlas_url, the key for signing JWTs, as well as the admin_password are absolutely necessary for the functionality of the app.  
 For the ATLAS_URL (look below, step 4) you will need to navigate to mongodb.com, sign in and connect to the cluster using a node.js driver (6.7 or later)
 
 ---
@@ -110,7 +141,7 @@ Configure a cloud MongoDB instance (e.g., MongoDB Atlas):
 	-Choose a username and a password (these are important for the connection string)  
 	-Choose the connection method "Drivers", with "Driver:Node.js" & the latest version  
 	-You don't need to install the driver  
-	-Copy the connection string from here, and use it in the .env file  
+	-Copy the connection string from there, and **use it in the .env file**  
 
 Under Security:  
 In Database Access: Make sure the user you have is either an admin  or has readWrite capabilities on the cluster  
@@ -123,13 +154,16 @@ Update the connection string in your .env file.
 (Even though populating the DB with blogs is unnecessary, it is absolutely necessary that we have an admin-superuser. This is the way to set up an admin.)
 
 Navigate back to the server directory:
-`cd ../server`
+```bash
+cd ../server
+```
 
 In order to populate the Database(and the webapp) with some blogs, and an admin-superuser, please run the file "seed.ts" through the following command:
 
 **!!!BEFORE RUNNING THIS COMMAND MAKE SURE THE .env FILE HAS BEEN SET UP PROPERLY!!!**
-
-`npm run seed`
+```bash
+npm run seed
+```
 
 If everything has been completed so far, proceed to the next step.
 
@@ -140,8 +174,10 @@ If everything has been completed so far, proceed to the next step.
 
 To start the backend (Node.js/Express) server, you need to be in the server directory and run:
 
-`cd server`  
-`npm start`
+```bash
+cd server  
+npm start
+```
 
 If you see "listening for requests on port 5200" (or the PORT you defined in .env) it means the server launched successfully.  
 This will start the server on the specified port (default is 5000 port is omitted from .env).
@@ -152,8 +188,10 @@ The server will be accessible at http://localhost:5200 or the port defined in yo
 
 To run the Angular frontend, open a new terminal in vsCode and navigate to the ng-frontend directory ("~/mean-blogs/ng-frontend/") and run:
 
-`cd ng-frontend`
-`ng serve`
+```bash
+cd ng-frontend
+ng serve
+```
 
 This will start the Angular development server, and the frontend will be accessible at http://localhost:4200 by default.
 
