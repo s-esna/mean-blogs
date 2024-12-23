@@ -78,7 +78,7 @@ Navigate to the ng-frontend ("mean-blogs/ng-frontend/") directory and install th
 
 #### 3. Environmental Variables
 
-CREATE a ".env" file inside the "server" dir (server/.env ) and set it up following the instructions below with the following contents:
+CREATE a ".env" file inside the "server" dir (server/.env ) and paste the below contents inside it. Pay attention to the comments please:
 
 ```
 ATLAS_URL  = "" #ABSOLUTELY NECESSARY! Enter your Atlas Connection string here. https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string  
@@ -119,7 +119,7 @@ In Network Access: Under the Network Access tab, make sure to whitelist your cur
 Update the connection string in your .env file.
 
 ##### 4.2. Populating DB  
-(Even though populating the DB with blogs is unnecessary, it is absolutely necessary that we have an admin-superuser. This is the only way to set up an admin.)
+(Even though populating the DB with blogs is unnecessary, it is absolutely necessary that we have an admin-superuser. This is the way to set up an admin.)
 
 Navigate back to the server directory:
 `cd ../server`
@@ -177,7 +177,7 @@ Please make sure you have a valid JWT for testing the various endpoints.
 
 In order to get a JWT:
 
-1. Login to the webapp
+1. Log into the webapp
 
 2. Open developer tools in your browser (F12)
 
@@ -188,3 +188,45 @@ In order to get a JWT:
 5. Paste it in the "Authorize" section, on the top right of the swagger page
 
 Check description of each endpoint to see if it needs a JWT, and if the JWT of an admin, or a plain user is needed
+
+---
+
+#### 7. Features
+
+Key features of this project are the following:
+
+- CRUD operations through a RESTful API
+
+- Authentication:
+
+A user needs to be registered and logged-in to access any part of the website
+
+- Authorization:
+
+Only an admin is authorized to do certain actions (like creating blogs)
+
+- Tag searching & dynamic text searching:
+
+Blogs can be looked up using their tags, or through a search bar that looks for corresponding text in their title or main body. The text search fetches blogs while the user is typing.
+
+- Dynamic pagination:
+
+While the user is searching for text through the search bar, the pagination also changes dynamically.
+
+- Validators on front and backend for registration:
+
+Validators are implemented for registration (emails have to have email format, passwords have to follow a strong password format etc). Validators have been put for users elsewhere as well (i.e. can't submit an empty comment)
+
+- Email service through the 'contact' page:
+
+Users can send an email directly through the contact page, to a specific email address we have set up
+
+- User-friendly experience throughout the app:
+
+Be it success messages for comment submission and login, or warning messages when trying to delete a blog, actions come with corresponding and clear messages for the user.
+
+- Responsiveness:
+
+The web app is responsive for various monitor sizes.
+
+---
