@@ -6,21 +6,21 @@ import { ADMIN_PASSWORD } from "./config/env";
 const {ATLAS_URL, PORT} = SERVER_CONFIG;
 
 const hashPassword = async (password: string): Promise<string> => {
-  const saltRounds = 10; // Recommended value
+  const saltRounds = 10; 
   return await bcrypt.hash(password, saltRounds);
 };
 
 
-// Function to seed data
+//Function to seed data
 const seedData = async () => {
   try {
     
-// Sample data for seeding
+//Sample data for seeding
 const blogs = [
     {
       _id: new mongodb.ObjectId(),
       date: new Date('2024-01-01'),
-      title: 'Introduction to TypeScript',
+      title: 'Ένας χρόνος διαδηλώσεις στο Σύνταγμα ενάντια στη γενοκτονία του Παλαιστινιακού λαού',
       body: 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.',
       img: 'https://scontent-vie1-1.xx.fbcdn.net/v/t39.30808-6/466850715_999181262223829_2859200878334272673_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=20UPyN2UhvoQ7kNvgFdxuig&_nc_zt=23&_nc_ht=scontent-vie1-1.xx&_nc_gid=Ah7m9gOLHFvIdaVzShcF1h0&oh=00_AYBaHxUOZLyyIBkSVlTcW107n2EzAPSya9wR-XyzzOoTFA&oe=6768D1C3',
       tags: ['typescript', 'programming', 'javascript'],

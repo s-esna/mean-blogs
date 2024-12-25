@@ -165,6 +165,10 @@ In order to populate the Database(and the webapp) with some blogs, and an admin-
 npm run seed
 ```
 
+This will create a database in your cluster called "Pesek".
+
+Inside the "Pesek" database, two collections will be created. One called "blogs" and one called "users".
+
 If everything has been completed so far, proceed to the next step.
 
 ---
