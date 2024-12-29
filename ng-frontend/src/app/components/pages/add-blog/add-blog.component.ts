@@ -2,15 +2,19 @@ import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { BlogsService } from '../../../service/blogs.service';
-import { DatePipe } from '@angular/common';
 import { IBlog } from '../../../model/interface/interfaces';
 import { HoldBlogService } from '../../../service/hold-blog.service';
 import { ToastrService } from 'ngx-toastr';
+import {QuillEditorComponent} from 'ngx-quill'
+import Block from 'quill/blots/block';
+
+// Block.tagName = "DIV";
+// Quill.register(Block, true)
 
 @Component({
   selector: 'app-add-blog',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, QuillEditorComponent],
   templateUrl: './add-blog.component.html',
   styleUrl: './add-blog.component.css'
 })

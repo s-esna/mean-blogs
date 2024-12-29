@@ -1,170 +1,91 @@
-<!-- <div class="outer-container">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2>{{title}}</h2>
-            </div>
-            @if (title === 'All Blogs') { 
-                @if (isAdmin) {
-                <button class="btn btn-success m-3 w-auto" routerLink="add-blog">Add new Blog</button>
-                }
-                <div>
-                    <input class="my-1" type="text" placeholder="Search..."  (keyup)="onSearch($event)">
-                </div>
-            }
-            
-            <div>
-                @for (blog of blogs; track $index) { 
-                    <div class="divider"></div>
-                    @if (title === 'All Blogs') {
-                        <h3 class="text-center"> <a class="text-decoration-none text-reset custom-hover-link" [routerLink]="blog._id">{{blog.title}}</a></h3>
-                    } @else {
-                        <h3 class="text-center"> <a class="text-decoration-none text-reset custom-hover-link" [routerLink]="'../../' + blog._id">{{blog.title}}</a></h3>
 
-                    }
-                    <div>
-                        @if (isAdmin) {
-                            <button class="btn btn-primary mx-1" (click)="updateById(blog)"  >Edit</button>
-                        
-                            <button class="btn btn-danger mx-1" (click)="deleteById(blog._id)"  >Delete</button>
-                        }
-                    </div>
-        
-                    <div>
-                        @if (title === "All Blogs") {
-                            <div class="text-center">
-                                <img [routerLink]="blog._id"  [src]="blog.img" alt="">                        
-                            </div>
-                            <p class="custom-hover-link" [routerLink]="blog._id">{{ blog.body | slice:0:250 }}{{ blog.body.length > 250 ? '...' : '' }}</p>            
-                        } @else {
-                            <div class="text-center">
-                                <img [routerLink]="'../../' + blog._id"  [src]="blog.img" alt="">                        
-                            </div>
-                            <p class="custom-hover-link" [routerLink]="'../../' + blog._id">{{ blog.body | slice:0:250 }}{{ blog.body.length > 250 ? '...' : '' }}</p> 
-                        }
-                        
-                        
-                    </div>
-        
-                    <button class="btn btn-primary mb-2" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+blog._id" >Comments</button> 
-                    @for (comment of blog.comments; track $index) {
-                        <div>
-                            <div [id]='blog._id' class="collapse">
-                               <span class="fw-bold">{{comment.username}}:</span>  {{comment.commentBody}}
-                            </div> 
-                        </div>
-                    }
-                }   
-            </div>
-        
-            <div>
-                <ul class="pagination mt-3">
-                    <li class="page-item" [class.disabled]="currentPage === 1">
-                        <button class="page-link" (click)="loadPage(currentPage - 1, searchQuery)">Prev</button>
-                    </li>
-                    @for (page of [].constructor(totalPages); track $index) {
-                        <li class="page-item" [class.active]="currentPage === $index + 1">
-                            <button class="page-link" (click)="loadPage($index + 1, searchQuery)">{{$index + 1}}</button>
-                        </li>
-                    }
-                    <li class="page-item"  [class.disabled]="currentPage === totalPages">
-                        <button class="page-link" (click)="loadPage(currentPage + 1, searchQuery)">Next</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="outer-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center">{{title}}</h2>
+      </div>
 
- -->
- <div class="outer-container">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h2 class="text-center">{{title}}</h2>
+      <!-- Search bar and add button -->
+      @if (title === 'All Blogs') { 
+        @if (isAdmin) {
+        <div class="col-12 col-md-4">
+          <button class="btn btn-success mb-3 w-100" routerLink="add-blog">Add new Blog</button>
         </div>
-  
-        <!-- Search bar and add button -->
-        @if (title === 'All Blogs') { 
-          @if (isAdmin) {
-          <div class="col-12 col-md-4">
-            <button class="btn btn-success mb-3 w-100" routerLink="add-blog">Add new Blog</button>
-          </div>
-          }
-          <div class="col-12 col-md-8">
-            <input class="form-control mb-3" type="text" placeholder="Search..." (keyup)="onSearch($event)">
-          </div>
         }
-  
-        <!-- Blog entries -->
-        <div class="col-12">
-          @for (blog of blogs; track $index) { 
-            <div class="divider my-3"></div>
-  
-            <div class="blog-entry my-2">
-              <h3 class="text-center">
-                <a class="text-decoration-none text-reset custom-hover-link" 
-                   [routerLink]="title === 'All Blogs' ? blog._id : '../../' + blog._id">
-                  {{blog.title}}
-                </a>
-              </h3>
-  
-              <div class="text-center">
-                <img [routerLink]="title === 'All Blogs' ? blog._id : '../../' + blog._id" 
-                     [src]="blog.img" 
-                     alt="Blog Image" 
-                     class="img-fluid">
-              </div>
-  
-              <p class="custom-hover-link" 
+        <div class="col-12 col-md-8">
+          <input class="form-control mb-3" type="text" placeholder="Search..." (keyup)="onSearch($event)">
+        </div>
+      }
+
+      <!-- Blog entries -->
+      <div class="col-12">
+        @for (blog of blogs; track $index) { 
+          <div class="divider my-3"></div>
+
+          <div class="blog-entry my-2">
+            <h3 class="text-center">
+              <a class="text-decoration-none text-reset custom-hover-link" 
                  [routerLink]="title === 'All Blogs' ? blog._id : '../../' + blog._id">
-                {{ blog.body | slice:0:250 }}{{ blog.body.length > 250 ? '...' : '' }}
-              </p>
-  
-              <!-- Admin Buttons -->
-              @if (isAdmin) {
-                <div class="d-flex justify-content-center my-2">
-                  <button class="btn btn-primary mx-1" (click)="updateById(blog)">Edit</button>
-                  <button class="btn btn-danger mx-1" (click)="deleteById(blog._id)">Delete</button>
+                {{blog.title}}
+              </a>
+            </h3>
+
+            <div class="text-center">
+              <img [routerLink]="title === 'All Blogs' ? blog._id : '../../' + blog._id" 
+                   [src]="blog.img" 
+                   alt="Blog Image" 
+                   class="img-fluid">
+            </div>
+
+            <!-- <p class="custom-hover-link" 
+               [routerLink]="title === 'All Blogs' ? blog._id : '../../' + blog._id">
+              {{ blog.body | slice:0:250 }}{{ blog.body.length > 250 ? '...' : '' }}
+            </p> -->
+
+            <!-- Admin Buttons -->
+            @if (isAdmin) {
+              <div class="d-flex justify-content-center my-2">
+                <button class="btn btn-primary mx-1" (click)="updateById(blog)">Edit</button>
+                <button class="btn btn-danger mx-1" (click)="deleteById(blog._id)">Delete</button>
+              </div>
+            }
+
+            <!-- Comments Section -->
+            <button class="btn btn-primary mb-2" 
+                    data-bs-toggle="collapse" 
+                    [attr.data-bs-target]="'#'+blog._id" 
+                    aria-expanded="false" 
+                    >
+              Comments
+            </button>
+            <div [id]='blog._id' class="collapse">
+              @for (comment of blog.comments; track $index) {
+                <div>
+                  <span class="fw-bold">{{comment.username}}:</span> {{comment.commentBody}}
                 </div>
               }
-  
-              <!-- Comments Section -->
-              <button class="btn btn-primary mb-2" 
-                      data-bs-toggle="collapse" 
-                      [attr.data-bs-target]="'#'+blog._id" 
-                      aria-expanded="false" 
-                      >
-                Comments
-              </button>
-              <div [id]='blog._id' class="collapse">
-                @for (comment of blog.comments; track $index) {
-                  <div>
-                    <span class="fw-bold">{{comment.username}}:</span> {{comment.commentBody}}
-                  </div>
-                }
-              </div>
             </div>
+          </div>
+        }
+      </div>
+
+      <!-- Pagination -->
+      <div class="col-12">
+        <ul class="pagination mt-3 justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="loadPage(currentPage - 1, searchQuery)">Prev</button>
+          </li>
+          @for (page of [].constructor(totalPages); track $index) {
+            <li class="page-item" [class.active]="currentPage === $index + 1">
+              <button class="page-link" (click)="loadPage($index + 1, searchQuery)">{{$index + 1}}</button>
+            </li>
           }
-        </div>
-  
-        <!-- Pagination -->
-        <div class="col-12">
-          <ul class="pagination mt-3 justify-content-center">
-            <li class="page-item" [class.disabled]="currentPage === 1">
-              <button class="page-link" (click)="loadPage(currentPage - 1, searchQuery)">Prev</button>
-            </li>
-            @for (page of [].constructor(totalPages); track $index) {
-              <li class="page-item" [class.active]="currentPage === $index + 1">
-                <button class="page-link" (click)="loadPage($index + 1, searchQuery)">{{$index + 1}}</button>
-              </li>
-            }
-            <li class="page-item" [class.disabled]="currentPage === totalPages">
-              <button class="page-link" (click)="loadPage(currentPage + 1, searchQuery)">Next</button>
-            </li>
-          </ul>
-        </div>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" (click)="loadPage(currentPage + 1, searchQuery)">Next</button>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-  
+</div>

@@ -7,7 +7,8 @@
             </div>
             <div class="m-3 col-8">
                 <label class="form-label">Body</label>
-                <textarea class="form-control" formControlName="body"></textarea>    
+                <!-- <textarea class="form-control" formControlName="body"></textarea>     -->
+                <quill-editor class="form-control" formControlName="body" [styles]="{height : '200px'}"></quill-editor>
             </div>
             <div class="m-3 col-8">
                 <label class="form-label">Tags</label>

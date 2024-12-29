@@ -1,3 +1,10 @@
+.formattedDiv {
+  white-space: normal; 
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  overflow-x: hidden; 
+}
+
 .tag-box {
     border: 1px dotted black;
     margin: 0px 5px;

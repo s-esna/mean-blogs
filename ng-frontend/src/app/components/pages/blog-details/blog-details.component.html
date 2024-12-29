@@ -18,9 +18,9 @@
                 <div class="text-center">
                     <img [src]="blog.img" alt="">                        
                 </div>
-                <p>
-                    {{blog.body}}
-                </p>
+                <div [innerHTML]="sanitizedBody" class="formattedDiv">
+                    
+                </div>
                 <button class="btn btn-success mb-2" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+blog._id" >Comments</button> 
         
         

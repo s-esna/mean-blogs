@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './blog-details.component.css'
 })
 export class BlogDetailsComponent implements OnInit {
-  
+
+  sanitizer = inject(DomSanitizer);
   toastr = inject(ToastrService)
   blogService = inject(BlogsService)
   router = inject(Router)
@@ -27,12 +29,14 @@ export class BlogDetailsComponent implements OnInit {
   blog = {} as IBlog 
   blogs : IBlog[] = [];
   loading: boolean = true; // Add a loading state to prevent flicker
+  sanitizedBody: SafeHtml | null = null; 
 
 
   loadBlog(id : string | null) { 
     this.blogService.getSingleBlog(id)
     .subscribe((blog: IBlog) => {
         this.blog = blog
+        this.sanitizedBody = this.sanitizer.bypassSecurityTrustHtml(this.blog.body)
         this.loading = false
       },
       (error) => {

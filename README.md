@@ -94,7 +94,7 @@ npm install
 
 ```bash
 cd ../server
-touch .env
+ni .env
 ```
 
 - Copy and paste the contents below, inside the '.env' file. Pay attention to the comments please:
